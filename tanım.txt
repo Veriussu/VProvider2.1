@@ -1,0 +1,103 @@
+=========================================================================
+ VProvider — Hafif Yerel Yapay Zeka Model Sunucusu (Tanım ve Özellikler)
+=========================================================================
+
+1) VPROVIDER NEDİR?
+-------------------------------------------------------------------------
+VProvider, GGUF formatındaki açık kaynak yapay zeka modellerini kendi
+bilgisayarınızda (veya yerel ağınızda) çalıştıran hafif bir sunucudur.
+OpenAI uyumlu /v1/* API'si sayesinde Chatbox, SillyTavern, Cline, opencode
+gibi araçlarla doğrudan konuşur; web yönetim paneliyle de HuggingFace'ten
+tek tıkla model indirir, bellek ve GPU kullanımını yönetirsiniz.
+
+Çekirdek motor: llama.cpp (C++ tabanlı, çok düşük kaynak tüketimi).
+Desteklenen donanım: NVIDIA (CUDA), AMD (ROCm / Vulkan), Intel (SYCL) ve CPU.
+
+2) ARTILARI (NEDEN VPROVIDER?)
+-------------------------------------------------------------------------
++ GÜÇLÜ DONANIM ALGILAMASI
+  NVIDIA / AMD / Intel GPU'sunu otomatik algılar (nvidia-smi, rocm-smi,
+  sysfs); kurulum donanıma uygun motoru kendisi derler. GPU yoksa CPU moduna
+  geçer — kullanıcı hiçbir şey yapmaz.
+
++ AKILLI GPU KATMAN HESABI
+  Modeli yüklerken başlıktan katman sayısını ve KV (bağlam) önbelleğini
+  okur; VRAM'e sığan GPU katman sayısını kendisi hesaplar. VRAM yetmezse
+  otomatik CPU'ya düşer. Çökme yok, ellenmemiş çalışma var.
+
++ AÇIK STANDART: OPENAI UYUMLU API
+  /v1/chat/completions, /v1/responses, /v1/completions, yayın (SSE) akışı,
+  tool/function calling ve OpenAI hata yapısı. Herhangi bir OpenAI SDK veya
+  istemci ile anında çalışır.
+
++ HAFİF VE YEREL
+  Veriler bilgisayardan çıkmaz; LLM / görsel / video / ses üretimi tek panelde.
+  Harici buluta bağımlılık yok (TTS hariç çevrimiçi motor ister).
+
++ DİNAMİK BELLEK YÖNETİMİ
+  `keep` (her an hazır) ve `dynamic` (boşta boşalt) modları; model boştayken
+  0 MB VRAM. tek GPU'da birden çok model arası geçiş serbestçe yapılır.
+
++ WEB YÖNETİM PANELİ
+  Kurulum sihirbazı, şifreli giriş, model indirme/yükleme/boşaltma, API anahtarı
+  yönetimi, panel içi sohbet, görsel/video/ses üretimi — hepsi tek arayüzde.
+
+3) ÖZELLİK DETAYLARI
+-------------------------------------------------------------------------
+- OpenAI uyumlu API:
+    * /v1/models, /v1/chat/completions, /v1/completions, /v1/responses
+    * Akışsız + SSE streaming, OpenAI hata formatı
+    * Function / tool calling — chat ve responses uç noktalarında
+
+- Web yönetim paneli:
+    * İlk kurulum sihirbazı + session cookie ile şifreli giriş
+    * Model listesi, yükle / boşalt, bellek modu, diskten silme
+    * API anahtarları sekmesi: oluştur, listele, kopyala, sil
+    * Panel içi sohbet (API anahtarı gerekmeden test)
+
+- HuggingFace entegrasyonu:
+    * GGUF arama, dosya listeleme, resumable (kesintisiz devam) indirme,
+      tek tıkla kurulum
+
+- Otomatik GPU altyapısı:
+    * GPU_MODE=auto ile donanım algılama (nvidia-smi / rocm-smi / sysfs)
+    * backend seçimi: CUDA → ROCm → Vulkan → SYCL → CPU
+    * install.sh uyumsuz derlemede motora otomatik yeniden derler
+    * /panel/system/gpu uç noktasından anlık GPU durumu
+
+- Görsel / Video / Ses üretimi:
+    * ComfyUI köprüsü ile /v1/images/generations ve /v1/videos/generations
+      (SD/SDXL, AnimateDiff → GIF)
+    * edge-tts ile /v1/audio/speech (Türkçe sesler dahil)
+    * LLM kullanılmadığında GPU'yu bırakır; motorlar VRAM için yarışmaz
+
+- Güvenlik:
+    * Panel kullanıcı adı / şifre (bcrypt) ve /v1/* API anahtarı (Bearer)
+      ayrı ayrı korunur
+    * Gizli veriler (.env, veritabanı) sürüm kontrolü dışındadır
+
+- Yönetim scriptleri:
+    * install.sh (otomatik kurulum + donanıma özel derleme)
+    * start / stop / restart / download / remove
+    * systemd servisi ve /usr/local/bin kısayolları (yetki varsa)
+
+4) TEKNİK KART
+-------------------------------------------------------------------------
+- Dil / Platform : Python 3.10+ (sunucu), C++ (llama.cpp motoru)
+- API : OpenAI uyumlu /v1/* (REST + SSE)
+- Model formatı : GGUF (HuggingFace)
+- GPU : NVIDIA CUDA, AMD ROCm/Vulkan, Intel SYCL, CPU
+- Veritabanı : SQLite (kullanıcı, oturum, ayarlar, API anahtarları)
+- Port : 9055 (varsayılan), .env'den değiştirilebilir
+- Test : pytest (birim + API + uçtan uca; sahte motorla hızlı CI)
+
+5) LİSANS
+-------------------------------------------------------------------------
+Tüm hakları Veriüssü (veriussu.com) firmasına aittir (© 2026).
+Ticarî kullanım yasaktır; kişisel, eğitim ve ticarî olmayan kullanıma
+ücretsiz izin verilir. Ticarî kullanım için yazılı onay gerekir:
+info@veriussu.com
+
+Model ağırlıkları ilgili açık kaynak lisanslarına tabidir (HuggingFace).
+
+=========================================================================
