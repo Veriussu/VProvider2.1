@@ -204,6 +204,7 @@ bu görselleri doğrudan ekranda gösterir.
 | `PORT` | `9055` | Dinleme portu |
 | `MEMORY_MODE` | `dynamic` | `keep` / `dynamic` |
 | `IDLE_TIMEOUT_MINUTES` | `0` | dynamic modda boşta kalma süresi; `0` = kullanım bitince anında GPU'dan boşalt (çoklu model), `5`+ = CLI/opencode kullanımında model Bellek'te kalır |
+| `MEMORY_LIMIT_PCT` | `90` | Model kullanılırken sistem RAM'inin en fazla bu yüzdesi kullanılır (boşta RAM tutulmaz); `0` = sınırsız |
 | `GPU_MODE` | `auto` | `auto` / `cuda` / `rocm` / `sycl` / `vulkan` / `metal` / `cpu` — backend ve katman seçimini belirler; `auto` donanımı algılar (macOS'ta `metal`) |
 | `MODELS_DIR` | `models` | GGUF klasörü |
 | `DATA_DIR` | `data` | Veritabanı klasörü |
@@ -320,6 +321,13 @@ curl -N http://localhost:9055/v1/chat/completions \
     `IDLE_TIMEOUT_MINUTES=5` (veya üstü) önerilir.
   - `IDLE_TIMEOUT_MINUTES>0`: o süre boyunca yeni istek gelmezse boşaltılır →
     **boşta 0 MB VRAM**.
+
+Boşta (model yüklü değilken) program **hiç model RAM'i ayırmaz**; yalnızca
+uygulama çekirdeği (~150 MB) bellekte durur. Model kullanılırken `MEMORY_LIMIT_PCT`
+(=90) devreye girer: katman hesabı, CPU'da kalan ağırlık + KV önbelleğinin sistem
+RAM'inin en fazla %90'ını kullanmasını gözetir (VRAM yetersizse manuel `GPU_LAYERS`
+ve/veya daha küçük bir quant / daha kısa `CONTEXT_SIZE` önerilir; uyarı
+loglarda "RAM bütçesi uyarısı" olarak görünür).
 
 ---
 

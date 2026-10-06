@@ -216,6 +216,107 @@ def test_auto_gpu_layers_kv_aware(monkeypatch, tmp_path):
 
 
 # ─────────────────────────────────────────────
+# RAM bütçesi (MEMORY_LIMIT_PCT)
+# ─────────────────────────────────────────────
+
+def _no_rss(monkeypatch):
+    """process_rss_mb sıfırlanır; böylece taban her zaman RAM_BASELINE_MB olur."""
+    monkeypatch.setattr(gpu_detect, "process_rss_mb", lambda: 0)
+
+
+def test_ram_budget_moves_more_layers_to_gpu(monkeypatch):
+    """Dar RAM bütçesi, modeli RAM'de tutabilmek için daha çok katmanı GPU'ya taşımalı."""
+    _no_rss(monkeypatch)
+    N_CTX, KV_PTL = 65536, 2048
+    args = dict(vram_free_mb=8192, model_size_mb=4360, n_layers=42,
+                kv_per_token_layer=KV_PTL, n_ctx=N_CTX)
+    base = auto_gpu_layers(**args)  # ram_budget_mb=0 -> eski davranış
+    assert 1 <= base < 42
+    # 2000 MB bütçe: CPU'da kalan (ağırlık+KV) bu bütçeye sığmalı -> ~33 katman GPU'da
+    tight = auto_gpu_layers(**args, ram_budget_mb=2000)
+    assert tight > base  # RAM'i bütçede tutmak için daha çok katman taşınır
+    assert tight < 42
+    # Daha rahat bütçe, more CPU katman kalmasına izin verir -> VRAM limitinde kalır
+    roomy = auto_gpu_layers(**args, ram_budget_mb=4000)
+    assert tight >= roomy
+
+
+def test_ram_budget_never_exceeds_vram_margin(monkeypatch):
+    """RAM bütçesi ne kadar dar olursa olsun VRAM emniyet payına inilmemeli."""
+    _no_rss(monkeypatch)
+    N_CTX, KV_PTL = 65536, 2048
+    args = dict(vram_free_mb=8192, model_size_mb=4360, n_layers=42,
+                kv_per_token_layer=KV_PTL, n_ctx=N_CTX)
+    from app.gpu_detect import RAM_BASELINE_MB, RAM_VRAM_MARGIN_MB
+    per_layer = (4360 / 42) + (KV_PTL * N_CTX / 1_000_000)
+    base = auto_gpu_layers(**args)
+    extreme = auto_gpu_layers(**args, ram_budget_mb=150)  # sıfır konfor -> taban ile aynı
+    assert extreme == base
+    # Dar bütçe, VRAM'in emniyet payına (RAM_VRAM_MARGIN_MB) inmeyebilir
+    tight = auto_gpu_layers(**args, ram_budget_mb=2000)
+    assert tight <= int((8192 - RAM_VRAM_MARGIN_MB) / per_layer)
+    # VRAM bütçeyi karşılayabiliyorsa (11000 MB) CPU katmanları bütçeyi aşmaz
+    roomy = dict(vram_free_mb=11000, model_size_mb=4360, n_layers=42,
+                 kv_per_token_layer=KV_PTL, n_ctx=N_CTX)
+    t2 = auto_gpu_layers(**roomy, ram_budget_mb=2000)
+    cpu_layers = 42 - t2
+    assert cpu_layers * per_layer + RAM_BASELINE_MB <= 2000
+
+
+def test_ram_budget_full_offload_when_vram_allows(monkeypatch):
+    """Bütçe tüm katmanları GPU'ya taşıyabiliyorsa -1 (tam offload) dönmeli."""
+    _no_rss(monkeypatch)
+    N_CTX, KV_PTL = 65536, 2048
+    args = dict(vram_free_mb=11000, model_size_mb=4360, n_layers=42,
+                kv_per_token_layer=KV_PTL, n_ctx=N_CTX)
+    base = auto_gpu_layers(**args)  # VRAM tek başına 42 katmanı taşımıyor -> kısmi
+    assert 1 <= base < 42
+    # Çok dar bütçe (sadece taban) -> tüm katmanlar GPU'ya; VRAM emniyet payıyla yetiyor
+    assert auto_gpu_layers(**args, ram_budget_mb=151) == -1
+
+
+def test_resolve_runtime_ram_warning_added(monkeypatch):
+    """Kalan katmanların RAM gideri bütçeyi aşarsa nota uyarı eklenir."""
+    _no_rss(monkeypatch)
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw(free=2048))
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cuda"])
+    monkeypatch.setattr(gpu_detect, "gguf_n_layers", lambda p: 42)
+    monkeypatch.setattr(gpu_detect, "gguf_kv_per_token_layer", lambda p: 2048)
+    rt = resolve_runtime("auto", -1, model_path="m", model_size_bytes=4_360_000_000,
+                         n_ctx=65536, ram_budget_mb=300)
+    assert rt.backend == "cuda"
+    assert "RAM bütçesi" in rt.note
+
+
+def test_resolve_runtime_ram_warning_cpu_mode(monkeypatch):
+    """CPU modunda da bütçe aşımı uyarısı nota eklenir (hataya çevrilmez)."""
+    _no_rss(monkeypatch)
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw())
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu"])
+    monkeypatch.setattr(gpu_detect, "gguf_n_layers", lambda p: 42)
+    monkeypatch.setattr(gpu_detect, "gguf_kv_per_token_layer", lambda p: 2048)
+    rt = resolve_runtime("cpu", -1, model_path="m", model_size_bytes=4_360_000_000,
+                         n_ctx=65536, ram_budget_mb=300)
+    assert rt.backend == "cpu"
+    assert "RAM bütçesi" in rt.note
+
+
+def test_system_ram_mb_positive(monkeypatch):
+    """Linux'ta sistem RAM miktarı bilinebilmelidir (>0 MB)."""
+    if gpu_detect.sys.platform.startswith("win"):
+        import pytest
+        pytest.skip("Windows'da ctypes GlobalMemoryStatusEx donanıma bağımlıdır")
+    assert gpu_detect.system_ram_mb() > 0
+    assert gpu_detect.process_rss_mb() > 0
+
+
+def test_system_ram_mb_failure_returns_zero(monkeypatch):
+    """RAM ölçümü başarısız olursa 0 dönmeli (hesap güvenle devre dışı)."""
+    monkeypatch.setattr(gpu_detect.os, "sysconf", lambda k: (_ for _ in ()).throw(OSError("no")))
+    assert gpu_detect.system_ram_mb() == 0
+
+
+# ─────────────────────────────────────────────
 # GGUF KV per-token hesabı
 # ─────────────────────────────────────────────
 

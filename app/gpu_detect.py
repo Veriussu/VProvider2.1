@@ -20,6 +20,7 @@
 # ─────────────────────────────────────────────────────────────
 
 import logging
+import os
 import platform
 import re
 import struct
@@ -54,6 +55,62 @@ VENDOR_BACKEND_PREFERENCE = {
 
 # GGUF meta verisinde katman sayısı bilinmiyorsa kullanılan varsayılan
 DEFAULT_GGUF_LAYERS = 32
+
+# RAM bütçesi hesabındaki sabitler
+RAM_BASELINE_MB = 150      # uygulamanın kendi (modelsiz) bellek ayak izi tahmini
+RAM_VRAM_MARGIN_MB = 256   # VRAM tam dolumda bırakılan emniyet payı (RAM'i tutmak için)
+
+
+def system_ram_mb() -> int:
+    """Sistemin toplam fiziksel RAM miktarını döndürür (MB).
+
+    Windows: GlobalMemoryStatusEx; Linux/macOS: sysconf. Bilinemezse 0 döner
+    (o durumda RAM bütçesi hesabı devre dışı kalır, eski davranış korunur).
+    """
+    try:
+        if sys.platform.startswith("win"):
+            import ctypes
+
+            class _MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong),
+                    ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            stat = _MEMORYSTATUSEX()
+            stat.dwLength = ctypes.sizeof(_MEMORYSTATUSEX)
+            if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):
+                return int(stat.ullTotalPhys // (1024 * 1024))
+            return 0
+        pages = os.sysconf("SC_PHYS_PAGES")
+        size = os.sysconf("SC_PAGE_SIZE")
+        return int(pages * size // (1024 * 1024))
+    except Exception:  # noqa: BLE001
+        return 0
+
+
+def process_rss_mb() -> int:
+    """Mevcut sürecin çekirdek (RSS) bellek kullanımı (MB).
+
+    Linux'ta /proc/self/statm üzerinden; diğer platformlarda 0 (bilinmiyor).
+    Yalnızca tahmin amaçlıdır; başarısızlıkta 0 döner.
+    """
+    try:
+        if sys.platform.startswith("win"):
+            return 0
+        with open("/proc/self/statm") as fh:
+            parts = fh.read().split()
+        page = os.sysconf("SC_PAGE_SIZE")
+        return int(int(parts[1]) * page // (1024 * 1024))
+    except Exception:  # noqa: BLE001
+        return 0
 
 
 @dataclass
@@ -431,6 +488,7 @@ def auto_gpu_layers(
     n_layers: Optional[int] = None,
     kv_per_token_layer: Optional[float] = None,
     n_ctx: int = 0,
+    ram_budget_mb: int = 0,
 ) -> int:
     """Boş VRAM'e göre güvenli gpu_layers değerini döndürür.
 
@@ -440,6 +498,12 @@ def auto_gpu_layers(
     KV bilgisi GGUF'tan (kv_per_token_layer) gelir; bilinmiyorsa genel tahmin
     (KV ~ model boyutu x n_ctx/65536) kullanılır. Compute/UB tamponu için
     sabit bir pay (max ~512 MB veya %12) ayrılır.
+
+    ram_budget_mb > 0 ise sistem RAM bütçesi de gözetilir: GPU'ya taşınmayan
+    katmanların (ağırlık + KV) bellek gideri bu bütçeyi aşmamalıdır. Aşılma
+    ihtimalinde, VRAM'in yalnızca emniyet payı kadarını harcayarak daha çok
+    katman GPU'ya taşınır (RAM'i bütçede tutmak için). VRAM imkân vermezse
+    en iyi çaba uygulanır ve resolve_runtime bunu uyarıya çevirir.
     """
     if vram_free_mb <= 0 or model_size_mb <= 0:
         return -1
@@ -464,8 +528,31 @@ def auto_gpu_layers(
         return -1  # tüm katmanlar VRAM'e sığıyor
     available_mb = vram_free_mb - graph_reserve_mb
     if available_mb <= 0:
-        return 0
-    count = int(available_mb / per_layer_mb)
+        count = 0
+    else:
+        count = int(available_mb / per_layer_mb)
+
+    # RAM bütçesi: CPU'da kalan katmanlar (ağırlık + KV) sistem RAM'inde yaşar.
+    # Amaç: RAM %MEMORY_LIMIT_PCT'nin altında kalsın. Gerekirse GPU'ya daha çok
+    # katman taşı — ama asla VRAM emniyet payının (RAM_VRAM_MARGIN_MB) altına inme.
+    if ram_budget_mb > 0:
+        baseline = max(process_rss_mb(), RAM_BASELINE_MB)
+        room_mb = ram_budget_mb - baseline
+        if room_mb > 0:
+            cpu_by_ram = int(room_mb / per_layer_mb)  # RAM'de tutulabilecek katman
+            n_ram = max(0, total_layers - cpu_by_ram)  # en az bu kadarını GPU'ya al
+            if n_ram > count:
+                # Grafik rezervinin tamamı yerine yalnızca küçük bir emniyet payı
+                # bırakarak, RAM'i bütçede tutabilecek kadar katman daha taşınır.
+                hard_available_mb = vram_free_mb - RAM_VRAM_MARGIN_MB
+                n_vram_hard = int(hard_available_mb / per_layer_mb) if hard_available_mb > 0 else 0
+                count = min(n_ram, n_vram_hard)
+                if count >= total_layers:
+                    return -1  # bütçe için tüm katmanlar GPU'ya taşınabilir
+                if count <= 0 and n_ram > 0:
+                    count = 0  # VRAM gerçekten yetmiyor; en iyi çaba eski kararda
+        # RAM tarafı ek offload'a izin vermeyecek kadar darsa int(count) VRAM değeridir.
+
     # Anlamsız küçük offload'dan kaçın: katmanların ~%10'undan azı
     # sığacaksa CPU'da kal (gpu_layers=0)
     min_sensible = max(2, int(total_layers * 0.10))
@@ -484,6 +571,7 @@ def resolve_runtime(
     model_path: Optional[str] = None,
     model_size_bytes: int = 0,
     n_ctx: int = 0,
+    ram_budget_mb: int = 0,
 ) -> RuntimeInfo:
     """GPU_MODE/GPU_LAYERS ayarlarından nihai çalışma zamanı kararını üretir.
 
@@ -492,17 +580,22 @@ def resolve_runtime(
       cuda | rocm | sycl | vulkan | metal -> zorlamalı; derlenmemişse RuntimeError.
       cpu    -> her zaman CPU (gpu_layers=0).
     Ayrıca requested_layers=0 ise CPU'ya, pozitif ise olduğu gibi GPU'ya gider.
+
+    ram_budget_mb > 0 ise otomatik katman hesabı RAM bütçesini de gözetir ve
+    tahmini RAM aşımında karara uyarı eklenir (yükleme engellenmez).
     """
     hw = detect_hardware()
     compiled = compiled_backends()
 
     if gpu_mode == "cpu" or requested_layers == 0:
+        note = "CPU modu (GPU_LAYERS=0 veya GPU_MODE=cpu)"
+        note += _ram_warning(model_path, model_size_bytes, n_ctx, ram_budget_mb) if ram_budget_mb > 0 else ""
         return RuntimeInfo(
             hardware=hw,
             backend="cpu",
             compiled_backends=compiled,
             gpu_layers=0,
-            note="CPU modu (GPU_LAYERS=0 veya GPU_MODE=cpu)",
+            note=note,
         )
 
     if gpu_mode == "auto":
@@ -514,6 +607,8 @@ def resolve_runtime(
                 f"llama_cpp derlemesi uyumlu değil (derlenen: {', '.join(compiled)}). "
                 "CPU moduna geçiliyor. GPU için: bash install.sh --rebuild"
             )
+            if ram_budget_mb > 0:
+                note += _ram_warning(model_path, model_size_bytes, n_ctx, ram_budget_mb)
             return RuntimeInfo(hardware=hw, backend="cpu", compiled_backends=compiled, gpu_layers=0, note=note)
         backend = chosen
     elif gpu_mode in ("cuda", "rocm", "sycl", "vulkan", "metal"):
@@ -538,10 +633,48 @@ def resolve_runtime(
             n_layers,
             kv_per_token_layer,
             n_ctx,
+            ram_budget_mb=ram_budget_mb,
         )
 
     note = (
         f"{hw.vendor.upper()} GPU algılandı ({hw.name or 'bilinmiyor'}; boş VRAM "
         f"{hw.vram_free_mb} MB) -> backend={backend}, gpu_layers={layers}"
     )
+    if ram_budget_mb > 0:
+        note += _ram_warning(model_path, model_size_bytes, n_ctx, ram_budget_mb, layers=layers)
     return RuntimeInfo(hardware=hw, backend=backend, compiled_backends=compiled, gpu_layers=layers, note=note)
+
+
+# Tahminî RAM kullanımını (uygulama + CPU'da kalan ağırlık/KV) bütçeyle karşılar.
+def _ram_warning(
+    model_path: Optional[str],
+    model_size_bytes: int,
+    n_ctx: int,
+    ram_budget_mb: int,
+    layers: int = 0,
+) -> str:
+    """RAM bütçesi aşılacaksa uyarı metni; aşılmıyorsa boş dize döner."""
+    try:
+        if not model_path or model_size_bytes <= 0:
+            return ""
+        total = gguf_n_layers(model_path) or DEFAULT_GGUF_LAYERS
+        kv = gguf_kv_per_token_layer(model_path)
+        model_mb = model_size_bytes / 1_000_000
+        wpl = model_mb / total if total else model_mb
+        kv_layer_mb = 0.0
+        if kv and n_ctx > 0:
+            kv_layer_mb = kv * n_ctx / 1_000_000
+        elif wpl > 0:
+            kv_layer_mb = wpl * 1.25 * (n_ctx / 65536.0)
+        baseline = max(process_rss_mb(), RAM_BASELINE_MB)
+        cpu_layers = max(0, total - max(0, layers))
+        est = baseline + cpu_layers * (wpl + kv_layer_mb)
+        if est <= ram_budget_mb:
+            return ""
+        return (
+            f" | RAM bütçesi uyarısı: tahmini sistem RAM kullanımı ~{int(est)} MB "
+            f"(bütçe {ram_budget_mb} MB). Model RAM'e zor sığabilir — daha küçük bir "
+            "quant veya daha kısa CONTEXT_SIZE önerilir."
+        )
+    except Exception:  # noqa: BLE001
+        return ""

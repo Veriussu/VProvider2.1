@@ -42,6 +42,10 @@ class Settings(BaseSettings):
     memory_mode: str = "dynamic"
     idle_timeout_minutes: int = 0
 
+    # Model kullanılırken sistem RAM'inin en fazla bu yüzdesi kullanılabilir.
+    # 0 = sınırsız (eski davranış). idle'da zaten hiçbir model bellekte yoktur.
+    memory_limit_pct: int = 90
+
     # Çalışma klasörleri (proje köküne göre otomatik tam yol üretilir)
     models_dir: str = "models"
     data_dir: str = "data"

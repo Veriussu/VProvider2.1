@@ -21,7 +21,8 @@ import logging
 import os
 from typing import Iterable, Optional
 
-from app.gpu_detect import resolve_runtime
+from app.config import settings
+from app.gpu_detect import resolve_runtime, system_ram_mb
 
 logger = logging.getLogger("vprovider")
 
@@ -331,12 +332,23 @@ def create_engine(model_path: str, **options) -> LlamaEngine:
             model_size_bytes = 0
     requested_layers = options.get("gpu_layers", -1)
 
+    # RAM bütçesi: sistem RAM'inin MEMORY_LIMIT_PCT'i (0 = sınırsız). Boşta
+    # zaten hiçbir model yüklü değildir; bütçe yalnızca model kullanılırken
+    # aşılmasın diye katman/uyarı kararında kullanılır.
+    ram_budget_mb = 0
+    ram_pct = settings.memory_limit_pct
+    if ram_pct > 0:
+        total_ram = system_ram_mb()
+        if total_ram > 0:
+            ram_budget_mb = int(total_ram * ram_pct // 100)
+
     runtime = resolve_runtime(
         gpu_mode=gpu_mode,
         requested_layers=requested_layers,
         model_path=model_path,
         model_size_bytes=model_size_bytes,
         n_ctx=options.get("context_size", 4096),
+        ram_budget_mb=ram_budget_mb,
     )
     options["gpu_layers"] = runtime.gpu_layers
     logger.info("GPU kararı: %s", runtime.note)
