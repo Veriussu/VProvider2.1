@@ -85,8 +85,8 @@ async def _synthesize_edge(text: str, voice: str, rate: str) -> tuple[bytes, str
         communicate = await asyncio.to_thread(_edge_communicate, text, voice, rate)
     except ImportError:
         raise TTSError(
-            "edge-tts motoru kurulu değil. Kurun: .venv/bin/pip install edge-tts "
-            "(veya requirements.txt'ten)."
+            "edge-tts motoru kurulu değil. Kurun: pip install edge-tts "
+            "(veya venv'inize requirements.txt'i yükleyin)."
         )
     buf = io.BytesIO()
     async for chunk in communicate.stream():

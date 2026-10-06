@@ -36,8 +36,10 @@ else
     echo " ✓ VProvider zaten çalışıyor (pid $(pgrep -f 'uvicorn app.main:app' | tr '\n' ' '))"
     exit 0
   fi
+  # nohup her platformda mevcuttur (macOS'ta "setsid" yoktur) ve SIGHUP'ı
+  # blokladığı için arka plan sürecini terminalden bağımsız tutar.
   mkdir -p "${LOG_DIR}"
-  (cd "${PROJECT_ROOT}" && setsid nohup ./.venv/bin/uvicorn app.main:app --host "${host}" --port "${port}" < /dev/null >> "${LOG_FILE}" 2>&1 &)
+  (cd "${PROJECT_ROOT}" && nohup ./.venv/bin/uvicorn app.main:app --host "${host}" --port "${port}" < /dev/null >> "${LOG_FILE}" 2>&1 &)
   sleep 1
   if pgrep -f "uvicorn app.main:app" >/dev/null 2>&1; then
     echo " ✓ VProvider başlatıldı: http://${host}:${port}  (log: ${LOG_FILE})"

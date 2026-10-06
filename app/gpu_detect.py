@@ -1,11 +1,15 @@
 # ─────────────────────────────────────────────────────────────
 #  Bölüm:    GPU Algılama ve Motor Seçimi
 #  Dosya:    app/gpu_detect.py
-#  Amaç:     Donanımı (NVIDIA/AMD/Intel) gerçek zamanlı algılar, kurulu
+#  Amaç:     Donanımı (NVIDIA/AMD/Intel/Apple) gerçek zamanlı algılar, kurulu
 #            llama-cpp-python derlemesinin hangi GPU backend'ini içerdiğini
 #            belirler ve çalışma zamanında GPU/CPU kararını üretir.
-#  Mekanik:  - detect_hardware:  nvidia-smi -> rocm-smi /sysfs -> lspci (Intel)
-#            - compiled_backends: llama_cpp paketindeki libggml-*.so dosyaları
+#  Platform: Linux (CUDA/ROCm/SYCL/Vulkan), macOS (Metal + Apple Silicon),
+#            Windows (CUDA/Vulkan/SYCL). Backend dosya tespiti platforma göre
+#            .so (Linux), .dylib (macOS) veya .dll (Windows) uzantısını kullanır.
+#  Mekanik:  - detect_hardware:  nvidia-smi -> rocm-smi -> Apple (macOS) ->
+#                                sysfs(amdgpu, Linux) -> lspci (Intel, Linux)
+#            - compiled_backends: llama_cpp paketindeki ggml-* kütüphane dosyaları
 #            - resolve_runtime: GPU_MODE + GPU_LAYERS + model boyutu ile
 #              nihai (backend, gpu_layers, açıklama) kararını üretir.
 #            - gpu_mode=auto: donanıma uygun derlenmiş backend varsa GPU,
@@ -16,9 +20,11 @@
 # ─────────────────────────────────────────────────────────────
 
 import logging
+import platform
 import re
 import struct
 import subprocess
+import sys
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -26,12 +32,16 @@ from typing import Optional
 
 logger = logging.getLogger("vprovider")
 
-# llama_cpp paketindeki libggml-*.so dosyası isimlerinden backend eşleşmesi
-BACKEND_SO_FILES = {
-    "cuda": "libggml-cuda.so",
-    "rocm": "libggml-hip.so",
-    "sycl": "libggml-sycl.so",
-    "vulkan": "libggml-vulkan.so",
+# llama_cpp paketindeki backend kütüphane dosya adları. İşletim sistemi düzenine
+# göre farklılık gösterir: Linux'ta "libggml-cuda.so", macOS'ta "*.dylib",
+# Windows'ta "ggml-cuda.dll" (lib öneki yok). Aynı paket farklı sürümlerde
+# birden çok dosya taşıyabileceğinden backend başına ad listesi tutulur.
+BACKEND_LIB_PATTERNS = {
+    "cuda": ("libggml-cuda.so", "libggml-cuda.dylib", "ggml-cuda.dll"),
+    "rocm": ("libggml-hip.so", "libggml-rocm.so", "ggml-hip.dll", "ggml-rocm.dll"),
+    "sycl": ("libggml-sycl.so", "ggml-sycl.dll"),
+    "vulkan": ("libggml-vulkan.so", "libggml-vulkan.dylib", "ggml-vulkan.dll"),
+    "metal": ("libggml-metal.dylib", "ggml-metal.dll"),
 }
 
 # Donanım satıcısı -> tercih sırasındaki backend adları (fallback: vulkan)
@@ -39,6 +49,7 @@ VENDOR_BACKEND_PREFERENCE = {
     "nvidia": ["cuda", "vulkan"],
     "amd": ["rocm", "vulkan"],
     "intel": ["sycl", "vulkan"],
+    "apple": ["metal"],
 }
 
 # GGUF meta verisinde katman sayısı bilinmiyorsa kullanılan varsayılan
@@ -61,7 +72,7 @@ class RuntimeInfo:
     """Çalışma zamanı için üretilen (backend, gpu_layers) kararı."""
 
     hardware: GPUInfo
-    backend: str                 # "cuda" | "rocm" | "sycl" | "vulkan" | "cpu"
+    backend: str                 # "cuda" | "rocm" | "sycl" | "vulkan" | "metal" | "cpu"
     compiled_backends: list      # kurulu llama_cpp derlemesindeki backend'ler
     gpu_layers: int              # LlamaCppEngine'e gidecek nihai değer
     note: str                    # loglara ve panele giden açıklama
@@ -166,7 +177,11 @@ def _amd_sysfs_info() -> Optional[GPUInfo]:
 
 
 def _intel_info() -> Optional[GPUInfo]:
-    """lspci üzerinden Intel GPU'sunu bulur (bellek paylaşımlı, VRAM bilinmez)."""
+    """lspci üzerinden Intel GPU'sunu bulur (bellek paylaşımlı, VRAM bilinmez).
+
+    Yalnızca Linux'ta anlamlıdır; Windows/macOS'ta "lspci" olmadığından _run
+    None döner ve bu algılayıcı zararsızca atlanır.
+    """
     out = _run(["lspci"])
     if not out:
         return None
@@ -175,14 +190,31 @@ def _intel_info() -> Optional[GPUInfo]:
     return GPUInfo(vendor="intel", name="Intel GPU", vram_total_mb=0, vram_free_mb=0, driver="i915")
 
 
+def _apple_info() -> Optional[GPUInfo]:
+    """macOS'ta Apple Silicon/Intel Mac'i algılar.
+
+    llama.cpp Metal backend'i birleşik (unified) belleği kullanır; VRAM ayrı
+    bir sayaç olmadığından 0 (bilinmiyor) döner. Bu, auto_gpu_layers'ın
+    tüm katmanları GPU'ya almasına (-1) yol açar ve Metal için doğrudur
+    (model + KV aynı sistem belleğinde yaşar, disk/VRAM taşması olmaz).
+    """
+    if sys.platform != "darwin":
+        return None
+    machine = platform.machine().lower()
+    name = "Apple Silicon" if machine in ("arm64", "aarch64") else "Intel Mac"
+    return GPUInfo(vendor="apple", name=name, vram_total_mb=0, vram_free_mb=0, driver="metal")
+
+
 @lru_cache(maxsize=1)
 def detect_hardware() -> GPUInfo:
-    """Sistemdeki GPU'yu satıcı önceliğiyle algılar (NVIDIA -> AMD -> Intel).
+    """Sistemdeki GPU'yu satıcı önceliğiyle algılar (NVIDIA -> AMD -> Apple).
 
+    Apple algılaması yalnızca macOS'ta; sysfs/lspci algılayıcıları yalnızca
+    Linux'ta çalışır (diğer platformlarda _run None döner ve atlanır).
     Hiçbir GPU algılanamazsa vendor="none" döner. Süreç başına bir kez
     çalışır (lru_cache); testlerde monkeypatch ile değiştirilebilir.
     """
-    for detector in (_nvidia_info, _amd_info, _amd_sysfs_info, _intel_info):
+    for detector in (_nvidia_info, _amd_info, _apple_info, _amd_sysfs_info, _intel_info):
         info = detector()
         if info is not None:
             logger.info("Donanım tespiti: %s (%s)", info.vendor, info.name or "-")
@@ -199,16 +231,24 @@ def detect_hardware() -> GPUInfo:
 def compiled_backends() -> list:
     """Kurulu llama-cpp-python derlemesinin içerdiği backend listesini döner.
 
-    libggml-*.so dosyalarının varlığına bakar (ör. libggml-cuda.so -> CUDA).
-    Hiçbir GPU backend dosyası yoksa ["cpu"] döner. import yerine dosya
-    varlığına bakılır; böylece ağır kütüphane yüklenmez.
+    Paketin lib/ klasöründeki backend kütüphane dosyalarına bakar. Dosya adı
+    platforma göre değişir: Linux "libggml-cuda.so", macOS "libggml-cuda.dylib",
+    Windows "ggml-cuda.dll". Metal yalnızca macOS'ta anlamlıdır (ggml.cpp'de
+    GGML_METAL yolu Apple Silicon'a özgüdür). Hiçbir GPU backend dosyası yoksa
+    ["cpu"] döner. import yerine dosya varlığına bakılır; böylece ağır
+    kütüphane yüklenmez.
     """
     try:
         import llama_cpp
     except ImportError:
         return ["cpu"]
     lib_dir = Path(llama_cpp.__file__).parent / "lib"
-    found = [backend for backend, so in BACKEND_SO_FILES.items() if (lib_dir / so).exists()]
+    found = []
+    for backend, names in BACKEND_LIB_PATTERNS.items():
+        if backend == "metal" and not sys.platform.startswith("darwin"):
+            continue
+        if any((lib_dir / name).exists() for name in names):
+            found.append(backend)
     if not found:
         return ["cpu"]
     logger.info("Derlenmiş llama_cpp backend'leri: %s", ", ".join(found))
@@ -449,7 +489,7 @@ def resolve_runtime(
 
     gpu_mode değerleri:
       auto   -> donanıma göre; uyumlu derlenmiş backend varsa GPU, yoksa CPU.
-      cuda | rocm | sycl | vulkan -> zorlamalı; derlenmemişse RuntimeError.
+      cuda | rocm | sycl | vulkan | metal -> zorlamalı; derlenmemişse RuntimeError.
       cpu    -> her zaman CPU (gpu_layers=0).
     Ayrıca requested_layers=0 ise CPU'ya, pozitif ise olduğu gibi GPU'ya gider.
     """
@@ -476,16 +516,17 @@ def resolve_runtime(
             )
             return RuntimeInfo(hardware=hw, backend="cpu", compiled_backends=compiled, gpu_layers=0, note=note)
         backend = chosen
-    elif gpu_mode in ("cuda", "rocm", "sycl", "vulkan"):
+    elif gpu_mode in ("cuda", "rocm", "sycl", "vulkan", "metal"):
         if gpu_mode not in compiled:
             raise RuntimeError(
                 f"GPU_MODE={gpu_mode} seçildi ancak kurulu llama_cpp derlemesi "
                 f"{gpu_mode} içermiyor (derlenen: {', '.join(compiled)}). "
-                "Çözüm: 'bash install.sh --rebuild' ile doğru backend derlenebilir."
+                "Çözüm: 'bash install.sh --rebuild' ile doğru backend derlenebilir "
+                "(Windows'ta install.ps1 -Rebuild)."
             )
         backend = gpu_mode
     else:
-        raise ValueError(f"Geçersiz GPU_MODE: {gpu_mode!r} (auto|cuda|rocm|sycl|vulkan|cpu)")
+        raise ValueError(f"Geçersiz GPU_MODE: {gpu_mode!r} (auto|cuda|rocm|sycl|vulkan|metal|cpu)")
 
     layers = requested_layers
     if layers == -1:

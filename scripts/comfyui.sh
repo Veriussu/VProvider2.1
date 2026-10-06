@@ -49,7 +49,8 @@ case "${ACTION}" in
       exit 1
     fi
     mkdir -p "$(dirname "${LOGFILE}")"
-    (cd "${COMFY_DIR}" && setsid nohup ./.venv/bin/python main.py --listen 127.0.0.1 --port "${PORT}" < /dev/null >> "${LOGFILE}" 2>&1 & echo $! > "${PIDFILE}")
+    # nohup macOS'ta da vardır ("setsid" yoktur); terminalden bağımsız başlatır.
+    (cd "${COMFY_DIR}" && nohup ./.venv/bin/python main.py --listen 127.0.0.1 --port "${PORT}" < /dev/null >> "${LOGFILE}" 2>&1 & echo $! > "${PIDFILE}")
     sleep 2
     if [ -f "${PIDFILE}" ] && kill -0 "$(cat "${PIDFILE}")" 2>/dev/null; then
       echo " ✓ ComfyUI başlatıldı: http://127.0.0.1:${PORT}  (log: ${LOGFILE})"

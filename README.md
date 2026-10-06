@@ -69,38 +69,73 @@ de HuggingFace'ten tek tıkla model indirir, bellek kullanımını yönetirsiniz
 ## Gereksinimler
 
 - **Python 3.10+**
-- **NVIDIA / AMD / Intel GPU** (opsiyonel — yoksa CPU modunda çalışır)
-  - CUDA için: sürücü + CUDA Toolkit (llama.cpp derlemesi için)
-- `git`, `python3`, `pip`
+- **NVIDIA / AMD / Intel / Apple Silicon GPU** (opsiyonel — yoksa CPU modunda çalışır)
+  - CUDA için: sürücü + CUDA Toolkit (+ Windows'ta Visual Studio Build Tools)
+  - macOS (Apple Silicon): Metal otomatik kullanılır (Xcode Command Line Tools gerekir)
+- **Linux / macOS:** `git`, `python3`
+- **Windows:** `python` (PATH'te), `git`, PowerShell 5.1+
 
 ---
 
 ## İletişim
 
 - **Web:** https://veriussu.com
-- **GitHub:** https://github.com/Veriussu/VProvider1.1
+- **GitHub:** https://github.com/Veriussu/VProvider2.1
 - **E-posta:** vprovider@veriussu.com · info@veriussu.com
+
+---
+
+## Platform Desteği
+
+| Platform | Motor | Kurulum | Yönetim |
+|---|---|---|---|
+| **Linux** | CUDA / ROCm / SYCL / Vulkan / CPU | `install.sh` | `scripts/*.sh` (bash) |
+| **macOS (Apple Silicon)** | Metal (otomatik) | `install.sh` | `scripts/*.sh` (bash) |
+| **macOS (Intel)** | CPU | `install.sh --cpu` | `scripts/*.sh` (bash) |
+| **Windows** | CUDA (derleme) / CPU (hazır wheel) | `install.ps1` (veya `install.bat`) | `scripts/*.ps1` (PowerShell) |
+
+Python tarafı tamamen platform-nötrdür: GPU backend algılama (`app/gpu_detect.py`)
+`.so`/`.dylib`/`.dll` uzantılarına göre çalışır; NVIDIA/AMD/Intel algılamasının
+yanı sıra macOS'ta Apple Silicon'u otomatik tanır ve Metal'i seçer.
 
 ---
 
 ## Hızlı Kurulum
 
+### Linux / macOS (bash)
+
 ```bash
-git clone https://github.com/Veriussu/VProvider1.1.git vprovider && cd vprovider
+git clone https://github.com/Veriussu/VProvider2.1.git vprovider && cd vprovider
 bash install.sh
 ```
 
 `install.sh` aşağıdakileri sırayla yapar:
 
-1. Donanım algılar (**CUDA → ROCm → SYCL → Vulkan → CPU**)
+1. Donanım algılar (**CUDA → ROCm → SYCL → Vulkan → Metal → CPU**)
 2. `.venv` sanal ortamını kurar ve bağımlılıkları yükler
-3. Donanıma özel **llama-cpp-python** derler
+3. Donanıma özel **llama-cpp-python** derler (macOS/Apple Silicon'da `GGML_METAL`)
 4. `.env` oluşturur (yoksa)
-5. Yetki varsa **systemd servisini** kurar ve başlatır (`vprovider.service`)
+5. Linux'ta yetki varsa **systemd servisini** kurar ve başlatır (`vprovider.service`)
 6. Yetki varsa `/usr/local/bin` altına `vprovider-*` kısayollarını bağlar
 
 > Not: `llama-cpp-python` zaten kuruluysa yeniden derlenmez; zorlamak için
 > `bash install.sh --rebuild`. CPU modunu zorlamak için `bash install.sh --cpu`.
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/Veriussu/VProvider2.1.git vprovider; cd vprovider
+.\install.ps1
+```
+
+`install.ps1` (veya çift tıklama için `install.bat`):
+1. `.venv` kurar ve bağımlılıkları yükler
+2. `nvidia-smi` varsa **CUDA derlemeyi dener**; gerekli araçlar yoksa (Visual
+   Studio Build Tools + CUDA Toolkit) otomatik olarak **hazır CPU wheel'ine** düşer
+3. `.env` oluşturur (yoksa)
+
+Seçenekler: `.\install.ps1 -CPU` (hep CPU wheel), `.\install.ps1 -Rebuild`
+(donanıma göre zorla derle), `.\install.ps1 -SkipBuild` (asla derleme).
 
 Kurulum tamamlanınca tarayıcıda `http://<sunucu-ip>:9055/` adresini açın:
 ilk açılışta kurulum sihirbazı yönetici hesabı ve API anahtarını üretir.
@@ -120,8 +155,13 @@ ilk açılışta kurulum sihirbazı yönetici hesabı ve API anahtarını üreti
 | `scripts/remove.sh --all` | Projenin **tamamı** silinir: modeller, kaynak kod, `.env`, veriler |
 | `clear.sh` | `remove.sh` için geriye uyumlu takma ad |
 
-systemd kuruluysa scriptler `systemctl start/stop/restart vprovider` çağırır;
-değilse uvicorn'u doğrudan yönetirler.
+Windows'ta aynı komutların PowerShell karşılıkları `scripts/` altındadır:
+`start.ps1`, `stop.ps1`, `restart.ps1`, `download.ps1`,
+`remove.ps1` (+ `-All`), `comfyui.ps1`, `comfyui-checkpoint.ps1`. Başlatma
+kısayolu olarak `start.bat` kullanılabilir.
+
+Linux'ta systemd kuruluysa scriptler `systemctl start/stop/restart vprovider`
+çağırır; değilse uvicorn'u doğrudan yönetirler (macOS/Windows'ta da doğrudan).
 
 ---
 
@@ -164,7 +204,7 @@ bu görselleri doğrudan ekranda gösterir.
 | `PORT` | `9055` | Dinleme portu |
 | `MEMORY_MODE` | `dynamic` | `keep` / `dynamic` |
 | `IDLE_TIMEOUT_MINUTES` | `0` | dynamic modda boşta kalma süresi; `0` = kullanım bitince anında GPU'dan boşalt (çoklu model), `5`+ = CLI/opencode kullanımında model Bellek'te kalır |
-| `GPU_MODE` | `auto` | `auto` / `cuda` / `rocm` / `sycl` / `vulkan` / `cpu` — backend ve katman seçimini belirler; `auto` donanımı algılar |
+| `GPU_MODE` | `auto` | `auto` / `cuda` / `rocm` / `sycl` / `vulkan` / `metal` / `cpu` — backend ve katman seçimini belirler; `auto` donanımı algılar (macOS'ta `metal`) |
 | `MODELS_DIR` | `models` | GGUF klasörü |
 | `DATA_DIR` | `data` | Veritabanı klasörü |
 | `DATABASE_PATH` | `data/vprovider.db` | SQLite dosyası |
@@ -395,7 +435,7 @@ vprovider/
 ├── static/index.html     # Yönetim paneli (tek dosya)
 ├── static/logo.png       # Gömülü proje logosu (değiştirilemez)
 ├── static/favicon.png    # Gömülü tarayıcı simgesi (değiştirilemez)
-├── scripts/              # start/stop/restart/download/remove
+├── scripts/              # start/stop/restart/download/remove (.sh = Linux/macOS, .ps1 = Windows)
 ├── scripts/comfyui.sh          # ComfyUI motoru başlat/durdur/durum (çalışmazsa 1 döner)
 ├── scripts/comfyui-checkpoint.sh  # HF checkpoint indirici
 ├── deploy/vprovider.service   # systemd şablonu
@@ -406,7 +446,10 @@ vprovider/
 ├── tests/                # pytest (birim + API + uçtan uca)
 ├── models/               # GGUF modelleri
 ├── data/                 # SQLite veritabanı
-├── install.sh            # Otomatik kurulum
+├── install.sh            # Otomatik kurulum (Linux/macOS)
+├── install.ps1           # Otomatik kurulum (Windows/PowerShell)
+├── install.bat           # install.ps1 kısayolu (çift tıklama)
+├── start.bat             # start.ps1 kısayolu (çift tıklama)
 ├── clear.sh              # remove.sh takma adı
 ├── LICENSE               # Sınırlı kullanım lisansı (Veriüssü)
 └── .env.example          # Ayarlar şablonu
@@ -421,9 +464,10 @@ bash scripts/remove.sh        # sunucu + venv + veriler kaldırılır; modeller 
 bash scripts/remove.sh --all  # projenin tamamı: modeller, kaynak kod, .env, veriler silinir
 ```
 
-İlki systemd servisini, `/usr/local/bin` kısayollarını, `.venv`'i, `data/` içeriğini ve
-`runtime/` loglarını temizler; kaynak kod ve `models/` yerinde kalır. `--all` ile diskten
-proje dizininin tamamı kaldırılır.
+İlki systemd servisini (Linux), `/usr/local/bin` kısayollarını, `.venv`'i, `data/`
+içeriğini ve `runtime/` loglarını temizler; kaynak kod ve `models/` yerinde kalır.
+`--all` ile diskten proje dizininin tamamı kaldırılır. Windows'ta aynı işler
+`scripts/remove.ps1` ve `scripts/remove.ps1 -All` ile yapılır.
 
 ---
 

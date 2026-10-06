@@ -9,6 +9,8 @@
 # ─────────────────────────────────────────────────────────────
 
 import struct
+import sys
+import types
 
 import pytest
 
@@ -350,3 +352,106 @@ def test_amd_falls_back_to_vulkan(monkeypatch):
     monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu", "vulkan"])
     rt = resolve_runtime("auto", -1)
     assert rt.backend == "vulkan"
+
+
+# ─────────────────────────────────────────────
+# Platformlar arası: macOS / Metal
+# ─────────────────────────────────────────────
+
+def test_apple_info_on_darwin(monkeypatch):
+    """macOS'ta Apple Silicon otomatik algılanmalı (vendor=apple, metal)."""
+    monkeypatch.setattr(gpu_detect.sys, "platform", "darwin")
+    monkeypatch.setattr(gpu_detect.platform, "machine", lambda: "arm64")
+    info = gpu_detect._apple_info()
+    assert info is not None
+    assert info.vendor == "apple"
+    assert info.driver == "metal"
+    assert "Apple" in info.name
+    # Birleşik bellekte ayrı VRAM sayacı yok -> 0 (bilinmiyor)
+    assert info.vram_free_mb == 0
+
+
+def test_apple_info_not_darwin(monkeypatch):
+    """Windows/Linux'ta Apple algılayıcısı devre dışı kalmalı."""
+    monkeypatch.setattr(gpu_detect.sys, "platform", "linux")
+    assert gpu_detect._apple_info() is None
+    monkeypatch.setattr(gpu_detect.sys, "platform", "win32")
+    assert gpu_detect._apple_info() is None
+
+
+def test_detect_order_includes_apple(monkeypatch):
+    """NVIDIA yoksa ve macOS'taysa Apple algılanmalı (nvidia/amd boş)."""
+    monkeypatch.setattr(gpu_detect, "_nvidia_info", lambda: None)
+    monkeypatch.setattr(gpu_detect, "_amd_info", lambda: None)
+    monkeypatch.setattr(gpu_detect.sys, "platform", "darwin")
+    monkeypatch.setattr(gpu_detect.platform, "machine", lambda: "arm64")
+    info = detect_hardware()
+    assert info.vendor == "apple"
+
+
+def test_auto_apple_metal_compiled(monkeypatch):
+    """auto modda Apple + metal derlemesi -> GPU (metal), tüm katmanlar."""
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw(vendor="apple", name="Apple Silicon", total=0, free=0))
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu", "metal"])
+    rt = resolve_runtime("auto", -1, model_path="m", model_size_bytes=4_000_000_000)
+    assert rt.backend == "metal"
+    assert rt.gpu_layers == -1  # birleşik bellek: VRAM bilinmez -> tüm katmanlar GPU'da
+
+
+def test_auto_apple_no_metal_falls_back_to_cpu(monkeypatch):
+    """macOS'ta metal derlenmemişse anlaşılır açıklamayla CPU'ya dönülür."""
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw(vendor="apple", name="Apple Silicon", total=0, free=0))
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu"])
+    rt = resolve_runtime("auto", -1)
+    assert rt.backend == "cpu" and rt.gpu_layers == 0
+    assert "install.sh --rebuild" in rt.note
+
+
+def test_explicit_metal_compiled(monkeypatch):
+    """metal zorlaması kurulu derlemeyle eşleşince GPU olarak kullanılır."""
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw(vendor="apple"))
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu", "metal"])
+    monkeypatch.setattr(gpu_detect, "gguf_n_layers", lambda p: 42)
+    rt = resolve_runtime("metal", -1, model_path="m", model_size_bytes=4_000_000_000)
+    assert rt.backend == "metal"
+
+
+def test_explicit_metal_missing_raises(monkeypatch):
+    """metal zorlaması derlenmemişse anlaşılır RuntimeError."""
+    monkeypatch.setattr(gpu_detect, "detect_hardware", lambda: _hw(vendor="apple"))
+    monkeypatch.setattr(gpu_detect, "compiled_backends", lambda: ["cpu"])
+    with pytest.raises(RuntimeError, match="install.sh --rebuild"):
+        resolve_runtime("metal", -1)
+
+
+def test_compiled_backends_metal_dylib_on_darwin(monkeypatch, tmp_path):
+    """macOS'ta libggml-metal.dylib varlığı backend listesine metal eklemeli."""
+    fake = types.ModuleType("llama_cpp")
+    lib = tmp_path / "lib"
+    lib.mkdir()
+    (lib / "libggml-metal.dylib").touch()
+    fake.__file__ = str(tmp_path / "__init__.py")
+    monkeypatch.setitem(sys.modules, "llama_cpp", fake)
+    monkeypatch.setattr(gpu_detect.sys, "platform", "darwin")
+    gpu_detect.compiled_backends.cache_clear()
+    try:
+        assert compiled_backends() == ["metal"]
+    finally:
+        gpu_detect.compiled_backends.cache_clear()
+
+
+def test_compiled_backends_metal_ignored_on_linux(monkeypatch, tmp_path):
+    """Windows/Linux'ta metal dosyası olsa bile metal geri yüzü sayılmaz."""
+    fake = types.ModuleType("llama_cpp")
+    lib = tmp_path / "lib"
+    lib.mkdir()
+    (lib / "libggml-metal.dylib").touch()
+    (lib / "libggml-cuda.so").touch()
+    fake.__file__ = str(tmp_path / "__init__.py")
+    monkeypatch.setitem(sys.modules, "llama_cpp", fake)
+    monkeypatch.setattr(gpu_detect.sys, "platform", "linux")
+    gpu_detect.compiled_backends.cache_clear()
+    try:
+        assert compiled_backends() == ["cuda"]
+    finally:
+        gpu_detect.compiled_backends.cache_clear()

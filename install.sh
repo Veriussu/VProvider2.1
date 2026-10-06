@@ -4,8 +4,11 @@
 #  Dosya:    install.sh
 #  Amaç:     Tek komutla VProvider kurulumu: donanım tespiti →
 #            derleme bayrakları → venv + bağımlılıklar → llama-cpp-python
-#            derleme → .env üretimi → systemd servisi (mümkünse)
-#  Mekanik:  Donanım önceliği: CUDA → ROCm → SYCL → Vulkan → CPU.
+#            derleme → .env üretimi → systemd servisi (Linux, mümkünse).
+#  Platform: Linux (CUDA/ROCm/SYCL/Vulkan/CPU) ve macOS
+#            (Apple Silicon için GGML_METAL). Windows kullanıcıları
+#            install.ps1 PowerShell betiğini kullanır.
+#  Mekanik:  Donanım önceliği: CUDA → ROCm → SYCL → Vulkan → Metal(macOS) → CPU.
 #            CUDA derlemesi uzun sürdüğünden, llama_cpp içe aktarılabilir
 #            durumdaysa yeniden derlenmez (--rebuild ile zorlanır).
 #  Kullanım: bash install.sh                (otomatik tespit)
@@ -19,6 +22,12 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${PROJECT_ROOT}"
+
+# Platform kimliği: Linux / Darwin (macOS); mimari: x86_64 / arm64 (Apple Silicon)
+UNAME_S="$(uname -s)"
+UNAME_M="$(uname -m)"
+IS_MACOS=0
+[ "${UNAME_S}" = "Darwin" ] && IS_MACOS=1
 
 FORCE_CPU=0
 FORCE_REBUILD=0
@@ -53,7 +62,7 @@ ASCII
   echo "  Hafif Yerel Yapay Zeka Model Sunucusu - Kurulum Başlıyor..."
   printf '%s\n' "${LINE}"
   echo "  Web:       https://veriussu.com"
-  echo "  GitHub:    https://github.com/Veriussu/VProvider1.1"
+  echo "  GitHub:    https://github.com/Veriussu/VProvider2.1"
   echo "  E-posta:   vprovider@veriussu.com  |  info@veriussu.com"
   printf '%s\n' "${LINE}"
 }
@@ -64,9 +73,10 @@ banner
 # ─────────────────────────────────────────────
 need() { command -v "$1" >/dev/null 2>&1 || { echo " ✗ Eksik bağımlılık: $1 (kurun ve tekrar deneyin)" >&2; exit 1; }; }
 need python3
-need pip
 need git
 
+# "pip" tek başına PATH'te olmayabilir (ör. Homebrew Python); venv içindeki
+# pip'i her yerde kullanırız. macOS'ta "python3" = python.org/Homebrew sürümü.
 PY_MAJOR="$(python3 -c 'import sys; print(sys.version_info.major)')"
 PY_MINOR="$(python3 -c 'import sys; print(sys.version_info.minor)')"
 if [ "${PY_MAJOR}" -lt 3 ] || { [ "${PY_MAJOR}" -eq 3 ] && [ "${PY_MINOR}" -lt 10 ]; }; then
@@ -96,14 +106,22 @@ llama_kurulu_ve_iliskitli() {
   "${PY}" -c "import llama_cpp; print(llama_cpp.__version__)" >/dev/null 2>&1
 }
 
-# Kurulu derlemenin içerdiği backend adı (libggml-*.so dosyalarına bakılır)
+# Kurulu derlemenin içerdiği backend adı (ggml kütüphane dosyalarına bakılır;
+# .so = Linux, .dylib = macOS)
 llama_compiled_backend() {
   local libdir=${PROJECT_ROOT}/.venv/lib/python3.*/site-packages/llama_cpp/lib
   [ -d ${libdir} ] || { echo "cpu"; return; }
-  for b in cuda:libggml-cuda.so rocm:libggml-hip.so sycl:libggml-sycl.so vulkan:libggml-vulkan.so; do
+  for b in cuda:libggml-cuda.so:libggml-cuda.dylib \
+           rocm:libggml-hip.so \
+           sycl:libggml-sycl.so \
+           vulkan:libggml-vulkan.so:libggml-vulkan.dylib \
+           metal:libggml-metal.dylib; do
     local name="${b%%:*}"
-    local so="${b##*:}"
-    if [ -f ${libdir}/${so} ]; then echo "${name}"; return; fi
+    local files="${b#*:}"
+    local f
+    for f in ${files//:/ }; do
+      if [ -f ${libdir}/${f} ]; then echo "${name}"; return; fi
+    done
   done
   echo "cpu"
 }
@@ -111,6 +129,12 @@ llama_compiled_backend() {
 # Donanım tespitine göre istenen backend adı (pick_and_build ile aynı öncelik)
 llama_desired_backend() {
   if [ "${FORCE_CPU}" -eq 1 ]; then echo "cpu"; return; fi
+  if [ "${IS_MACOS}" -eq 1 ]; then
+    if [ "${UNAME_M}" = "arm64" ] || [ "${UNAME_M}" = "aarch64" ]; then
+      echo "metal"; return   # Apple Silicon -> Metal
+    fi
+    echo "cpu"; return       # Intel Mac -> CPU (Vulkan/Metal sınırlı)
+  fi
   if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1; then echo "cuda"; return; fi
   if command -v rocm-smi >/dev/null 2>&1; then echo "rocm"; return; fi
   if command -v lspci >/dev/null 2>&1 && lspci 2>/dev/null | grep -qiE "vga.*intel|3d.*intel"; then echo "sycl"; return; fi
@@ -143,6 +167,9 @@ pick_and_build() {
   if [ "${FORCE_CPU}" -eq 1 ]; then
     backend="CPU (--cpu bayrağı ile zorlandı)"
     llama_derle "-DGGML_CPU=on"
+  elif [ "${IS_MACOS}" -eq 1 ] && { [ "${UNAME_M}" = "arm64" ] || [ "${UNAME_M}" = "aarch64" ]; }; then
+    backend="Apple Metal (Apple Silicon)"
+    llama_derle "-DGGML_METAL=on" || { echo " • Metal derlemesi başarısız, CPU deneniyor..."; llama_derle "-DGGML_CPU=on"; backend="CPU"; }
   elif command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1; then
     backend="NVIDIA CUDA"
     llama_derle "-DGGML_CUDA=on" || { echo " • CUDA derlemesi başarısız, Vulkan deneniyor..."; llama_derle "-DGGML_VULKAN=on"; }

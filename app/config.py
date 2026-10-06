@@ -49,7 +49,7 @@ class Settings(BaseSettings):
 
     # LLM çalıştırma parametreleri
     context_size: int = 4096
-    # GPU kullanım modu: auto (donanıma göre) | cuda | rocm | sycl | vulkan | cpu
+    # GPU kullanım modu: auto (donanıma göre) | cuda | rocm | sycl | vulkan | metal | cpu
     gpu_mode: str = "auto"
     gpu_layers: int = -1        # -1 = otomatik (VRAM'e göre); pozitif = sabit
     threads: int = 0            # 0 = otomatik

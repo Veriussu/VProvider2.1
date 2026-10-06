@@ -310,7 +310,7 @@ def create_engine(model_path: str, **options) -> LlamaEngine:
     nihai gpu_layers değerini hesaplayıp LlamaCppEngine döner.
 
     Özel seçenekler (LlamaCppEngine'e geçmez):
-      gpu_mode          -> auto|cuda|rocm|sycl|vulkan|cpu (.env GPU_MODE)
+      gpu_mode          -> auto|cuda|rocm|sycl|vulkan|metal|cpu (.env GPU_MODE)
       model_size_bytes  -> VRAM hesapları için model dosya boyutu
     """
     try:
