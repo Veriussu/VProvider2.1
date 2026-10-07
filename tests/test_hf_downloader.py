@@ -426,3 +426,221 @@ def test_delete_model_unloads_then_removes(tmp_path):
     removed = asyncio.run(hf.delete_model("silinecek", manager=manager, models_dir=tmp_path))
     assert manager.unloaded == ["silinecek"]
     assert removed == ["silinecek.gguf"]
+
+# ------------------------------------------------------------------
+# Tip bazlı indirme (safetensors/onnx/ct2/embeddings)
+# ------------------------------------------------------------------
+
+def test_search_kind_filters_by_library(monkeypatch):
+    """Tip bazlı arama kitaplık etiketiyle çağrılır ve dosya sayısı döner."""
+    FakeApi.all_models = [FakeListModel("org/embed-model", downloads=10)]
+    FakeApi.repo_file_map = {"org/embed-model": ["config.json", "model.safetensors", "README.md"]}
+    monkeypatch.setattr(hf, "_api", lambda token=None: FakeApi())
+
+    results = hf.search_kind("embed", kind="embeddings", limit=5)
+
+    assert FakeApi.recorded_kwargs["filter"] == "sentence-transformers"
+    assert len(results) == 1
+    assert results[0]["repo_id"] == "org/embed-model"
+    # yalnızca ağırlık dosyaları sayılır (README.json sayılmaz)
+    assert results[0]["file_count"] == 1
+
+
+def test_search_kind_skips_repos_without_matching_files(monkeypatch):
+    """Uygun dosya içermeyen repo sonuçlara girmez."""
+    FakeApi.all_models = [FakeListModel("org/gorselsiz", downloads=5)]
+    FakeApi.repo_file_map = {"org/gorselsiz": ["README.md", "notes.txt"]}
+    monkeypatch.setattr(hf, "_api", lambda token=None: FakeApi())
+
+    assert hf.search_kind("", kind="onnx") == []
+
+
+def test_search_kind_rejects_unknown_kind():
+    """Bilinmeyen biçim hata verir."""
+    with pytest.raises(ValueError):
+        hf.search_kind("", kind="bilinmeyen")
+
+
+def test_get_kind_files_gguf_and_typed(monkeypatch):
+    """get_kind_files: gguf için .gguf, diğerleri için türe uyan dosyalar."""
+    FakeApi.repo_file_map = {
+        "org/x": ["model.gguf", "config.json", "model.safetensors", "model.onnx"],
+    }
+    monkeypatch.setattr(hf, "_api", lambda token=None: FakeApi())
+
+    assert hf.get_kind_files("org/x", kind="gguf") == ["model.gguf"]
+    assert hf.get_kind_files("org/x", kind="safetensors") == ["model.safetensors"]
+    assert hf.get_kind_files("org/x", kind="onnx") == ["model.onnx"]
+
+
+def test_download_by_kind_snapshot_to_kind_dir(monkeypatch, tmp_path):
+    """Tip bazlı indirme models/<tür>/<org_ad> klasörüne snapshot olarak iner."""
+    calls = {}
+
+    def fake_snapshot(**kwargs):
+        calls.update(kwargs)
+        target = kwargs["local_dir"]
+        import pathlib
+
+        p = pathlib.Path(target)
+        p.mkdir(parents=True, exist_ok=True)
+        (p / "config.json").write_text("{}", "utf-8")
+        (p / "model.bin").write_bytes(b"12345")
+        return str(p)
+
+    monkeypatch.setattr(hf, "snapshot_download", fake_snapshot)
+
+    result = hf.download_by_kind("org/whisper-small", kind="ct2", models_dir=tmp_path)
+
+    expected = tmp_path / "ct2" / "org_whisper-small"
+    assert result.path == expected
+    assert result.size_bytes == 7
+    assert (expected / "model.bin").exists()
+    assert hf.get_download_status("org/whisper-small")["status"] == "tamam"
+    # ilerleme sınıfı repo'ya bağlanmış olmalı (tqdm_class çağrılabilir)
+    tqdm_cls = calls["tqdm_class"]
+    bar = tqdm_cls(total=10)
+    bar.update(4)
+    assert hf.get_download_status("org/whisper-small")["received"] == 4
+
+
+def test_download_by_kind_rejects_unknown_kind(tmp_path):
+    """Bilinmeyen biçim indirme başlatılmadan reddedilir."""
+    with pytest.raises(ValueError):
+        hf.download_by_kind("org/x", kind="bilinmeyen", models_dir=tmp_path)
+
+
+def test_download_by_kind_marks_error_on_failure(monkeypatch, tmp_path):
+    """Snapshot indirme hatasında durum 'hata' olur ve hata yeniden yükselir."""
+    def boom(**kwargs):
+        raise RuntimeError("ağ hatası")
+
+    monkeypatch.setattr(hf, "snapshot_download", boom)
+
+    with pytest.raises(RuntimeError):
+        hf.download_by_kind("org/x", kind="embeddings", models_dir=tmp_path)
+
+    status = hf.get_download_status("org/x")
+    assert status["status"] == "hata"
+    assert "ağ hatası" in status["error"]
+
+
+def test_download_by_kind_gguf_delegates(monkeypatch, tmp_path):
+    """gguf türü mevcut dosya indirme akışına yönlendirir."""
+    seen = {}
+
+    def fake_download_model(repo_id, filename, revision="main", models_dir=None,
+                            token=None, progress_cb=None):
+        seen.update({"repo_id": repo_id, "filename": filename, "models_dir": models_dir})
+        return hf.DownloadResult(path=tmp_path / filename, repo_id=repo_id,
+                                 filename=filename, size_bytes=1)
+
+    monkeypatch.setattr(hf, "download_model", fake_download_model)
+
+    hf.download_by_kind("org/kucuk", kind="gguf", filename="kucuk-Q4_K_M.gguf",
+                        models_dir=tmp_path)
+
+    assert seen["filename"] == "kucuk-Q4_K_M.gguf"
+    assert seen["repo_id"] == "org/kucuk"
+
+
+def test_download_by_kind_gguf_auto_picks_quant(monkeypatch, tmp_path):
+    """gguf türünde dosya verilmezse nicelik seçimi (pick_gguf) yapılır."""
+    picked = {}
+
+    def fake_pick(repo_id, quant=hf.DEFAULT_QUANT, token=None):
+        picked["repo_id"] = repo_id
+        return hf.RepoFile("otomatik-Q4_K_M.gguf", 10)
+
+    monkeypatch.setattr(hf, "pick_gguf", fake_pick)
+    monkeypatch.setattr(hf, "download_model", lambda repo_id, filename, *a, **kw: hf.DownloadResult(
+        path=tmp_path / filename, repo_id=repo_id, filename=filename, size_bytes=1))
+
+    hf.download_by_kind("org/kucuk", kind="gguf", models_dir=tmp_path)
+
+    assert picked["repo_id"] == "org/kucuk"
+
+
+def test_delete_model_files_removes_typed_dir(tmp_path):
+    """Tip bazlı model dizini de silinir, komşular korunur."""
+    target = tmp_path / "embeddings" / "silinecek"
+    target.mkdir(parents=True)
+    (target / "model.safetensors").write_bytes(b"x")
+    keep = tmp_path / "embeddings" / "korunacak"
+    keep.mkdir(parents=True)
+
+    removed = hf.delete_model_files("silinecek", models_dir=tmp_path)
+
+    assert not target.exists()
+    assert keep.exists()
+    assert any("silinecek" in r for r in removed)
+
+
+def test_search_kind_falls_back_to_legacy_library_arg(monkeypatch):
+    """Eski huggingface_hub (library=) ile de çalışır; yeni (filter=) tercih edilir."""
+    class LegacyApi(FakeApi):
+        def list_models(self, **kwargs):
+            if "filter" in kwargs:          # yeni imza yoksa TypeError yükselt
+                raise TypeError("unexpected keyword argument 'filter'")
+            type(self).recorded_kwargs = kwargs
+            return list(type(self).all_models)
+
+    FakeApi.all_models = [FakeListModel("org/legacy-embed", downloads=7)]
+    FakeApi.repo_file_map = {"org/legacy-embed": ["model.safetensors"]}
+    monkeypatch.setattr(hf, "_api", lambda token=None: LegacyApi())
+
+    results = hf.search_kind("", kind="embeddings")
+
+    assert LegacyApi.recorded_kwargs["library"] == "sentence-transformers"
+    assert results and results[0]["repo_id"] == "org/legacy-embed"
+
+
+# ------------------------------------------------------------------
+# safetensors indirme desenleri (disk tasarrufu)
+# ------------------------------------------------------------------
+
+def test_allow_patterns_prefers_fp16_variant():
+    """Hem fp32 hem fp16 varyantı olan repoda yalnızca fp16 + yapılandırma alınır."""
+    files = [
+        "model_index.json",
+        "unet/diffusion_pytorch_model.safetensors",
+        "unet/diffusion_pytorch_model.fp16.safetensors",
+        "text_encoder/model.safetensors",
+        "text_encoder/model.fp16.safetensors",
+        "sd_turbo.safetensors",              # monolitik kopya (gereksiz)
+        "unet/diffusion_pytorch_model.onnx",  # dışa aktarım (gereksiz)
+    ]
+    allow = hf._safetensors_allow_patterns(files)
+    assert "*.fp16.safetensors" in allow
+    assert "*.safetensors" not in allow      # monolitik/fp32 alınmaz
+    assert "*.json" in allow                # yapılandırmalar alınır
+
+
+def test_allow_patterns_primary_when_no_fp16():
+    """fp16 varyantı yoksa birincil safetensors alınır."""
+    files = ["model_index.json", "unet/diffusion_pytorch_model.safetensors"]
+    allow = hf._safetensors_allow_patterns(files)
+    assert "*.safetensors" in allow
+    assert "*.fp16.safetensors" not in allow
+
+
+def test_allow_patterns_none_for_bin_repos():
+    """Ağırlıklar safetensors değilse desen kısıtı uygulanmaz (None)."""
+    assert hf._safetensors_allow_patterns(["unet/diffusion_pytorch_model.bin"]) is None
+
+
+def test_snapshot_filters_only_for_safetensors(monkeypatch):
+    """Desenler yalnızca safetensors türünde uygulanır."""
+    monkeypatch.setattr(hf, "_api", lambda token=None: FakeApi())
+    FakeApi.repo_file_map = {"org/x": ["model_index.json", "unet/x.fp16.safetensors"]}
+    allow, ignore = hf._snapshot_filters(hf.KIND_SAFETENSORS, "org/x", None)
+    assert allow and ignore
+    allow, ignore = hf._snapshot_filters(hf.KIND_EMBEDDINGS, "org/x", None)
+    assert allow is None and ignore is None
+
+
+def test_ignore_patterns_exclude_onnx_and_media():
+    """ONNX/openvino/medya dosyaları her zaman dışlanır."""
+    assert "*.onnx" in hf._SNAPSHOT_IGNORE_PATTERNS
+    assert "*openvino*" in hf._SNAPSHOT_IGNORE_PATTERNS
+    assert "*.png" in hf._SNAPSHOT_IGNORE_PATTERNS

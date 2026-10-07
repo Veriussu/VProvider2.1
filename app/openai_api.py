@@ -21,11 +21,12 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from app.auth import require_api_key
+from app import registry
+from app.gateway import ApiContext, api_auth
 from app.model_manager import get_manager
 
 # OpenAI uyumlu router; tüm /v1/* istekleri API anahtarı ister
-router = APIRouter(prefix="/v1", dependencies=[Depends(require_api_key)])
+router = APIRouter(prefix="/v1", dependencies=[Depends(api_auth)])
 
 # Akış (SSE) yanıt başlıkları
 STREAM_HEADERS = {
@@ -148,6 +149,24 @@ def _require_model(model_id: str) -> None:
             param="model",
             code="model_not_found",
         )
+
+
+def _task_for(model_id: str) -> str:
+    """Bir GGUF modelinin tarife görevini belirler (reasoning | chat).
+
+    Reasoning modeller (models/reasoning/ klasörü ya da adında r1/thinking/
+    reasoning işareti bulunanlar) "reasoning" tarifesinden düşülür; diğerleri
+    "chat". Böylece pahalı düşünme modellerinin kredisi ayrı kalır.
+    """
+    manager = get_manager()
+    for info in manager.list_models():
+        if info.model_id == model_id:
+            if registry.category_for_gguf(info.model_id, info.path, manager.models_dir) == (
+                registry.CAT_REASONING
+            ):
+                return "reasoning"
+            return "chat"
+    return "chat"
 
 
 def _filter_params(req: BaseModel) -> dict:
@@ -301,15 +320,38 @@ def _usage_payload(usage: dict) -> dict:
 
 @router.get("/models")
 def list_models():
-    """Diskteki tüm GGUF modellerini OpenAI /v1/models biçiminde listeler."""
+    """Tüm modelleri (GGUF + tip bazlı) OpenAI /v1/models biçiminde listeler.
+
+    Her kayıt iş kategorisini "pricing.task" alanında taşır (chat, reasoning,
+    embedding, image, video, music, stt); istemci tarifeyi buradan okur.
+    """
+    manager = get_manager()
     data = []
-    for model in get_manager().list_models():
+    for model in manager.list_models():
         data.append(
             {
                 "id": model.model_id,
                 "object": "model",
                 "created": int(model.path.stat().st_mtime),
                 "owned_by": "vprovider",
+                "pricing": {
+                    "task": registry.category_for_gguf(
+                        model.model_id, model.path, manager.models_dir
+                    )
+                },
+            }
+        )
+
+    # Tip bazlı modeller (embedding/ct2/safetensors/onnx): GGUF değildir,
+    # panelden indirilip models/<tür>/ altına kurulur.
+    for entry in registry.scan_typed(models_dir=manager.models_dir):
+        data.append(
+            {
+                "id": entry.model_id,
+                "object": "model",
+                "created": int(entry.path.stat().st_mtime),
+                "owned_by": "vprovider",
+                "pricing": {"task": entry.category},
             }
         )
     return {"object": "list", "data": data}
@@ -320,7 +362,7 @@ def list_models():
 # ------------------------------------------------------------------
 
 @router.post("/chat/completions")
-async def chat_completions(req: ChatCompletionRequest):
+async def chat_completions(req: ChatCompletionRequest, ctx: ApiContext = Depends(api_auth)):
     """Sohbet yanıtı üretir; stream=True ise SSE akışı döner."""
     _require_model(req.model)
     params = _filter_params(req)
@@ -333,6 +375,7 @@ async def chat_completions(req: ChatCompletionRequest):
                 messages,
                 params,
                 include_usage=bool((req.stream_options or {}).get("include_usage")),
+                ctx=ctx,
             ),
             media_type="text/event-stream",
             headers=STREAM_HEADERS,
@@ -341,21 +384,28 @@ async def chat_completions(req: ChatCompletionRequest):
     content = await get_manager().chat(req.model, messages, **params)
     usage = _usage_payload(await get_manager().usage(req.model))
     tool_calls, finish = await get_manager().tool_call_info(req.model)
+    ctx.charge(
+        _task_for(req.model), model_id=req.model,
+        prompt_tokens=usage.get("prompt_tokens", 0),
+        completion_tokens=usage.get("completion_tokens", 0),
+    )
     return _chat_response(req.model, content, usage, tool_calls=tool_calls, finish_reason=finish)
 
 
 async def _chat_stream_generator(
-    model_id: str, messages: list, params: dict, include_usage: bool = False
+    model_id: str, messages: list, params: dict, include_usage: bool = False,
+    ctx: ApiContext = None,
 ) -> AsyncIterator[str]:
     """Chat akışını OpenAI SSE biçiminde parça parça üretir.
 
     İçerik parçalarının yanı sıra araç çağrısı (tool_calls) delta'larını da
     iletir; bitiş parçasında finish_reason ve (istenirse) kullanım bilgisi
-    verilir.
+    verilir. Kullanım toplandıktan sonra ctx ile kredi düşülür.
     """
     stream_id = f"chatcmpl-{uuid4().hex[:12]}"
     finish_reason = "stop"
     usage_payload: dict = {}
+    raw_usage: dict = {}
     async for ev in get_manager().chat_stream_events(model_id, messages, **params):
         if isinstance(ev, str):
             # Geriye dönük uyum: eski/sahte motorlar doğrudan metin verir.
@@ -382,8 +432,17 @@ async def _chat_stream_generator(
         elif kind == "finish":
             finish_reason = ev.get("reason", "stop")
         elif kind == "usage":
+            raw_usage = ev.get("usage", {})
             if include_usage:
-                usage_payload = _usage_payload(ev.get("usage", {}))
+                usage_payload = _usage_payload(raw_usage)
+
+    if ctx is not None:
+        u = raw_usage or (await get_manager().usage(model_id)) or {}
+        ctx.charge(
+            _task_for(model_id), model_id=model_id,
+            prompt_tokens=u.get("prompt_tokens", 0),
+            completion_tokens=u.get("completion_tokens", 0),
+        )
 
     if finish_reason == "tool_calls":
         yield _sse_chat_chunk_full(stream_id, model_id, {}, "tool_calls")
@@ -407,28 +466,42 @@ async def _chat_stream_generator(
 # ------------------------------------------------------------------
 
 @router.post("/completions")
-async def completions(req: CompletionRequest):
+async def completions(req: CompletionRequest, ctx: ApiContext = Depends(api_auth)):
     """Metin tamamlama yanıtı üretir; stream=True ise SSE akışı döner."""
     _require_model(req.model)
     params = _filter_params(req)
 
     if req.stream:
         return StreamingResponse(
-            _completion_stream_generator(req.model, req.prompt, params),
+            _completion_stream_generator(req.model, req.prompt, params, ctx),
             media_type="text/event-stream",
             headers=STREAM_HEADERS,
         )
 
     content = await get_manager().completion(req.model, req.prompt, **params)
     usage = _usage_payload(await get_manager().usage(req.model))
+    ctx.charge(
+        _task_for(req.model), model_id=req.model,
+        prompt_tokens=usage.get("prompt_tokens", 0),
+        completion_tokens=usage.get("completion_tokens", 0),
+    )
     return _completion_response(req.model, content, usage)
 
 
-async def _completion_stream_generator(model_id: str, prompt: str, params: dict) -> AsyncIterator[str]:
+async def _completion_stream_generator(
+    model_id: str, prompt: str, params: dict, ctx: ApiContext = None
+) -> AsyncIterator[str]:
     """Completion akışını OpenAI SSE biçiminde parça parça üretir."""
     stream_id = f"cmpl-{uuid4().hex[:12]}"
     async for chunk in get_manager().completion_stream(model_id, prompt, **params):
         yield _sse_completion_chunk(stream_id, model_id, chunk, None)
+    if ctx is not None:
+        usage = (await get_manager().usage(model_id)) or {}
+        ctx.charge(
+            _task_for(model_id), model_id=model_id,
+            prompt_tokens=usage.get("prompt_tokens", 0),
+            completion_tokens=usage.get("completion_tokens", 0),
+        )
     yield _sse_completion_chunk(stream_id, model_id, "", "stop")
     yield "data: [DONE]\n\n"
 
@@ -686,7 +759,7 @@ def _collect_calls(call_state: dict) -> list:
 
 
 @router.post("/responses")
-async def responses(req: ResponsesRequest):
+async def responses(req: ResponsesRequest, ctx: ApiContext = Depends(api_auth)):
     """OpenAI Responses API uyumlu yanıt üretir; stream=True ise SSE akışı.
 
     Codex CLI gibi araçların konuştuğu şema: input + instructions ile sor,
@@ -698,7 +771,7 @@ async def responses(req: ResponsesRequest):
 
     if req.stream:
         return StreamingResponse(
-            _responses_stream_generator(req.model, messages, params, req),
+            _responses_stream_generator(req.model, messages, params, req, ctx),
             media_type="text/event-stream",
             headers=STREAM_HEADERS,
         )
@@ -706,12 +779,18 @@ async def responses(req: ResponsesRequest):
     content = await get_manager().chat(req.model, messages, **params)
     usage = await get_manager().usage(req.model)
     tool_calls, _finish = await get_manager().tool_call_info(req.model)
+    ctx.charge(
+        _task_for(req.model), model_id=req.model,
+        prompt_tokens=usage.get("prompt_tokens", 0) if usage else 0,
+        completion_tokens=usage.get("completion_tokens", 0) if usage else 0,
+    )
     output = _responses_output_items(content, tool_calls)
     return _resp_obj(req.model, req, output, usage, status="completed")
 
 
 async def _responses_stream_generator(
-    model_id: str, messages: list, params: dict, req: ResponsesRequest
+    model_id: str, messages: list, params: dict, req: ResponsesRequest,
+    ctx: ApiContext = None,
 ) -> AsyncIterator[str]:
     """Responses akışını OpenAI SSE olaylarıyla üretir.
 
@@ -872,6 +951,12 @@ async def _responses_stream_generator(
     if not usage:
         # Usage akış içinde gelmediyse motor defterinden al (varsa)
         usage = await get_manager().usage(model_id)
+    if ctx is not None:
+        ctx.charge(
+            _task_for(model_id), model_id=model_id,
+            prompt_tokens=usage.get("prompt_tokens", 0) if usage else 0,
+            completion_tokens=usage.get("completion_tokens", 0) if usage else 0,
+        )
     output = _responses_output_items(content_buf, _collect_calls(call_state))
     final = _resp_obj(
         model_id, req, output, usage, status="completed",

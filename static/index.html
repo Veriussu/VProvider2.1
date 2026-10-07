@@ -138,6 +138,10 @@
   .mcat.ses { color: var(--ok); border: 1px solid rgba(52,211,153,.35); background: rgba(52,211,153,.12); }
   .mcat.video { color: #ff9a6e; border: 1px solid rgba(255,154,110,.35); background: rgba(255,154,110,.12); }
   .mcat.müzik { color: #ffd46e; border: 1px solid rgba(255,212,110,.35); background: rgba(255,212,110,.12); }
+  .mcat.reasoning { color: #7ee0d3; border: 1px solid rgba(126,224,211,.35); background: rgba(126,224,211,.12); }
+  .mcat.embedding, .mcat.generic { color: #9fb4ff; border: 1px solid rgba(159,180,255,.35); background: rgba(159,180,255,.12); }
+  .mcat.stt { color: #86e3a0; border: 1px solid rgba(134,227,160,.35); background: rgba(134,227,160,.12); }
+  .mcat.image { color: #c4a4ff; border: 1px solid rgba(196,164,255,.35); background: rgba(196,164,255,.12); }
   .loaded-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
   .loaded-dot.on { background: var(--ok); box-shadow: 0 0 0 4px rgba(52,211,153,.16); }
   .loaded-dot.off { background: #4b5565; box-shadow: 0 0 0 4px rgba(75,85,101,.14); }
@@ -613,13 +617,37 @@
 
       <div class="card">
         <h2>Yeni Anahtar</h2>
-        <div class="row" style="align-items:flex-end;">
-          <div class="field" style="flex:2;">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+          <div class="field">
             <label>Anahtar Adı</label>
             <input type="text" id="api-name" placeholder="örn. Chatbox, Sunucu-1, Test">
           </div>
-          <button class="btn primary" onclick="createApi()">Oluştur</button>
+          <div class="field">
+            <label>Süre (ISO, bırakılırsa süresiz)</label>
+            <input type="text" id="api-expires" placeholder="örn. 2026-12-31T23:59:59">
+          </div>
+          <div class="field">
+            <label>RPM (dakikada istek; 0 = sınırsız)</label>
+            <input type="number" id="api-rpm" value="0" min="0">
+          </div>
+          <div class="field">
+            <label>TPM (dakikada token; 0 = sınırsız)</label>
+            <input type="number" id="api-tpm" value="0" min="0">
+          </div>
+          <div class="field">
+            <label>Aylık Token Kotası (0 = sınırsız)</label>
+            <input type="number" id="api-quota" value="0" min="0">
+          </div>
+          <div class="field">
+            <label>Kredi Bakiyesi (0 = sınırsız)</label>
+            <input type="number" id="api-balance" value="0" min="0" step="0.001">
+          </div>
+          <div class="field" style="grid-column:1/-1;">
+            <label>İzinli Modeller (virgülle; boş = tümü)</label>
+            <input type="text" id="api-allowlist" placeholder="örn. qwen3-0.6b, sd-xl" style="width:100%;">
+          </div>
         </div>
+        <button class="btn primary" style="margin-top:12px;" onclick="createApi()">Oluştur</button>
       </div>
     </div>
 
@@ -653,19 +681,57 @@
     <div class="modal-body">
       <div class="search-row">
         <input type="search" id="add-q" placeholder="Modeller içinde ara... örn. qwen3" oninput="renderAddModels()">
+        <select id="add-kind" onchange="onAddKindChange()">
+          <option value="gguf">GGUF &mdash; Metin / LLM</option>
+          <option value="embeddings">Embedding &mdash; Metin Gömme</option>
+          <option value="safetensors">Görsel / Video (safetensors)</option>
+          <option value="ct2">Konuşma Tanıma (Whisper)</option>
+          <option value="onnx">ONNX</option>
+        </select>
         <select id="add-cat" onchange="renderAddModels()">
           <option value="">Tümü</option>
           <option value="text-generation">Metin Üretimi</option>
-          <option value="text2text-generation">Metin→Metin</option>
+          <option value="text2text-generation">Metin&rarr;Metin</option>
           <option value="text-classification">Metin Sınıflandırma</option>
-          <option value="image-text-to-text">Görsel→Metin</option>
-          <option value="image-to-image">Görsel→Görsel</option>
-          <option value="text-to-audio">Metin→Ses</option>
+          <option value="image-text-to-text">Görsel&rarr;Metin</option>
+          <option value="image-to-image">Görsel&rarr;Görsel</option>
+          <option value="text-to-audio">Metin&rarr;Ses</option>
         </select>
         <button class="btn primary" onclick="searchAddModels()">Ara</button>
       </div>
+      <div id="add-kind-note" class="muted" style="margin-top:8px; font-size:12px;"></div>
       <div id="add-results" style="margin-top:12px;"></div>
     </div>
+  </div>
+</div>
+
+<div id="modal-key" class="modal-overlay hidden" onclick="closeKeyModalOnBg(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Anahtar Oluşturuldu</h3>
+      <button class="modal-x" onclick="closeKeyModal()" title="Kapat">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0 0 10px; color:var(--text); line-height:1.6;">
+        Bu anahtar <b>yalnızca bir kez</b> gösterilir; kapatınca bir daha görüntülenemez.
+        Kopyalayıp güvenli bir yere kaydedin.
+      </p>
+      <div id="created-key" class="api-key" style="user-select:all; word-break:break-all;"></div>
+      <div class="modal-actions">
+        <button class="btn primary" onclick="copyCreatedKey()">Kopyala</button>
+        <button class="btn" onclick="closeKeyModal()">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-keydetail" class="modal-overlay hidden" onclick="closeKeyDetailOnBg(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="kd-title">Anahtar Detayı</h3>
+      <button class="modal-x" onclick="closeKeyDetail()" title="Kapat">&times;</button>
+    </div>
+    <div class="modal-body" id="kd-body"><p class="muted">Yükleniyor...</p></div>
   </div>
 </div>
 
@@ -725,11 +791,27 @@ async function loadComfyInfo() {
   const badge = $("comfy-badge");
   const info = $("comfy-info");
   try {
+    // Önce yerel (in-process) modeller: ComfyUI gerekmeden üretim yapılabilir
+    const media = await api("/panel/media/models");
+    const localImages = (media.models || []).filter((m) => m.category === "image");
+    if (localImages.length) {
+      badge.textContent = "Yerel motor hazır";
+      badge.className = "badge on";
+      info.textContent = localImages.length + " yerel görsel modeli kurulu " +
+        "(sunucu içinde çalışır). " +
+        (media.comfy_checkpoints && media.comfy_checkpoints.length
+          ? media.comfy_checkpoints.length + " ComfyUI checkpoint'i de mevcut."
+          : "ComfyUI köprüsü kapalı olabilir.");
+      $("btn-comfy").disabled = false;
+      await loadMediaModels("image", localImages);
+      return;
+    }
     const st = await api("/panel/comfy/status");
     if (!st.enabled) {
       badge.textContent = "Modül kapalı";
       badge.className = "badge off";
-      info.textContent = "Köprü genel olarak kapalı (COMFYUI_ENABLED=false). .env içinde açıp yeniden başlatın.";
+      info.textContent = "Yerel görsel modeli yok ve ComfyUI kapalı (COMFYUI_ENABLED=false). " +
+        "Panelden models/safetensors/ altına bir model kurun veya ComfyUI'yi açın.";
       $("btn-comfy").disabled = true;
       return;
     }
@@ -745,7 +827,7 @@ async function loadComfyInfo() {
     info.textContent = (st.gpu ? st.gpu + " · " : "") + "VRAM ≈ " + (st.vram_mb || "?") + " MB" +
       " · Köprü bağlantısı harici bir süreçte (ComfyUI) sağlanır.";
     $("btn-comfy").disabled = false;
-    loadComfyCheckpoints();
+    loadMediaModels("image", []);
   } catch (err) {
     badge.textContent = "Durum alınamadı";
     badge.className = "badge off";
@@ -753,19 +835,51 @@ async function loadComfyInfo() {
   }
 }
 
-async function loadComfyCheckpoints() {
+// Üretim modeli seçimini doldurur: yerel modeller + ComfyUI checkpoint'leri
+async function loadMediaModels(category, localModels) {
   try {
-    const body = await api("/panel/comfy/checkpoints");
-    const sel = $("img-ckpt");
+    let comfy = [];
+    try {
+      const body = await api("/panel/media/models");
+      comfy = body.comfy_checkpoints || [];
+      if (!localModels || !localModels.length) {
+        localModels = (body.models || []).filter((m) => m.category === category);
+      }
+    } catch (e) { /* ComfyUI kapalı olabilir */ }
+
+    const sel = $(category === "video" ? "vid-ckpt" : "img-ckpt");
     sel.innerHTML = "";
-    (body.checkpoints || []).forEach((ck) => {
+    if (localModels && localModels.length) {
+      const g = document.createElement("optgroup");
+      g.label = "Yerel modeller (sunucu içinde)";
+      localModels.forEach((m) => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = m.id + " · " + m.size_mb + " MB";
+        g.appendChild(opt);
+      });
+      sel.appendChild(g);
+    }
+    if (comfy.length) {
+      const g = document.createElement("optgroup");
+      g.label = "ComfyUI checkpoint";
+      comfy.forEach((ck) => {
+        const opt = document.createElement("option");
+        opt.value = ck;
+        opt.textContent = ck;
+        g.appendChild(opt);
+      });
+      sel.appendChild(g);
+    }
+    if (!sel.options.length) {
       const opt = document.createElement("option");
-      opt.value = ck;
-      opt.textContent = ck;
+      opt.value = "";
+      opt.textContent = "Kullanılabilir model yok";
+      opt.disabled = true;
       sel.appendChild(opt);
-    });
+    }
   } catch (err) {
-    // checkpoint listesi kritik değil; durum uyarısı zaten görülüyor
+    // model listesi kritik değil; durum uyarısı zaten görülüyor
   }
 }
 
@@ -810,11 +924,20 @@ async function generateComfy() {
   }
 }
 
-// ---------- ComfyUI video üretim (AnimateDiff) ----------
+// ---------- video üretim (yerel pipeline veya ComfyUI/AnimateDiff) ----------
 async function loadVideoInfo() {
   const badge = $("vid-badge");
   const btn = $("btn-video");
   try {
+    const media = await api("/panel/media/models");
+    const localVideos = (media.models || []).filter((m) => m.category === "video");
+    if (localVideos.length) {
+      badge.textContent = "Yerel motor hazır";
+      badge.className = "badge on";
+      btn.disabled = false;
+      await loadMediaModels("video", localVideos);
+      return;
+    }
     const st = await api("/panel/comfy/status");
     if (!st.enabled) {
       badge.textContent = "Modül kapalı";
@@ -831,26 +954,12 @@ async function loadVideoInfo() {
     badge.textContent = (st.gpu || "Motor çalışıyor");
     badge.className = "badge on";
     btn.disabled = false;
-    loadVideoCheckpoints();
+    loadMediaModels("video", []);
   } catch (err) {
     badge.textContent = "Durum alınamadı";
     badge.className = "badge off";
     btn.disabled = true;
   }
-}
-
-async function loadVideoCheckpoints() {
-  try {
-    const body = await api("/panel/comfy/checkpoints");
-    const sel = $("vid-ckpt");
-    sel.innerHTML = "";
-    (body.checkpoints || []).forEach((ck) => {
-      const opt = document.createElement("option");
-      opt.value = ck;
-      opt.textContent = ck;
-      sel.appendChild(opt);
-    });
-  } catch (err) { /* kritik değil */ }
 }
 
 async function generateVideo() {
@@ -1161,6 +1270,15 @@ async function sendChat() {
 // ---------- modeller ----------
 const CATEGORY_LABELS = {
   metin: "Metin", görsel: "Görsel", ses: "Ses", video: "Video", müzik: "Müzik",
+  // Tip bazlı modeller registry kategorileriyle gelir
+  chat: "Metin", reasoning: "Düşünme", embedding: "Gömme", stt: "Konuşma",
+  image: "Görsel", generic: "Genel",
+};
+
+// Biçim (kind) rozetleri: panelde modelin türünü gösterir
+const KIND_LABELS = {
+  gguf: "GGUF", safetensors: "safetensors", onnx: "ONNX",
+  ct2: "Whisper", embeddings: "Embedding",
 };
 
 const ICON_KEEP =
@@ -1190,26 +1308,32 @@ function renderModel(m) {
   const el = document.createElement("div");
   el.className = "model";
   const cat = CATEGORY_LABELS[m.category] || "Metin";
+  const managed = m.managed !== false;   // tip bazlı modeller yalnızca silinebilir
   const keepActive = m.memory_mode === "keep" ? " active keep" : "";
   const dynActive = m.memory_mode !== "keep" ? " active dynamic" : "";
+  const kindBadge = m.kind && m.kind !== "gguf"
+    ? `<span class="mcat ${m.category || "generic"}">${escapeHtml(KIND_LABELS[m.kind] || m.kind)}</span>` : "";
   el.innerHTML = `
     <div class="info">
       <span class="name">${escapeHtml(m.id)}</span>
       <span class="meta">
         <span class="mcat ${m.category || "metin"}">${cat}</span>
+        ${kindBadge}
         ${m.params ? '<span>' + escapeHtml(m.params) + " parametre</span>" : ""}
         <span>${fmtBytes(m.size_bytes)}</span>
-        <span class="loaded-dot ${m.loaded ? "on" : "off"}" title="${m.loaded ? "Bellekte" : "Boşta"}"></span>
+        ${managed ? `<span class="loaded-dot ${m.loaded ? "on" : "off"}" title="${m.loaded ? "Bellekte" : "Boşta"}"></span>` : ""}
       </span>
     </div>
     <div class="actions">
-      <button class="icon-btn${keepActive}" data-act="keep" title="Sürekli aktif">${ICON_KEEP}<span class="tip">Sürekli aktif</span></button>
-      <button class="icon-btn${dynActive}" data-act="dynamic" title="İstek ile aktif">${ICON_DYNAMIC}<span class="tip">İstek ile aktif</span></button>
+      ${managed ? `<button class="icon-btn${keepActive}" data-act="keep" title="Sürekli aktif">${ICON_KEEP}<span class="tip">Sürekli aktif</span></button>
+      <button class="icon-btn${dynActive}" data-act="dynamic" title="İstek ile aktif">${ICON_DYNAMIC}<span class="tip">İstek ile aktif</span></button>` : ""}
       <button class="icon-btn danger" data-act="delete" title="Modeli sil">${ICON_DELETE}<span class="tip">Modeli sil</span></button>
     </div>`;
   $("model-list").appendChild(el);
-  el.querySelector('[data-act="keep"]').addEventListener("click", () => modelAction("mode", m.id, "keep"));
-  el.querySelector('[data-act="dynamic"]').addEventListener("click", () => modelAction("mode", m.id, "dynamic"));
+  if (managed) {
+    el.querySelector('[data-act="keep"]').addEventListener("click", () => modelAction("mode", m.id, "keep"));
+    el.querySelector('[data-act="dynamic"]').addEventListener("click", () => modelAction("mode", m.id, "dynamic"));
+  }
   el.querySelector('[data-act="delete"]').addEventListener("click", () => {
     openConfirm("Modeli Sil", m.id + " modelini ve dosyalarını diskten kalıcı olarak silmek istiyor musunuz?", async () => {
       try {
@@ -1256,31 +1380,46 @@ async function modelAction(action, id, value) {
 // ---------- model ekleme (popup) ----------
 let addRepo = "";
 let addFiles = [];
-let browseModels = [];
-let browseLoaded = false;
+let browseByKind = {};       // kind -> [repo kartı]  (tür başına önbellek)
 let downloadRows = {};   // repo_id -> { repo, row, bar, info, pct, timer }
+
+// Her tür için kullanıcıya ne olacağını anlatan ipucu
+const KIND_NOTES = {
+  gguf: "GGUF modelleri models/ köküne iner; /v1/chat/completions ile kullanılır.",
+  embeddings: "Embedding modelleri models/embeddings/ altına iner; /v1/embeddings ile kullanılır.",
+  safetensors: "Pipeline modelleri models/safetensors/ altına iner; görsel/video üretiminde kullanılır.",
+  ct2: "Whisper (ctranslate2) modelleri models/ct2/ altına iner; konuşma tanımada kullanılır.",
+  onnx: "ONNX modelleri models/onnx/ altına iner.",
+};
+
+function currentKind() { return $("add-kind").value; }
+
+function onAddKindChange() {
+  // Kategori filtresi yalnızca GGUF aramasında anlamlıdır
+  $("add-cat").style.display = currentKind() === "gguf" ? "" : "none";
+  $("add-kind-note").textContent = KIND_NOTES[currentKind()] || "";
+  renderAddModels();
+  if (!browseByKind[currentKind()]) loadBrowseModels(currentKind()).then(renderAddModels).catch(() => {});
+}
 
 function openAddModel() {
   $("add-results").innerHTML = "";
   $("add-q").value = "";
   $("modal-add").classList.remove("hidden");
   $("add-q").focus();
-  renderAddModels();
-  if (!browseLoaded) loadBrowseModels().then(renderAddModels).catch(() => {});
+  onAddKindChange();
 }
 
 function closeAddModel() { $("modal-add").classList.add("hidden"); }
 
 function closeAddModelOnBg(ev) { if (ev.target === ev.currentTarget) closeAddModel(); }
 
-async function loadBrowseModels() {
-  if (browseLoaded) return;
+async function loadBrowseModels(kind) {
   const box = $("add-results");
   box.innerHTML = '<div class="muted">Tüm modeller yükleniyor... (ilk açılış birkaç saniye sürebilir)</div>';
   try {
-    const data = await api("/panel/models/browse");
-    browseModels = data.models || [];
-    browseLoaded = true;
+    const data = await api("/panel/models/browse?kind=" + encodeURIComponent(kind));
+    browseByKind[kind] = data.models || [];
   } catch (e) {
     box.innerHTML = '<div class="empty">Modeller yüklenemedi.</div>';
     throw e;
@@ -1288,51 +1427,56 @@ async function loadBrowseModels() {
 }
 
 function renderAddModels() {
+  const kind = currentKind();
   const q = $("add-q").value.trim().toLowerCase();
   const cat = $("add-cat").value;
   addRepo = "";
   addFiles = [];
   const box = $("add-results");
-  if (!browseLoaded) { box.innerHTML = '<div class="muted">Tüm modeller yükleniyor...</div>'; return; }
-  const list = browseModels.filter((r) => {
+  const cached = browseByKind[kind];
+  if (!cached) { box.innerHTML = '<div class="muted">Tüm modeller yükleniyor...</div>'; return; }
+  const list = cached.filter((r) => {
     if (q && (r.repo_id || "").toLowerCase().indexOf(q) === -1) return false;
-    if (cat && !(r.pipeline || "").split(",").includes(cat)) return false;
+    if (kind === "gguf" && cat && !(r.pipeline || "").split(",").includes(cat)) return false;
     return true;
   });
   if (!list.length) { box.innerHTML = '<div class="empty">Sonuç bulunamadı.</div>'; return; }
   box.innerHTML = "";
-  list.forEach((r) => box.appendChild(repoCard(r)));
+  list.forEach((r) => box.appendChild(repoCard(r, kind)));
 }
 
 async function searchAddModels() {
-  if (!browseLoaded) {
-    await loadBrowseModels().catch(() => {});
-    if (!browseLoaded) return;
+  const kind = currentKind();
+  if (!browseByKind[kind]) {
+    await loadBrowseModels(kind).catch(() => {});
+    if (!browseByKind[kind]) return;
   }
   renderAddModels();
 }
 
-function repoCard(r) {
+function repoCard(r, kind) {
   const el = document.createElement("div");
   el.className = "hf-result";
+  const files = kind === "gguf" ? (r.gguf_count || 0) + " GGUF" : (r.file_count || 0) + " dosya";
+  const hint = kind === "gguf" ? "Parametre seç &rarr;" : "İndir &rarr;";
   el.innerHTML = `
     <div class="hf-row">
       <div>
         <strong>${escapeHtml(r.repo_id)}</strong>
-        <div class="meta">${r.downloads.toLocaleString("tr-TR")} indirme &middot; ${r.likes} beğeni &middot; ${r.gguf_count} GGUF</div>
+        <div class="meta">${(r.downloads || 0).toLocaleString("tr-TR")} indirme &middot; ${r.likes || 0} beğeni &middot; ${files}</div>
       </div>
-      <span class="muted">Parametre seç →</span>
+      <span class="muted">${hint}</span>
     </div>
     <div class="insparam"></div>`;
   el.addEventListener("click", (ev) => {
     if (ev.target.closest("button")) return;
     if (ev.target.closest(".insparam")) return;
-    selectRepo(r, el);
+    selectRepo(r, el, kind);
   });
   return el;
 }
 
-async function selectRepo(r, el) {
+async function selectRepo(r, el, kind) {
   if (el.classList.contains("selected")) {
     const prog = el.querySelector('[data-role="prog"]');
     if (prog && prog.children.length > 0) return;
@@ -1349,14 +1493,27 @@ async function selectRepo(r, el) {
   addRepo = "";
   addFiles = [];
   try {
-    const data = await api("/panel/models/repo-files?repo=" + encodeURIComponent(r.repo_id));
-    renderParamPanel(r.repo_id, data.files, slot);
+    const data = await api("/panel/models/repo-files?kind=" + encodeURIComponent(kind)
+      + "&repo=" + encodeURIComponent(r.repo_id));
+    renderParamPanel(r.repo_id, data.files, slot, kind);
   } catch (e) { slot.innerHTML = ""; toast(e.message, false); }
 }
 
-function renderParamPanel(repo_id, files, slot) {
+function renderParamPanel(repo_id, files, slot, kind) {
   addRepo = repo_id;
   addFiles = files;
+  if (kind !== "gguf") {
+    // Tip bazlı modellerde tek parametre yoktur: tüm repo indirilir.
+    slot.innerHTML = `
+      <div class="param-panel">
+        <div class="sel-repo">${escapeHtml(repo_id)}</div>
+        <div class="muted" style="margin-bottom:6px;">${(files || []).length} dosya bulundu; model
+          <b>models/${escapeHtml(kind)}/</b> klasörüne kurulacak.</div>
+        <button class="btn primary" style="width:100%;" data-role="kur" onclick="installSelected()">İndir</button>
+        <div class="dl-progress" data-role="prog"></div>
+      </div>`;
+    return;
+  }
   if (!files.length) {
     slot.innerHTML = '<div class="empty">Bu repo\'da GGUF dosyası bulunamadı.</div>';
     return;
@@ -1384,11 +1541,14 @@ function renderParamPanel(repo_id, files, slot) {
 
 async function installSelected() {
   const card = document.querySelector(".hf-result.selected");
-  if (!card || !addRepo || !addFiles.length) { toast("Önce bir model seçin.", false); return; }
+  if (!card || !addRepo) { toast("Önce bir model seçin.", false); return; }
+  const kind = currentKind();
   const sel = card.querySelector('input[name="param"]:checked');
-  const filename = sel ? sel.value : null;
-  const file = addFiles.find((f) => f.filename === filename);
-  if (!filename || !file) { toast("Bir parametre seçin.", false); return; }
+  const filename = kind === "gguf" ? (sel ? sel.value : null) : "";
+  if (kind === "gguf") {
+    const file = addFiles.find((f) => f.filename === filename);
+    if (!filename || !file) { toast("Bir parametre seçin.", false); return; }
+  }
   const repo_id = addRepo;
 
   const kurBtn = card.querySelector('[data-role="kur"]');
@@ -1399,11 +1559,11 @@ async function installSelected() {
   try {
     await api("/panel/models/download", { method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ repo_id, filename }) });
+      body: JSON.stringify({ repo_id, filename, kind }) });
     addRepo = "";
     addFiles = [];
     closeAddModel();
-    const ui = addDownloadRow(repo_id, filename);
+    const ui = addDownloadRow(repo_id, filename || kind);
     pollAddDownload(repo_id, ui);
   } catch (e) {
     kurBtn.disabled = false;
@@ -1508,6 +1668,41 @@ function pollAddDownload(repo_id, ui) {
 }
 
 // ---------- API anahtarları ----------
+let createdRawKey = "";
+
+function fmtCount(n) {
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
+  return "" + n;
+}
+
+function keyLimitsBadges(k) {
+  const b = [];
+  if (k.revoked) b.push('<span class="badge off">İPTAL</span>');
+  if (k.rate_limit_rpm) b.push('<span class="badge dynamic">RPM ' + k.rate_limit_rpm + '</span>');
+  if (k.rate_limit_tpm) b.push('<span class="badge dynamic">TPM ' + k.rate_limit_tpm + '</span>');
+  if (k.monthly_token_quota) b.push('<span class="badge">Kota ' + fmtCount(k.monthly_token_quota) + '</span>');
+  if (k.balance_credits > 0) b.push('<span class="badge on">Bakiye ' + (+k.balance_credits).toFixed(3) + '</span>');
+  if (k.balance_credits < 0) b.push('<span class="badge off">Borç</span>');
+  if (k.expires_at) b.push('<span class="badge">Süre ' + escapeHtml(String(k.expires_at).slice(0, 10)) + '</span>');
+  const allow = (k.model_allowlist || []).length;
+  if (allow) b.push('<span class="badge">' + allow + ' model</span>');
+  return b.join(" ");
+}
+
+function usageSummary(u) {
+  if (!u) return "";
+  const p = [];
+  p.push(fmtCount(u.requests || 0) + " istek");
+  p.push(fmtCount((u.prompt_tokens || 0) + (u.completion_tokens || 0)) + " token");
+  if (u.images) p.push(u.images + " görsel");
+  if (u.videos) p.push(u.videos + " video");
+  if (u.audio_sec) p.push(Number(u.audio_sec).toFixed(1) + " sn ses");
+  if (u.music) p.push(u.music + " müzik");
+  if (u.cost) p.push((+u.cost).toFixed(4) + " kredi");
+  return p.join(" • ");
+}
+
 async function loadApis() {
   const list = $("api-key-list");
   try {
@@ -1515,21 +1710,27 @@ async function loadApis() {
     const keys = data.keys || [];
     if (!keys.length) {
       list.innerHTML = '<p class="muted">Henüz anahtar yok. Aşağıdan ilk anahtarınızı oluşturun.</p>';
-      $("api-name").disabled = false;
       return;
     }
     list.innerHTML = "";
     keys.forEach((k) => {
       const box = document.createElement("div");
       box.className = "api-row";
+      const over = k.revoked ? '<div class="badge off" style="margin-bottom:8px;">Bu anahtar iptal edilmiş</div>' : "";
+      const usage = usageSummary(k.usage);
       box.innerHTML =
+        over +
         '<div class="api-meta">' +
           '<span class="api-name">' + escapeHtml(k.name) + "</span>" +
-          '<span class="api-date muted">' + escapeHtml(String(k.created_at || "").slice(0, 19).replace("T", " ")) + "</span>" +
+          '<div>' + keyLimitsBadges(k) + "</div>" +
         "</div>" +
-        '<div class="api-key">' + escapeHtml(k.key) + "</div>" +
-        '<div class="row" style="margin-top:6px;">' +
-          '<button class="btn" onclick="copyKey(\'' + k.id + '\')">Kopyala</button>' +
+        '<div class="api-key" style="margin-top:8px;">' + escapeHtml(k.prefix || "") + "•••••••••••• (gizli)</div>" +
+        (usage ? '<div class="muted" style="margin-top:6px;font-size:12px;">' + usage + "</div>" : "") +
+        '<div class="row" style="margin-top:8px;">' +
+          '<button class="btn" onclick="openKeyDetail(' + k.id + ')">Detay / Kullanım</button>' +
+          (k.revoked
+            ? '<button class="btn" onclick="setRevoked(' + k.id + ', false)">Yeniden Etkinleştir</button>'
+            : '<button class="btn danger" onclick="setRevoked(' + k.id + ', true)">İptal Et</button>') +
           '<button class="btn danger" onclick="deleteApi(' + k.id + ')">Sil</button>' +
         "</div>";
       list.appendChild(box);
@@ -1539,32 +1740,136 @@ async function loadApis() {
   }
 }
 
-async function copyKey(id) {
-  try {
-    const data = await api("/panel/apis");
-    const k = (data.keys || []).find((x) => String(x.id) === String(id));
-    if (!k) { toast("Anahtar bulunamadı.", false); return; }
-    await navigator.clipboard.writeText(k.key);
-    toast("API anahtarı kopyalandı.");
-  } catch (e) {
-    toast("Kopyalanamadı, manuel seçin.", false);
-  }
-}
-
 async function createApi() {
-  const input = $("api-name");
-  const name = input.value.trim();
+  const name = $("api-name").value.trim();
   if (!name) { toast("Önce anahtara bir ad verin.", false); return; }
+  const allow = $("api-allowlist").value.split(",").map((s) => s.trim()).filter(Boolean);
+  const body = {
+    name,
+    expires_at: $("api-expires").value.trim() || null,
+    rate_limit_rpm: parseInt($("api-rpm").value || "0", 10),
+    rate_limit_tpm: parseInt($("api-tpm").value || "0", 10),
+    monthly_token_quota: parseInt($("api-quota").value || "0", 10),
+    balance_credits: parseFloat($("api-balance").value || "0"),
+    model_allowlist: allow,
+  };
   try {
     const data = await api("/panel/apis", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify(body),
     });
-    input.value = "";
-    toast("" + data.key.name + " anahtarı oluşturuldu.");
+    createdRawKey = (data.key && data.key.key) || "";
+    $("created-key").textContent = createdRawKey;
+    $("modal-key").classList.remove("hidden");
+    $("api-name").value = "";
     loadApis();
   } catch (e) { toast(e.message, false); }
+}
+
+function copyCreatedKey() {
+  if (!createdRawKey) return;
+  navigator.clipboard.writeText(createdRawKey)
+    .then(() => toast("API anahtarı kopyalandı."))
+    .catch(() => toast("Kopyalanamadı, elle seçin.", false));
+}
+
+function closeKeyModal() { $("modal-key").classList.add("hidden"); createdRawKey = ""; }
+function closeKeyModalOnBg(e) { if (e.target === e.currentTarget) closeKeyModal(); }
+
+function closeKeyDetail() { $("modal-keydetail").classList.add("hidden"); }
+function closeKeyDetailOnBg(e) { if (e.target === e.currentTarget) closeKeyDetail(); }
+
+async function openKeyDetail(id) {
+  const m = $("modal-keydetail");
+  $("kd-title").textContent = "Anahtar Detayı";
+  $("kd-body").innerHTML = '<p class="muted">Yükleniyor...</p>';
+  m.classList.remove("hidden");
+  try {
+    const data = await api("/panel/apis/" + id + "/usage?days=30");
+    renderKeyDetail(data);
+  } catch (e) {
+    $("kd-body").innerHTML = '<p class="muted">Alınamadı: ' + escapeHtml(e.message) + "</p>";
+  }
+}
+
+function renderKeyDetail(d) {
+  const k = d.key;
+  const u = d.totals || {};
+  const rows = (d.rows || []).map((r) =>
+    "<tr><td>" + escapeHtml(r.date) + "</td><td>" + (r.requests || 0) + "</td><td>" +
+    ((r.prompt_tokens || 0) + (r.completion_tokens || 0)) + "</td><td>" + (r.images || 0) +
+    "</td><td>" + (r.videos || 0) + "</td><td>" + Number(r.audio_sec || 0).toFixed(1) +
+    "</td><td>" + (+r.cost || 0).toFixed(4) + "</td></tr>"
+  ).join("");
+  const table = rows
+    ? '<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;">' +
+      "<thead><tr><th>Tarih</th><th>İstek</th><th>Token</th><th>Görsel</th><th>Video</th><th>Ses</th><th>Kredi</th></tr></thead>" +
+      "<tbody>" + rows + "</tbody></table>"
+    : '<p class="muted">Son 30 günde kullanım kaydı yok.</p>';
+  const allow = (k.model_allowlist || []).join(", ");
+  $("kd-title").textContent = escapeHtml(k.name);
+  $("kd-body").innerHTML =
+    '<div class="api-key" style="margin-bottom:10px;">' + escapeHtml(k.prefix || "") + "••••••••••••</div>" +
+    '<div class="muted" style="font-size:12px;margin-bottom:10px;">' +
+      "Oluşturuldu: " + escapeHtml(String(k.created_at || "").slice(0, 10)) + " • " +
+      "Süre: " + (k.expires_at ? escapeHtml(String(k.expires_at).slice(0, 10)) : "Süresiz") + " • " +
+      "Durum: " + (k.revoked ? '<span class="badge off">İPTAL</span>' : '<span class="badge on">Aktif</span>') +
+    "</div>" +
+    '<div class="muted" style="font-size:12px;margin-bottom:14px;">Toplam: ' + usageSummary(u) + "</div>" +
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">' +
+      '<div class="field"><label>RPM</label><input type="number" id="kd-rpm" min="0" value="' + (k.rate_limit_rpm || 0) + '"></div>' +
+      '<div class="field"><label>TPM</label><input type="number" id="kd-tpm" min="0" value="' + (k.rate_limit_tpm || 0) + '"></div>' +
+      '<div class="field"><label>Aylık Kota (token)</label><input type="number" id="kd-quota" min="0" value="' + (k.monthly_token_quota || 0) + '"></div>' +
+      '<div class="field"><label>Bakiye (kredi)</label><input type="number" id="kd-balance" min="0" step="0.001" value="' + (k.balance_credits > 0 ? (+k.balance_credits).toFixed(3) : "0") + '"></div>' +
+      '<div class="field" style="grid-column:1/-1;"><label>Süre (ISO; boş = süresiz)</label><input type="text" id="kd-expires" value="' + escapeHtml(k.expires_at || "") + '"></div>' +
+      '<div class="field" style="grid-column:1/-1;"><label>İzinli Modeller (virgülle; boş = tümü)</label><input type="text" id="kd-allow" value="' + escapeHtml(allow) + '"></div>' +
+    "</div>" +
+    '<div class="row" style="margin-top:12px;">' +
+      '<button class="btn primary" onclick="saveKeyDetail(' + k.id + ')">Kaydet</button>' +
+      '<button class="btn" onclick="topUpKey(' + k.id + ')">+1 Kredi Yükle</button>' +
+      (k.revoked
+        ? '<button class="btn" onclick="setRevoked(' + k.id + ', false)">Etkinleştir</button>'
+        : '<button class="btn danger" onclick="setRevoked(' + k.id + ', true)">İptal Et</button>') +
+    "</div>" +
+    '<div style="font-size:13px;margin:14px 0 4px;font-weight:600;">Son 30 Gün Kullanımı</div>' +
+    table;
+}
+
+function saveKeyDetail(id) {
+  const allow = $("kd-allow").value.split(",").map((s) => s.trim()).filter(Boolean);
+  const body = {
+    rate_limit_rpm: parseInt($("kd-rpm").value || "0", 10),
+    rate_limit_tpm: parseInt($("kd-tpm").value || "0", 10),
+    monthly_token_quota: parseInt($("kd-quota").value || "0", 10),
+    balance_credits: parseFloat($("kd-balance").value || "0"),
+    expires_at: $("kd-expires").value.trim() || null,
+    model_allowlist: allow,
+  };
+  api("/panel/apis/" + id, {
+    method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
+  }).then(() => { toast("Anahtar güncellendi."); loadApis(); openKeyDetail(id); })
+    .catch((e) => toast(e.message, false));
+}
+
+function topUpKey(id) {
+  api("/panel/apis/" + id + "/credits", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ amount: 1 }),
+  }).then(() => { toast("1 kredi yüklendi."); loadApis(); openKeyDetail(id); })
+    .catch((e) => toast(e.message, false));
+}
+
+function setRevoked(id, revoke) {
+  const label = revoke
+    ? "Bu API anahtarını iptal etmek istiyor musunuz? Kullanan istemciler artık bağlanamaz."
+    : "İptal edilmiş anahtarı yeniden etkinleştirmek istiyor musunuz?";
+  openConfirm("API Anahtarı " + (revoke ? "İptali" : "Yeniden Etkinleştirme"), label, async () => {
+    try {
+      await api("/panel/apis/" + id + (revoke ? "/revoke" : "/unrevoke"), { method: "POST" });
+      toast("Anahtar " + (revoke ? "iptal edildi." : "yeniden etkin."));
+      loadApis();
+    } catch (e) { toast(e.message, false); }
+  });
 }
 
 async function deleteApi(id) {

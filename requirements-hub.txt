@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────
+#  Bölüm:    Faz Hub - Ağır Yapay Zeka Bağımlılıkları
+#  Dosya:    requirements-hub.txt
+#  Amaç:     Görsel/video üretimi (diffusers), ses işleme (STT/TTS),
+#            embedding ve reasoning kategorileri için ağır paketler.
+#  Mekanik:  Bu paketler çekirdekten AYRI kurulur; hiçbir load-time
+#            bağımlılığı yoktur (import-guard'larla isteğe bağlı modüller
+#            olarak yüklenir). Kurulu değilse çekirdek aynen çalışır.
+#  Kullanım: pip install -r requirements-hub.txt
+#  Not:      - torch, PyPI üzerinde CUDA (cu12x) tekerlekleriyle gelir;
+#              tek makineye bağlı kalmamak için sürümler sabitlenmez.
+#            - faster-whisper bulunamayan platformlarda yalnızca bir sonraki
+#              adım olan STT modülünü etkiler; TTS/diğerleri etkilenmez.
+# ─────────────────────────────────────────────────────────────
+
+torch
+torchvision
+transformers
+diffusers
+accelerate
+safetensors
+sentence-transformers
+scipy
+faster-whisper

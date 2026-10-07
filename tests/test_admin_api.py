@@ -342,7 +342,11 @@ def test_apis_list_create_delete_flow(tmp_path, monkeypatch):
 
     keys = client.get("/panel/apis").json()["keys"]
     assert [k["name"] for k in keys] == ["Chatbox", "Sunucu-1"]
-    assert store.get_api_key_by_id(key1["id"])["key"] == key1["key"]
+    # Depoda yalnızca maskeli kayıt var; düz metin anahtar asla saklanmaz
+    rec = store.get_api_key_record(key1["id"])
+    assert rec is not None
+    assert rec["prefix"] == key1["key"][:12]
+    assert "key" not in rec
 
     # Silme: ilk anahtar gider, diğeri kalır
     resp = client.delete(f"/panel/apis/{key1['id']}")
@@ -508,3 +512,110 @@ def test_web_tools_toggle_requires_session(tmp_path, monkeypatch):
     client, _ = _make_client(tmp_path, monkeypatch)
     r = client.post("/panel/web-tools", json={"enabled": True})
     assert r.status_code in (401, 403)
+
+# ------------------------------------------------------------------
+# Tip bazlı modeller (embedding/safetensors/ct2/onnx)
+# ------------------------------------------------------------------
+
+def test_panel_lists_typed_models(tmp_path, monkeypatch):
+    """Panel model listesi tip bazlı modelleri de gösterir (yönetilemez)."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+
+    emb = tmp_path / "models" / "embeddings" / "embed-model"
+    emb.mkdir(parents=True)
+    (emb / "config.json").write_text("{}", "utf-8")
+    (emb / "model.safetensors").write_bytes(b"x")
+
+    models = client.get("/panel/models").json()["models"]
+    by_id = {m["id"]: m for m in models}
+
+    assert by_id["ornek-model"]["kind"] == "gguf"
+    assert by_id["ornek-model"]["managed"] is True
+    assert by_id["embed-model"]["kind"] == "embeddings"
+    assert by_id["embed-model"]["managed"] is False
+    assert by_id["embed-model"]["category"] == "embedding"
+
+
+def test_panel_search_typed_kind(tmp_path, monkeypatch):
+    """Arama uç noktası kind=embeddings iken tip bazlı aramayı kullanır."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+
+    seen = {}
+
+    def fake_search_kind(query, kind, limit):
+        seen.update({"query": query, "kind": kind, "limit": limit})
+        return [{"repo_id": "org/embed", "downloads": 3, "likes": 1,
+                 "last_modified": "", "file_count": 2}]
+
+    monkeypatch.setattr(hf_downloader, "search_kind", fake_search_kind)
+
+    r = client.get("/panel/models/search", params={"q": "göm", "kind": "embeddings"})
+
+    assert r.status_code == 200
+    assert seen["kind"] == "embeddings"
+    assert r.json()["models"][0]["file_count"] == 2
+
+
+def test_panel_repo_files_typed_kind(tmp_path, monkeypatch):
+    """repo-files uç noktası tip bazlı türlerde dosya adlarını listeler."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+
+    monkeypatch.setattr(hf_downloader, "get_kind_files",
+                        lambda repo, kind: ["model.safetensors", "config.json"])
+
+    r = client.get("/panel/models/repo-files",
+                   params={"repo": "org/sd", "kind": "safetensors"})
+
+    assert r.status_code == 200
+    names = [f["filename"] for f in r.json()["files"]]
+    assert names == ["model.safetensors", "config.json"]
+
+
+def test_panel_download_typed_kind_uses_snapshot(tmp_path, monkeypatch):
+    """Tip bazlı indirme download_by_kind üzerinden başlatılır."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+
+    calls = []
+
+    def fake_download_by_kind(repo_id, kind, *a, **kw):
+        calls.append((repo_id, kind))
+        return hf_downloader.DownloadResult(
+            path=tmp_path / "models" / kind, repo_id=repo_id, filename="", size_bytes=1
+        )
+
+    monkeypatch.setattr(hf_downloader, "download_by_kind", fake_download_by_kind)
+
+    r = client.post("/panel/models/download",
+                    json={"repo_id": "org/embed", "kind": "embeddings"})
+
+    assert r.status_code == 200
+    assert r.json()["kind"] == "embeddings"
+    # arka plan görevi eşzamanlı tamamlanır (yanıt öncesi bir kez döner)
+    assert calls == [("org/embed", "embeddings")]
+
+
+def test_panel_delete_typed_model(tmp_path, monkeypatch):
+    """Tip bazlı model silme uç noktası klasörü kaldırır."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+
+    emb = tmp_path / "models" / "embeddings" / "silinecek"
+    emb.mkdir(parents=True)
+    (emb / "config.json").write_text("{}", "utf-8")
+    (emb / "model.safetensors").write_bytes(b"x")
+
+    r = client.post("/panel/models/silinecek/delete")
+
+    assert r.status_code == 200
+    assert not emb.exists()
+
+
+def test_panel_delete_unknown_model_404(tmp_path, monkeypatch):
+    """Olmayan model silinmek istendiğinde 404 döner."""
+    client, _ = _make_client(tmp_path, monkeypatch)
+    _login(client)
+    assert client.post("/panel/models/yok-model/delete").status_code == 404

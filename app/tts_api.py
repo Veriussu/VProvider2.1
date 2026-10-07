@@ -18,12 +18,12 @@ from fastapi.routing import APIRouter as _Router
 from pydantic import BaseModel, Field
 
 from app import tts_backend
-from app.auth import require_api_key
 from app.config import settings
+from app.gateway import ApiContext, api_auth
 from app.openai_api import _openai_error
 from app.tts_backend import TTSError, tts_status
 
-router: _Router = APIRouter(prefix="/v1/audio", dependencies=[Depends(require_api_key)])
+router: _Router = APIRouter(prefix="/v1/audio", dependencies=[Depends(api_auth)])
 
 
 # ------------------------------------------------------------------
@@ -45,7 +45,7 @@ class SpeechRequest(BaseModel):
 # ------------------------------------------------------------------
 
 @router.post("/speech")
-async def create_speech(req: SpeechRequest):
+async def create_speech(req: SpeechRequest, ctx: ApiContext = Depends(api_auth)):
     """Metni seslendirir; ham ses (audio/mpeg) döner (OpenAI ile aynı)."""
     if req.response_format != "mp3":
         raise _openai_error(
@@ -66,6 +66,9 @@ async def create_speech(req: SpeechRequest):
     except Exception as exc:
         raise _openai_error(502, f"Ses motoru bağlantı hatası: {exc}", code="tts_unreachable")
 
+    # Süre kestirimi: 128 kbps MP3 üzerinden (byte -> saniye)
+    audio_sec = round(len(audio) * 8 / 128_000, 2)
+    ctx.charge("tts", model_id=req.model, audio_sec=audio_sec)
     return Response(content=audio, media_type=mime)
 
 

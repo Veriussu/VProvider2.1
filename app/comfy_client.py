@@ -104,6 +104,24 @@ def get_stored_video(prompt_id: str) -> Optional[dict]:
 
 
 # ------------------------------------------------------------------
+# Genel depo kayıtları (ComfyUI ve in-process motorlar ortak kullanır)
+# ------------------------------------------------------------------
+
+def store_generated_images(prompt_id: str, images: list[dict]) -> None:
+    """Üretilen görselleri depolara yazar (url modu için).
+
+    Hem ComfyUI köprüsü hem in-process diffusers motoru bu işlevi kullanır;
+    böylece /v1/images/file/{id}/{i} tek bir depo üzerinden sunar.
+    """
+    _store_images(prompt_id, images)
+
+
+def store_generated_video(prompt_id: str, video: dict) -> None:
+    """Üretilen videoyu (GIF) depoya yazar (url modu için)."""
+    _store_video(prompt_id, video)
+
+
+# ------------------------------------------------------------------
 # ComfyUI HTTP istemcisi
 # ------------------------------------------------------------------
 

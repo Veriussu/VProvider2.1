@@ -136,7 +136,7 @@ def test_e2e_v1_requires_valid_key(client):
     """API anahtarı yoksa /v1 erişimi reddedilir."""
     resp = client.get("/v1/models")
     assert resp.status_code == 401
-    assert "Bearer" in resp.json()["detail"]
+    assert "Bearer" in resp.json()["error"]["message"]
 
 
 # ------------------------------------------------------------------

@@ -26,9 +26,12 @@ from app.admin_api import router as admin_router
 from app.comfy_api import router as comfy_router
 from app.comfy_api import video_router as comfy_video_router
 from app.config import settings
+from app.embedding_api import router as embedding_router
 from app.gpu_detect import compiled_backends, detect_hardware, resolve_runtime
 from app.openai_api import router as openai_router
+from app.stt_api import router as stt_router
 from app.tts_api import router as tts_router
+from app.music_api import router as music_router
 from app.user_store import get_store
 
 # Yönetim panelinin tek dosyalık ön yüzü
@@ -70,6 +73,9 @@ app = FastAPI(
 # OpenAI uyumlu /v1/* uç noktaları (API anahtarı korumalı)
 app.include_router(openai_router)
 
+# OpenAI uyumlu embedding /v1/embeddings (API anahtarı korumalı)
+app.include_router(embedding_router)
+
 # OpenAI uyumlu görsel üretim (ComfyUI köprüsü; API anahtarı korumalı)
 app.include_router(comfy_router)
 
@@ -78,6 +84,12 @@ app.include_router(comfy_video_router)
 
 # OpenAI uyumlu ses üretimi edge-tts (API anahtarı korumalı)
 app.include_router(tts_router)
+
+# OpenAI uyumlu ses metne çevirme (faster-whisper; API anahtarı korumalı)
+app.include_router(stt_router)
+
+# OpenAI uyumlu müzik üretimi (API anahtarı korumalı)
+app.include_router(music_router)
 
 # Yönetim paneli API'si (kurulum, giriş, model/site yönetimi)
 app.include_router(admin_router)

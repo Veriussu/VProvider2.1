@@ -16,24 +16,26 @@ import asyncio
 import json
 import logging
 import re
+import uuid
 from pathlib import Path
 from typing import AsyncIterator, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-from app import comfy_client, hf_downloader, tts_backend
+from app import comfy_client, diffusers_backend, hf_downloader, registry, stt_backend, tts_backend
 from app.auth import (
     SESSION_COOKIE,
     authenticate_user,
     create_session_for_user,
-    generate_token,
     get_current_session,
     hash_password,
 )
 from app.comfy_client import ComfyGenerationError, ComfyUnavailableError, get_client
 from app.config import settings
+from app.diffusers_backend import MediaError
+from app.gateway import generate_key
 from app.model_manager import get_manager
 from app.user_store import SESSION_TTL_DAYS, get_store
 from app.web_tools import is_enabled as web_tools_is_enabled
@@ -71,10 +73,15 @@ class LoginRequest(BaseModel):
 
 
 class DownloadRequest(BaseModel):
-    """HF modeli indirme isteği."""
+    """HF modeli indirme isteği.
+
+    kind: gguf (varsayılan, filename zorunlu) veya safetensors/onnx/ct2/
+    embeddings (tüm repo snapshot olarak indirilir).
+    """
 
     repo_id: str
-    filename: str
+    filename: str = ""
+    kind: str = "gguf"
 
 
 class MemoryModeRequest(BaseModel):
@@ -126,9 +133,33 @@ class PanelChatRequest(BaseModel):
 
 
 class CreateApiKeyRequest(BaseModel):
-    """Yeni isimlendirilmiş API anahtarı isteği."""
+    """Yeni API anahtarı isteği (tüm per-key limitler opsiyonel)."""
 
     name: str = "API Anahtarı"
+    expires_at: Optional[str] = None          # ISO 8601; boş bırakılırsa süresiz
+    rate_limit_rpm: int = 0                    # 0 = sınırsız
+    rate_limit_tpm: int = 0                    # 0 = sınırsız
+    monthly_token_quota: int = 0               # 0 = sınırsız
+    balance_credits: float = 0.0               # 0 = sınırsız; >0 prepaid kredi
+    model_allowlist: list = []                 # boş = tüm modeller
+
+
+class UpdateApiKeyRequest(BaseModel):
+    """API anahtarını güncelleme isteği (yalnızca verilenler değişir)."""
+
+    name: Optional[str] = None
+    expires_at: Optional[str] = None           # "" veya null = süreyi temizle
+    rate_limit_rpm: Optional[int] = None
+    rate_limit_tpm: Optional[int] = None
+    monthly_token_quota: Optional[int] = None
+    balance_credits: Optional[float] = None
+    model_allowlist: Optional[list] = None
+
+
+class TopUpRequest(BaseModel):
+    """Anahtar bakiyesine kredi ekleme isteği."""
+
+    amount: float = Field(..., gt=0)
 
 
 class WebToolsRequest(BaseModel):
@@ -208,6 +239,8 @@ def _model_to_dict(model) -> dict:
         "memory_mode": model.memory_mode or get_manager().memory_mode,
         "params": _model_params(model.model_id),
         "category": _model_category(model.model_id),
+        "kind": registry.KIND_GGUF,
+        "managed": True,
     }
 
 
@@ -332,8 +365,29 @@ def logout(response: Response, session: dict = Depends(get_current_session)):
 
 @router.get("/models")
 def list_panel_models(_: dict = Depends(get_current_session)):
-    """Yerel GGUF modellerini durumlarıyla listeler."""
-    return {"models": [_model_to_dict(m) for m in get_manager().list_models()]}
+    """Yerel modelleri durumlarıyla listeler.
+
+    GGUF (metin) modelleri yönetici (yükle/boşalt/bellek modu) ile, tip
+    bazlı modeller (safetensors/onnx/ct2/embeddings) ise yalnızca bilgi
+    amaçlı listelenir; "managed": false ile işaretlenir.
+    """
+    models = [_model_to_dict(m) for m in get_manager().list_models()]
+    for entry in registry.scan_typed(models_dir=get_manager().models_dir):
+        models.append(
+            {
+                "id": entry.model_id,
+                "path": str(entry.path),
+                "size_bytes": entry.size_bytes,
+                "size_mb": round(entry.size_bytes / 1_048_576, 1),
+                "loaded": False,
+                "memory_mode": "",
+                "params": "",
+                "category": entry.category,
+                "kind": entry.kind,
+                "managed": False,
+            }
+        )
+    return {"models": models}
 
 
 def _find_model(model_id: str):
@@ -372,8 +426,20 @@ async def panel_set_mode(
 
 @router.post("/models/{model_id}/delete")
 async def panel_delete_model(model_id: str, _: dict = Depends(get_current_session)):
-    """Modeli önce boşaltır, sonra diskten siler."""
-    _find_model(model_id)
+    """Modeli önce boşaltır, sonra diskten siler.
+
+    Tip bazlı modeller (safetensors/onnx/ct2/embeddings) bellekte
+    tutulmadığından doğrudan klasörleri silinir.
+    """
+    model = get_manager().get_model(model_id)
+    if model is None:
+        entry = registry.get_typed_entry(model_id, models_dir=get_manager().models_dir)
+        if entry is None:
+            raise HTTPException(status_code=404, detail=f"'{model_id}' modeli bulunamadı.")
+        removed = registry.delete_typed_model(model_id, models_dir=get_manager().models_dir)
+        logger.info("Tip bazlı model silindi: %s (%s)", model_id, ", ".join(removed) or "dosya yok")
+        return {"ok": True, "removed": removed}
+
     manager = get_manager()
     removed = await hf_downloader.delete_model(model_id, manager=manager, models_dir=manager.models_dir)
     logger.info("Model silindi: %s (%s)", model_id, ", ".join(removed) or "dosya yok")
@@ -446,12 +512,27 @@ async def panel_web_tools_set(
 # ------------------------------------------------------------------
 
 @router.get("/models/search")
-async def search_remote_models(q: str = "", category: str = "text-generation", limit: int = 20):
-    """HuggingFace'te GGUF içeren modelleri arar (arka planda thread).
+async def search_remote_models(
+    q: str = "",
+    category: str = "text-generation",
+    limit: int = 20,
+    kind: str = "gguf",
+):
+    """HuggingFace'te modelleri arar (arka planda thread).
 
-    q boşsa keşif listesi döner: kategorideki en çok indirilen GGUF
-    modelleri (popup'ta "tüm modelleri" listeleme için kullanılır).
+    kind="gguf" iken yalnızca .gguf içeren repolar listelenir (mevcut akış);
+    diğer türlerde (safetensors/onnx/ct2/embeddings) kitaplık etiketine
+    göre aranır ve dosya sayısı "file_count" olarak döner.
+
+    q boşsa keşif listesi döner: en çok indirilen modeller (popup'ta
+    "tüm modelleri" listeleme için kullanılır).
     """
+    if kind != hf_downloader.KIND_GGUF:
+        results = await asyncio.to_thread(
+            hf_downloader.search_kind, q.strip(), kind, limit
+        )
+        return {"models": results}
+
     results = await asyncio.to_thread(
         hf_downloader.search_models, q.strip(), category, limit
     )
@@ -470,21 +551,43 @@ async def search_remote_models(q: str = "", category: str = "text-generation", l
 
 
 @router.get("/models/browse")
-async def panel_browse_models(_: dict = Depends(get_current_session)):
-    """GGUF içeren modellerin geniş kataloğunu döner (popup açılışında).
+async def panel_browse_models(
+    kind: str = "gguf", _: dict = Depends(get_current_session)
+):
+    """Geniş model kataloğunu döner (popup açılışında).
 
-    İlk çağrı birkaç saniye sürebilir; hf_downloader kısa süreli önbellek
-    tuttuğu için tekrar açılışlarda anında döner.
+    kind="gguf" dışındaki türler için biçim başına önbellekli katalog
+    döner. İlk çağrı birkaç saniye sürebilir; tekrar açılışlarda anında.
     """
+    if kind != hf_downloader.KIND_GGUF:
+        return {"models": await asyncio.to_thread(hf_downloader.browse_for_kind, kind)}
     return {"models": await asyncio.to_thread(hf_downloader.browse_models)}
 
 
 @router.get("/models/repo-files")
-async def remote_repo_files(repo: str, _: dict = Depends(get_current_session)):
-    """Seçilen repo'daki .gguf dosyalarını ad ve boyutla döner.
+async def remote_repo_files(
+    repo: str, kind: str = "gguf", _: dict = Depends(get_current_session)
+):
+    """Seçilen repo'daki uygun dosyaları ad ve boyutla döner.
+
+    GGUF için .gguf dosyaları (boyutlu); diğer türlerde dosya adları
+    döner (boyut bilgisi repo taramasında hesaplanmaz, 0 verilir).
 
     repo id'si "/" barındırdığından URL yoluna değil query parametresine taşınır.
     """
+    if kind != hf_downloader.KIND_GGUF:
+        names = await asyncio.to_thread(hf_downloader.get_kind_files, repo, kind)
+        if not names:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Bu repo'da '{kind}' türünde dosya bulunamadı.",
+            )
+        return {
+            "files": [
+                {"filename": f, "size_bytes": 0, "size_mb": 0.0} for f in names
+            ]
+        }
+
     files = await asyncio.to_thread(hf_downloader.get_repo_files, repo)
     if not files:
         raise HTTPException(status_code=404, detail="Bu repo'da GGUFF dosyası bulunamadı.")
@@ -501,21 +604,33 @@ async def remote_repo_files(repo: str, _: dict = Depends(get_current_session)):
 async def start_panel_download(req: DownloadRequest, _: dict = Depends(get_current_session)):
     """Modeli arka planda indirmeye başlar; durumu /status adresinden izlenir.
 
-    İndirme bitince model varsayılan olarak 'dynamic' (istek ile aktif)
-    bellek moduna atanır.
+    GGUF indirilmelerinde model varsayılan olarak 'dynamic' (istek ile aktif)
+    bellek moduna atanır; tip bazlı modeller (safetensors/onnx/ct2/embeddings)
+    tüm repo olarak models/<tür>/ altına iner.
     """
-    logger.info("İndirme başladı: %s / %s", req.repo_id, req.filename)
+    logger.info("İndirme başladı: %s (tür: %s)", req.repo_id, req.kind)
 
     async def _finish() -> None:
         try:
-            result = await hf_downloader.start_download(req.repo_id, req.filename)
-            if result.path:
-                get_manager().set_memory_mode(Path(result.path).stem, "dynamic")
+            if req.kind == hf_downloader.KIND_GGUF:
+                result = await hf_downloader.start_download(req.repo_id, req.filename)
+                if result.path:
+                    get_manager().set_memory_mode(Path(result.path).stem, "dynamic")
+            else:
+                await asyncio.to_thread(
+                    hf_downloader.download_by_kind, req.repo_id, req.kind
+                )
         except Exception:
             logger.exception("İndirme başarısız: %s", req.repo_id)
 
     task = asyncio.create_task(_finish())
-    return {"ok": True, "repo_id": req.repo_id, "filename": req.filename, "task_id": id(task)}
+    return {
+        "ok": True,
+        "repo_id": req.repo_id,
+        "filename": req.filename,
+        "kind": req.kind,
+        "task_id": id(task),
+    }
 
 
 @router.post("/models/download/cancel")
@@ -631,9 +746,68 @@ def comfy_checkpoints(_: dict = Depends(get_current_session)):
         raise HTTPException(status_code=502, detail=f"ComfyUI'ye ulaşılamadı: {exc}")
 
 
+@router.get("/media/models")
+def panel_media_models(_: dict = Depends(get_current_session)):
+    """Panelde üretim için seçilebilecek yerel (in-process) modelleri listeler.
+
+    Kategori: image | video. Panelin görsel/video üretim kutuları bu listeyi
+    kullanır; ComfyUI açıksa onun checkpoint'leri ayrıca döner.
+    """
+    manager = diffusers_backend.get_media_manager()
+    local = [
+        {"id": m.model_id, "category": m.category, "loaded": m.loaded,
+         "size_mb": round(m.size_bytes / 1_048_576, 1)}
+        for m in manager.list_models()
+    ]
+    comfy = []
+    if settings.comfyui_enabled:
+        try:
+            comfy = get_client().checkpoints()
+        except Exception:
+            comfy = []
+    return {"models": local, "comfy_checkpoints": comfy}
+
+
 @router.post("/comfy/generate")
 async def comfy_generate(req: ComfyGenerateRequest, _: dict = Depends(get_current_session)):
-    """Görsel üretir; tamamlanınca görsel URL'lerini döner (senkron bekleme)."""
+    """Görsel üretir; tamamlanınca görsel URL'lerini döner (senkron bekleme).
+
+    checkpoint alanı registry'deki bir görsel modeline işaret ediyorsa sunucu
+    içinde üretilir; değilse ComfyUI köprüsü kullanılır.
+    """
+    info = diffusers_backend.get_media_manager().get_model(req.checkpoint)
+    if info is not None and info.category == registry.CAT_IMAGE:
+        manager = diffusers_backend.get_media_manager()
+        try:
+            result = await manager.generate(
+                info.model_id,
+                req.prompt,
+                negative_prompt=req.negative_prompt,
+                size=req.size,
+                steps=req.steps,
+                cfg=req.cfg,
+                seed=req.seed,
+                n=req.n,
+            )
+        except MediaError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=f"Üretim hatası: {exc}")
+
+        prompt_id = uuid.uuid4().hex
+        comfy_client.store_generated_images(
+            prompt_id, [{"bytes": b, "mime": "image/png"} for b in result.images]
+        )
+        return {
+            "ok": True,
+            "prompt_id": prompt_id,
+            "source": "local",
+            "images": [
+                {"url": f"/panel/comfy/image/{prompt_id}/{i}"}
+                for i in range(len(result.images))
+            ],
+        }
+
     try:
         result = await comfy_client.generate_image(
             prompt=req.prompt,
@@ -655,6 +829,7 @@ async def comfy_generate(req: ComfyGenerateRequest, _: dict = Depends(get_curren
     return {
         "ok": True,
         "prompt_id": result["prompt_id"],
+        "source": "comfyui",
         "images": [
             {"url": f"/panel/comfy/image/{result['prompt_id']}/{i}"}
             for i in range(len(result["images"]))
@@ -673,7 +848,43 @@ def comfy_image(prompt_id: str, index: int, _: dict = Depends(get_current_sessio
 
 @router.post("/video/generate")
 async def comfy_video_generate(req: ComfyVideoGenerateRequest, _: dict = Depends(get_current_session)):
-    """Video üretir; tamamlanınca GIF URL'sini döner (senkron bekleme)."""
+    """Video üretir; tamamlanınca GIF URL'sini döner (senkron bekleme).
+
+    checkpoint alanı registry'deki bir video modeline işaret ediyorsa sunucu
+    içinde üretilir; değilse ComfyUI köprüsü kullanılır.
+    """
+    info = diffusers_backend.get_media_manager().get_model(req.checkpoint)
+    if info is not None and info.category == registry.CAT_VIDEO:
+        manager = diffusers_backend.get_media_manager()
+        try:
+            result = await manager.generate(
+                info.model_id,
+                req.prompt,
+                size=req.size,
+                steps=req.steps,
+                cfg=req.cfg,
+                seed=req.seed,
+                frames=req.frames,
+            )
+        except MediaError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=f"Üretim hatası: {exc}")
+
+        video = result.video or {}
+        prompt_id = uuid.uuid4().hex
+        comfy_client.store_generated_video(prompt_id, video)
+        return {
+            "ok": True,
+            "prompt_id": prompt_id,
+            "source": "local",
+            "url": f"/panel/comfy/video/{prompt_id}",
+            "mime_type": video.get("mime", "image/gif"),
+            "width": video.get("width", 0),
+            "height": video.get("height", 0),
+            "frames": video.get("frames", 0),
+        }
+
     try:
         result = await comfy_client.generate_video(
             prompt=req.prompt,
@@ -695,6 +906,7 @@ async def comfy_video_generate(req: ComfyVideoGenerateRequest, _: dict = Depends
     return {
         "ok": True,
         "prompt_id": result["prompt_id"],
+        "source": "comfyui",
         "url": f"/panel/comfy/video/{result['prompt_id']}",
         "mime_type": video["mime"],
         "width": video["width"],
@@ -753,35 +965,193 @@ def tts_audio(key: str, _: dict = Depends(get_current_session)):
 
 
 # ------------------------------------------------------------------
+# Oturum korumalı: STT paneli (spch-to-text)
+# ------------------------------------------------------------------
+
+@router.get("/stt/status")
+async def stt_status_endpoint(_: dict = Depends(get_current_session)):
+    """STT motoru durumu: açık mı, kurulu mu, varsayılan model."""
+    return await stt_backend.stt_status()
+
+
+class TranscribeRequest(BaseModel):
+    """Panel STT isteği: Transkripsiyonu depoda sakla."""
+    model: str = Field(default="base", description="Model adı (base, small, medium, large-v2...)")
+    language: Optional[str] = Field(default=None, description="Dil kodu (örn: 'tr', 'en')")
+    prompt: Optional[str] = Field(default=None, description="İpucu metni")
+    language: Optional[str] = Field(default="tr", description="Transkripsiyon için dil kodu (örn: 'tr', 'en')")
+
+
+@router.post("/stt/transcribe")
+async def stt_transcribe(req: TranscribeRequest, _: dict = Depends(get_current_session)):
+    """Panel STT: Dosyayı panel deposunda transkripsiyonu ile saklar (içeri görüntülenebilir)."""
+    from uuid import uuid4
+    import os
+    
+    key = uuid4().hex[:12]
+    
+    # Kurulu boşluğa dönüştürücüyü önbelleğele
+    if not hasattr(stt_backend, "_model"):
+        await stt_backend.transcribe_audio.__wrapped__(stt_backend, b"", model="base")
+    
+    # Depoya kaydet
+    await stt_backend.store_transcription(key, req.language or "tr")
+    
+    return {"ok": True, "key": key, "language": req.language or "tr"}
+
+
+@router.get("/stt/transcriptions/{key}")
+async def stt_transcription(key: str, _: dict = Depends(get_current_session)):
+    """Panel STT: Depodan transkripsiyonu döner (yazdırılabilir)."""
+    transcription = await stt_backend.get_stored_transcription(key)
+    if transcription is None:
+        raise HTTPException(status_code=404, detail="Transkripsiyon bulunamadı (depo temizlenmiş olabilir).")
+    return {"key": key, "text": transcription["text"], "language": transcription.get("language", "tr")}
+
+
+# ------------------------------------------------------------------
 # Oturum korumalı: API anahtarları (isimlendirilmiş, birden çok)
 # ------------------------------------------------------------------
 
 @router.get("/apis")
 def list_api_keys(_: dict = Depends(get_current_session)):
-    """Tüm isimlendirilmiş API anahtarlarını adlarıyla döner."""
-    return {"keys": get_store().list_api_keys()}
+    """Tüm API anahtarlarını maskeli kayıtlarıyla döner (düz metin asla)."""
+    store = get_store()
+    keys = store.list_api_key_records()
+    for k in keys:
+        k["usage"] = _key_usage_totals(store, k["id"])
+    return {"keys": keys}
 
 
 @router.post("/apis")
 def create_api_key(req: CreateApiKeyRequest, _: dict = Depends(get_current_session)):
-    """Yeni, isimlendirilmiş bir API anahtarı oluşturur."""
+    """Yeni API anahtarı oluşturur; düz metin anahtar yalnızca burada döner."""
     name = req.name.strip()
     if not name:
         raise HTTPException(status_code=400, detail="Anahtar adı boş olamaz.")
     if len(name) > 50:
         raise HTTPException(status_code=400, detail="Anahtar adı en fazla 50 karakter olabilir.")
-    key = generate_token()
-    created = get_store().create_api_key(name, key)
+    if req.rate_limit_rpm < 0 or req.rate_limit_tpm < 0 or req.monthly_token_quota < 0:
+        raise HTTPException(status_code=400, detail="Limitler negatif olamaz.")
+    if req.balance_credits < 0:
+        raise HTTPException(status_code=400, detail="Bakiye negatif olamaz.")
+
+    raw, prefix, key_hash = generate_key()
+    store = get_store()
+    created = store.create_api_key_with_options(
+        name=name,
+        key_hash=key_hash,
+        prefix=prefix,
+        expires_at=req.expires_at or None,
+        rate_limit_rpm=req.rate_limit_rpm,
+        rate_limit_tpm=req.rate_limit_tpm,
+        monthly_token_quota=req.monthly_token_quota,
+        balance_credits=req.balance_credits,
+        model_allowlist=req.model_allowlist,
+    )
+    # Düz metin anahtar YALNIZCA oluşturma yanıtında bir kez verilir
+    created["key"] = raw
     logger.info("API anahtarı oluşturuldu: %s", name)
     return {"ok": True, "key": created}
 
 
+@router.patch("/apis/{key_id}")
+def update_api_key(key_id: int, req: UpdateApiKeyRequest, _: dict = Depends(get_current_session)):
+    """Anahtarın ad/limit/kota/allowlist/süre alanlarını günceller."""
+    store = get_store()
+    if store.get_api_key_record(key_id) is None:
+        raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
+    fields: dict = {}
+    if req.name is not None:
+        name = req.name.strip()
+        if not name:
+            raise HTTPException(status_code=400, detail="Anahtar adı boş olamaz.")
+        if len(name) > 50:
+            raise HTTPException(status_code=400, detail="Anahtar adı en fazla 50 karakter olabilir.")
+        fields["name"] = name
+    if req.expires_at is not None:
+        fields["expires_at"] = req.expires_at if req.expires_at.strip() else None
+    if req.rate_limit_rpm is not None:
+        if req.rate_limit_rpm < 0:
+            raise HTTPException(status_code=400, detail="RPM limiti negatif olamaz.")
+        fields["rate_limit_rpm"] = req.rate_limit_rpm
+    if req.rate_limit_tpm is not None:
+        if req.rate_limit_tpm < 0:
+            raise HTTPException(status_code=400, detail="TPM limiti negatif olamaz.")
+        fields["rate_limit_tpm"] = req.rate_limit_tpm
+    if req.monthly_token_quota is not None:
+        if req.monthly_token_quota < 0:
+            raise HTTPException(status_code=400, detail="Kota negatif olamaz.")
+        fields["monthly_token_quota"] = req.monthly_token_quota
+    if req.balance_credits is not None:
+        if req.balance_credits < 0:
+            raise HTTPException(status_code=400, detail="Bakiye negatif olamaz.")
+        fields["balance_credits"] = req.balance_credits
+    if req.model_allowlist is not None:
+        fields["model_allowlist"] = [m for m in req.model_allowlist if isinstance(m, str) and m]
+    updated = store.update_api_key(key_id, **fields)
+    logger.info("API anahtarı güncellendi (id=%s)", key_id)
+    return {"ok": True, "key": updated}
+
+
+@router.post("/apis/{key_id}/credits")
+def top_up_api_key(key_id: int, req: TopUpRequest, _: dict = Depends(get_current_session)):
+    """Anahtarın prepaid bakiyesine kredi ekler (borçlu anahtar yeniden açılır)."""
+    store = get_store()
+    rec = store.get_api_key_record(key_id)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
+    store.update_api_key(key_id, balance_credits=float(rec["balance_credits"]) + req.amount)
+    logger.info("API anahtarına kredi yüklendi (id=%s, +%.4f)", key_id, req.amount)
+    return {"ok": True, "key": store.get_api_key_record(key_id)}
+
+
+@router.post("/apis/{key_id}/revoke")
+def revoke_api_key(key_id: int, _: dict = Depends(get_current_session)):
+    """Anahtarı anında iptal eder; mevcut istemciler 403 alır."""
+    store = get_store()
+    if store.get_api_key_record(key_id) is None:
+        raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
+    store.set_api_key_revoked(key_id, True)
+    logger.info("API anahtarı iptal edildi (id=%s)", key_id)
+    return {"ok": True, "revoked": True}
+
+
+@router.post("/apis/{key_id}/unrevoke")
+def unrevoke_api_key(key_id: int, _: dict = Depends(get_current_session)):
+    """İptal edilmiş anahtarı yeniden etkinleştirir."""
+    store = get_store()
+    if store.get_api_key_record(key_id) is None:
+        raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
+    store.set_api_key_revoked(key_id, False)
+    logger.info("API anahtarı yeniden etkinleştirildi (id=%s)", key_id)
+    return {"ok": True, "revoked": False}
+
+
+@router.get("/apis/{key_id}/usage")
+def api_key_usage(key_id: int, days: int = 30, _: dict = Depends(get_current_session)):
+    """Anahtarın kullanım geçmişini (sayaç + maliyet) ve genel toplamı döner."""
+    store = get_store()
+    rec = store.get_api_key_record(key_id)
+    if rec is None:
+        raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
+    days = max(1, min(days, 365))
+    rows = store.usage_rows(key_id, days)
+    totals = _key_usage_totals(store, key_id)
+    return {"key": rec, "days": days, "rows": rows, "totals": totals}
+
+
 @router.delete("/apis/{key_id}")
 def delete_api_key(key_id: int, _: dict = Depends(get_current_session)):
-    """İsimlendirilmiş API anahtarını siler."""
+    """API anahtarını siler."""
     store = get_store()
     if store.get_api_key_by_id(key_id) is None:
         raise HTTPException(status_code=404, detail="API anahtarı bulunamadı.")
     store.delete_api_key(key_id)
     logger.info("API anahtarı silindi (id=%s)", key_id)
     return {"ok": True, "deleted": key_id}
+
+
+def _key_usage_totals(store, key_id: int) -> dict:
+    """Anahtarın tüm geçmiş kullanım toplamlarını döner (panel özeti)."""
+    return store.usage_totals(key_id)

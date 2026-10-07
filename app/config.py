@@ -66,11 +66,29 @@ class Settings(BaseSettings):
     comfyui_default_checkpoint: str = ""
     comfyui_default_negative: str = "blur, ugly, low quality, watermark"
 
+    # Yapay zeka hub'ı (görsel/video/ses/embedding) — isteğe bağlı modül
+    # ai_hub_enabled=True iken ağır paketler kuruluysa ilgili yetenekler
+    # devreye girer; kurulu değilse çekirdek aynen çalışır (import-guard).
+    ai_hub_enabled: bool = True
+
+    # Embedding: boş bırakılırsa /v1/embeddings yalnızca models/embeddings/
+    # altına kurulu modelleri sunar; bir HF model kimliği (örn.
+    # sentence-transformers/all-MiniLM-L6-v2) verilirse ilk çağrıda iner.
+    embedding_model: str = ""
+
     # Ses üretimi (TTS) köprüsü — isteğe bağlı modül
     tts_enabled: bool = False
     tts_engine: str = "edge"            # edge-tts (Microsoft çevrimiçi motor)
     tts_voice: str = "tr-TR-EmelNeural" # varsayılan Türkçe kadın sesi
     tts_voice_rate: str = "+0%"         # edge-tts hız ayarı (+0%/-10%/+20%...)
+
+    # Ses metne çevirme (STT) — isteğe bağlı modül
+    stt_enabled: bool = False
+    stt_model: str = "base"             # varsayılan faster-whisper modeli (base, small, medium, large-v2...)
+
+    # Müzik üretimi (MusicGen) köprüsü — isteğe bağlı modül
+    music_enabled: bool = False
+    music_model: str = "musicgen-small" # varsayılan MusicGen modeli
 
     # İnternet erişimi (web araçları) — yalnızca çağrı anında ağ kullanır
     # web_tools_enabled varsayılanı .env'den gelir; paneldeki toggle DB'de

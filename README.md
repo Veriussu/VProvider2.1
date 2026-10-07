@@ -27,7 +27,14 @@ de HuggingFace'ten tek tıkla model indirir, bellek kullanımını yönetirsiniz
   VRAM'e sığan katman sayısı hesaplanır. VRAM yetmezse otomatik olarak CPU
   moduna düşülür, `gpu_layers` kullanıcıya bildirilir.
 - **OpenAI uyumlu API** — `/v1/models`, `/v1/chat/completions`, `/v1/completions`,
-  `/v1/responses` (akışsız + SSE streaming, OpenAI hata yapısı)
+  `/v1/responses`, `/v1/embeddings` (akışsız + SSE streaming, OpenAI hata yapısı)
+- **Birleşik model kaydı (registry)** — GGUF, safetensors (görsel/video), onnx,
+  ctranslate2 (Whisper) ve embedding modellerini tek katalogda toplar; her model
+  iş kategorisini (`pricing.task`) taşır. `models/reasoning/` klasörüne ya da adında
+  `r1`/`thinking`/`reasoning` işareti bulunan GGUF modelleri **reasoning tarifesiyle**
+  (token başına 2 kat) ücretlendirilir.
+- **Embedding (metin gömme)** — `models/embeddings/` altındaki modellerle
+  `/v1/embeddings`; ya da `.env` içindeki `EMBEDDING_MODEL` ile varsayılan model.
 - **Function / tool calling** — chat ve responses uç noktalarında araç çağrısı,
   `tool_choice` ve paralel tool call yanıtları
 - **İnternet erişimi (ücretsiz, web araçları)** — model, güncel bilgi için
@@ -39,15 +46,18 @@ de HuggingFace'ten tek tıkla model indirir, bellek kullanımını yönetirsiniz
   "İnternet Erişimi" anahtarıyla yapılır ve kalıcı olarak kaydedilir.
 - **Web yönetim paneli** — ilk kurulum sihirbazı, şifreli giriş (session cookie),
   model listesi, yükle/boşalt, bellek modu, silme
-- **HuggingFace entegrasyonu** — GGUF arama, dosya listeleme, kesintisiz devam
-  edebilen (resumable) indirme, tek tıkla model yükleme
+- **HuggingFace entegrasyonu** — tür seçimli arama (GGUF / embedding / safetensors /
+  Whisper / ONNX), dosya listeleme, kesintisiz devam edebilen (resumable) indirme,
+  tek tıkla model yükleme
 - **Dinamik bellek yönetimi** — `keep` (her daim hazır) ve `dynamic` (boşta boşalt)
   modları; modeller boştayken **0 MB VRAM**
-- **Görsel üretim (ComfyUI köprüsü)** — OpenAI uyumlu `/v1/images/generations`,
-  panelde "Görsel Üretim" sekmesi; LLM kullanım bitince GPU'yu bıraktığı için
-  görsel motoruyla VRAM yarışmaz
-- **Video üretim (AnimateDiff köprüsü)** — `/v1/videos/generations` + panelde
-  "Video Üretim" sekmesi; kareler sunucuda GIF'e birleştirilir
+- **Görsel üretim (in-process + ComfyUI)** — OpenAI uyumlu `/v1/images/generations`
+  ve `/v1/images/edits`. `models/safetensors/` altındaki modeller **sunucu içinde**
+  (diffusers, ComfyUI gerekmez) çalışır; istenen model registry'de yoksa ComfyUI
+  köprüsüne düşülür. `GET /v1/images/models` hangi modellerin kullanılabildiğini söyler.
+  LLM kullanım bitince GPU'yu bıraktığı için görsel motoruyla VRAM yarışmaz
+- **Video üretim (in-process + ComfyUI)** — `/v1/videos/generations`; kareler sunucuda
+  GIF'e birleştirilir, `GET /v1/videos/models` modelleri listeler
 - **Ses üretim (TTS köprüsü)** — OpenAI uyumlu `/v1/audio/speech` (edge-tts,
   Türkçe sesler) + panelde "Ses Üretim" sekmesi; GPU gerekmez, internet ister
 - **Panel içi sohbet** — "Sohbet" sekmesiyle seçili modeli arayüzden test etme;
@@ -265,14 +275,18 @@ curl -N http://localhost:9055/v1/chat/completions \
 
 | Bölge | Yöntem | Yol | Açıklama |
 |---|---|---|---|
-| API | `GET` | `/v1/models` | Yüklü modellerin listesi |
+| API | `GET` | `/v1/models` | Tüm modellerin listesi (GGUF + tip bazlı); `pricing.task` ile kategorisi |
 | API | `POST` | `/v1/chat/completions` | Chat (akışsız / SSE) — tool calling destekli |
 | API | `POST` | `/v1/responses` | OpenAI Responses API (Codex gibi araçlar için) |
 | API | `POST` | `/v1/completions` | Metin tamamlama |
-| API | `POST` | `/v1/images/generations` | Görsel üretim (ComfyUI), `url` veya `b64_json` |
+| API | `POST` | `/v1/embeddings` | Metin gömme (models/embeddings/ altındaki modellerle) |
+| API | `POST` | `/v1/images/generations` | Görsel üretim (in-process veya ComfyUI), `url` veya `b64_json` |
+| API | `POST` | `/v1/images/edits` | Görsel→görsel düzenleme (multipart, yerel modeller) |
+| API | `GET` | `/v1/images/models` | Kullanılabilir görsel modelleri (yerel + ComfyUI) |
 | API | `GET` | `/v1/images/file/{prompt_id}/{i}` | Üretilen görsel (API anahtarı gerekir) |
 | API | `GET` | `/v1/images/comfy/checkpoints` | ComfyUI checkpoint listesi |
-| API | `POST` | `/v1/videos/generations` | Video üretim (AnimateDiff → GIF), url modu |
+| API | `POST` | `/v1/videos/generations` | Video üretim (in-process veya ComfyUI/AnimateDiff → GIF) |
+| API | `GET` | `/v1/videos/models` | Kullanılabilir video modelleri |
 | API | `GET` | `/v1/videos/file/{prompt_id}` | Üretilen video (API anahtarı gerekir) |
 | API | `GET` | `/v1/videos/comfy/checkpoints` | Video için checkpoint listesi |
 | API | `POST` | `/v1/audio/speech` | Metni seslendirir → ham MP3 döner (OpenAI ile aynı) |
@@ -353,6 +367,15 @@ kullanım biter bitmez GPU'yu boşalttığından, görsel motoruyla VRAM yarış
 Kısaca:
 
 ```bash
+# YÖNTEM A — in-process (önerilen, ComfyUI gerekmez)
+# 1) requirements-hub.txt ile ağır paketler kurulu olsun (torch, diffusers)
+# 2) Panel > Model Ekle > "Görsel / Video (safetensors)" ile modeli indirin
+#    (models/safetensors/<ad> altına iner) veya klasörü elle kopyalayın
+# 3) Panel > Görsel Üretim sekmesinden veya /v1/images/generations ile üretin
+```
+
+```bash
+# YÖNTEM B — ComfyUI köprüsü (harici motor)
 # 1) ComfyUI'yi kendiniz kurun (ayrıntı: deploy/comfyui-rehber.md)
 # 2) .env'de COMFYUI_ENABLED=true (ve COMFYUI_DIR) ayarlayıp sunucuyu yeniden başlatın
 # 3) scripts/comfyui.sh start        # motoru başlat
@@ -360,14 +383,24 @@ Kısaca:
 # 5) Panel > Görsel Üretim sekmesinden veya /v1/images/generations ile üretin
 ```
 
+Hangi modellerin üretime hazır olduğunu öğrenmek için:
+
+```bash
+curl http://localhost:9055/v1/images/models -H "Authorization: Bearer $API_KEY"
+```
+
 ```bash
 # OpenAI uyumlu çağrı (url modu)
 curl http://localhost:9055/v1/images/generations \
   -H "Authorization: Bearer $API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model": "v1-5-pruned-emaonly.safetensors",
+  -d '{"model": "stabilityai_sd-turbo",
        "prompt": "güneşli orman, fotogerçekçi", "size": "512x512"}'
 ```
+
+`model` alanında önce yerel modeller (registry) aranır; bulunamazsa ComfyUI
+checkpoint'i olarak yorumlanır. Görsel→görsel düzenleme için `multipart/form-data`
+ile `/v1/images/edits` kullanılır (`image` dosyası + `prompt` + `model`).
 
 Yanıt `data[0].url` ile görseli `/v1/images/file/{prompt_id}/0` adresinden verir
 (`response_format: "b64_json"` ile base64 de alınır). Üretilen görseller in-memory
@@ -427,16 +460,24 @@ vprovider/
 ├── app/                  # Uygulama kaynak kodu
 │   ├── main.py           # Uygulama + router bağlama + panel ön yüzü
 │   ├── config.py         # .env okuma + sabit sistem kimliği (SITE_IDENTITY)
+│   ├── registry.py       # Birleşik model kataloğu (tip + kategori, reasoning)
+│   ├── ai_hub.py         # Ağır paket kasası (torch/diffusers/... tembel yüklenir)
 │   ├── model_manager.py  # Bellek modları + yükleme/boşaltma
 │   ├── gpu_detect.py     # Donanım/backend algılama + akıllı katman hesabı
 │   ├── llama_backend.py  # llama.cpp sarmalayıcı (gerçek motor)
+│   ├── diffusers_backend.py  # in-process görsel/video motoru (pembe kilit, VAE)
+│   ├── embedding_backend.py  # Metin gömme (sentence-transformers)
 │   ├── auth.py           # Kullanıcı/şifre + API anahtarı
 │   ├── user_store.py     # SQLite (kullanıcı, oturum, ayarlar, API anahtarları)
-│   ├── hf_downloader.py  # HuggingFace arama + resumable indirme
-│   ├── openai_api.py     # /v1/* router
+│   ├── gateway.py        # API anahtarı doğrulama, limit, kota, bakiye, kredi
+│   ├── pricing.py        # Kredi tarifeleri (görev bazlı)
+│   ├── rate_limit.py     # RPM (token bucket) + TPM (kayan pencere)
+│   ├── hf_downloader.py  # HuggingFace arama + resumable/tip-bazlı indirme
+│   ├── openai_api.py     # /v1/* metin router
+│   ├── embedding_api.py  # /v1/embeddings
 │   ├── admin_api.py      # /panel/* router
 │   ├── comfy_client.py   # ComfyUI HTTP istemcisi (görsel + video)
-│   ├── comfy_api.py      # /v1/images/* + /v1/videos/*
+│   ├── comfy_api.py      # /v1/images/* + /v1/videos/* (in-process + ComfyUI)
 │   ├── tts_backend.py    # Ses üretim motoru (edge-tts)
 │   ├── tts_api.py        # /v1/audio/*
 │   └── web_tools.py      # İnternet erişimi: web_search + fetch_url (2.1)
@@ -452,7 +493,13 @@ vprovider/
 ├── deploy/caddy-rehber.md     # Caddy kurulum + sorun giderme rehberi
 ├── deploy/comfyui-rehber.md   # ComfyUI kurulum + checkpoint + sistem rehberi
 ├── tests/                # pytest (birim + API + uçtan uca)
-├── models/               # GGUF modelleri
+├── models/               # modeller (aşağıdaki düzene göre)
+│   ├── *.gguf            #   metin/LLM modelleri (llama.cpp)
+│   ├── reasoning/        #   düşünme modelleri (reasoning tarifesi)
+│   ├── embeddings/       #   sentence-transformers (metin gömme)
+│   ├── safetensors/      #   diffusers pipeline (görsel/video/müzik)
+│   ├── ct2/              #   faster-whisper (konuşma tanıma)
+│   └── onnx/             #   ONNX aktarımları
 ├── data/                 # SQLite veritabanı
 ├── install.sh            # Otomatik kurulum (Linux/macOS)
 ├── install.ps1           # Otomatik kurulum (Windows/PowerShell)

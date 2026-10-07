@@ -1,0 +1,2251 @@
+Usage: uvicorn [OPTIONS] APP
+Try 'uvicorn --help' for help.
+
+Error: Invalid value for '--port': '' is not a valid integer.
+INFO:     Started server process [42862]
+INFO:     Waiting for application startup.
+2026-10-07 15:15:45,836 | INFO | VProvider sunucusu başlatıldı (bellek modu: dynamic)
+2026-10-07 15:15:45,858 | INFO | Donanım tespiti: nvidia (NVIDIA GeForce RTX 4060)
+2026-10-07 15:15:45,949 | INFO | Derlenmiş llama_cpp backend'leri: cuda
+2026-10-07 15:15:45,949 | INFO | GPU durumu: NVIDIA GPU algılandı (NVIDIA GeForce RTX 4060; boş VRAM 7436 MB) -> backend=cuda, gpu_layers=-1 | Donanım: NVIDIA GeForce RTX 4060 | Derlenmiş: cuda
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52900 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /logo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /logo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58792 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+2026-10-07 15:18:02,535 | INFO | Model silindi: Qwen3.5-9B-Q4_K_M (Qwen3.5-9B-Q4_K_M.gguf)
+INFO:     127.0.0.1:58778 - "POST /panel/models/Qwen3.5-9B-Q4_K_M/delete HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+2026-10-07 15:18:04,221 | INFO | Tip bazlı model silindi: stabilityai_sd-turbo (models/safetensors/stabilityai_sd-turbo)
+INFO:     127.0.0.1:58778 - "POST /panel/models/stabilityai_sd-turbo/delete HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58778 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57510 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57510 - "GET /panel/web-tools HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40474 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40474 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40482 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40482 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40482 - "GET /panel/me HTTP/1.1" 401 Unauthorized
+INFO:     100.84.204.3:40474 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59756 - "POST /panel/login HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59756 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59756 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59756 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59772 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59772 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+2026-10-07 17:38:33,431 | INFO | HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,656 | INFO | HTTP Request: GET https://huggingface.co/api/models?search=gguf&sort=downloads&limit=300 "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,826 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/locate-anything.cpp-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,843 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-2-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,854 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,854 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,855 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,856 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/audio.cpp-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,857 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,859 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,863 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,864 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,865 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/nemotron-3.5-asr-streaming-0.6b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,866 | INFO | HTTP Request: GET https://huggingface.co/api/models/HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,866 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,867 | INFO | HTTP Request: GET https://huggingface.co/api/models/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,874 | INFO | HTTP Request: GET https://huggingface.co/api/models/cdiamond/Qwen3.8-27B-iMatrix-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,880 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.0-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:33,989 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Laguna-XS-2.1-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,002 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Qwen-Image-2.1-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,014 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/parakeet-unified-en-0.6b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,016 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF-MTP/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,017 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,019 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,020 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.0-35B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,020 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/deepseek-v4.1-flash-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,024 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-12b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,027 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/YuE2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,029 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,030 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Dirk-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,039 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-Flash-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,040 | INFO | HTTP Request: GET https://huggingface.co/api/models/0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,054 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,062 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Ornith-1.5-9B-uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,155 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,171 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/deepseek-v4-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,171 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,179 | INFO | HTTP Request: GET https://huggingface.co/api/models/byteshape/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,180 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.3-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,181 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,182 | INFO | HTTP Request: GET https://huggingface.co/api/models/rippertnt/HyperCLOVAX-SEED-Text-Instruct-1.5B-Q4_K_M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,191 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/KAT-Coder-V2.5-Dev-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,191 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,199 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,203 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-2.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,206 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-397B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,211 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/cohere-transcribe-03-2026-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,216 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Inkling-Small-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,225 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Z-Image-Turbo-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,225 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/endless-frontier_BigBang-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,315 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,326 | INFO | HTTP Request: GET https://huggingface.co/api/models/esatapedico/Qwen3.8-27B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,329 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-12B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,339 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,340 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-models/Muse-Glimmer-30B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,340 | INFO | HTTP Request: GET https://huggingface.co/api/models/datalab-to/surya-ocr-2-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,344 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-E4B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,350 | INFO | HTTP Request: GET https://huggingface.co/api/models/AtomicChat/Qwen3.8-Flash-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,355 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,364 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-27B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,366 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-35B-A3B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,374 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,382 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/MiniMax-Music3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,386 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-9B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,387 | INFO | HTTP Request: GET https://huggingface.co/api/models/yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,392 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/ACE-Step-1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,482 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,490 | INFO | HTTP Request: GET https://huggingface.co/api/models/dealignai/Ornith-1.5-9B-UNCENSORED-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,496 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,498 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/parakeet-tdt-0.6b-v3-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,501 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-4B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,505 | INFO | HTTP Request: GET https://huggingface.co/api/models/FINAL-Bench/POCKET-35B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,510 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/MiniMax-Music3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,514 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-medium-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,519 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen2.5-32B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,524 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,528 | INFO | HTTP Request: GET https://huggingface.co/api/models/LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-Final-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,538 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,546 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,547 | INFO | HTTP Request: GET https://huggingface.co/api/models/poolside/Laguna-S-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,548 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,552 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-2B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,645 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,652 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,656 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Apodex-1.1-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,658 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,659 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-12B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,667 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-230M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,679 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,683 | INFO | HTTP Request: GET https://huggingface.co/api/models/XHToken/Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,686 | INFO | HTTP Request: GET https://huggingface.co/api/models/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,687 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,691 | INFO | HTTP Request: GET https://huggingface.co/api/models/LocalAI-io/privacy-filter-nemotron-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,703 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gpt-oss-20b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,704 | INFO | HTTP Request: GET https://huggingface.co/api/models/BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,708 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,712 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-Edit-2511-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,713 | INFO | HTTP Request: GET https://huggingface.co/api/models/tencent/Hy-MT2-7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,805 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-26B-A4B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,813 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,814 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,817 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,818 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Ornith-1.5-35B-A3B-APEX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,831 | INFO | HTTP Request: GET https://huggingface.co/api/models/z-lab/Qwen3.8-27B-DFlash2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,842 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,845 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-I2V-A14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,846 | INFO | HTTP Request: GET https://huggingface.co/api/models/orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,852 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/inkling-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,853 | INFO | HTTP Request: GET https://huggingface.co/api/models/migtissera/Tess-4-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,864 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,864 | INFO | HTTP Request: GET https://huggingface.co/api/models/scragnog/MOSS-Music-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,867 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-9B-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,875 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Bonsai-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,878 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Voxtral-Mini-4B-Realtime-2602-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,971 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,972 | INFO | HTTP Request: GET https://huggingface.co/api/models/Mia-AiLab/Gemmable-4-12B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,974 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-8B-A1B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,975 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,978 | INFO | HTTP Request: GET https://huggingface.co/api/models/Accio-Lab/occamy-1.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:34,992 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-E2B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,003 | INFO | HTTP Request: GET https://huggingface.co/api/models/leliuga/all-MiniLM-L6-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,006 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,013 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-VL-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,022 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-Cold-Fusion-GAIN-V1.1-NM-DAU-NEO-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,023 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Ornith-1.0-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,023 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/LTX-2.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,026 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-8B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,037 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-large-v3-turbo-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,041 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-35B-A3B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,043 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/thomsonreuters_Thomson-1.0-Small-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,134 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,134 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-27B-Ridge-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,135 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,143 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-26B-A4B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,145 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Qwen3-8B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,155 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/google_gemma-4-E2B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,162 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwen3.6-35B-A3B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,163 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.8-27B-Flash-V2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,170 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/FLUX.2-klein-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,179 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,180 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwopus3.6-27B-v2-MTP-NVFP4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,184 | INFO | HTTP Request: GET https://huggingface.co/api/models/tvall43/Qwen3.6-14B-A3B-FableVibes-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,196 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-Coder-Compat-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,207 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwopus3.6-27B-Coder-MTP-NVFP4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,208 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,210 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/XYZAILab_XYZ-Aquila-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,295 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,302 | INFO | HTTP Request: GET https://huggingface.co/api/models/yuxinlu1/gemma-4-12B-coder-fable5-composer2.5-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,302 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Kimi-K3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,304 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,312 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwen3.6-27B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,320 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-large-v3-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,323 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/FLUX.2-klein-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,325 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-2B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,329 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/embeddinggemma-300M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,336 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,337 | INFO | HTTP Request: GET https://huggingface.co/api/models/bottlecapai/ThinkingCap-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,351 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-VL-4B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,357 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-2512-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,369 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-31B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,370 | INFO | HTTP Request: GET https://huggingface.co/api/models/llm-jp/llm-jp-4-33b-thinking-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,372 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-AgentWorld-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,458 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Kimi-K2.7-Code-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,460 | INFO | HTTP Request: GET https://huggingface.co/api/models/llmfan46/gemma-4-Ortenzya-The-Creative-Wordsmith-31B-it-uncensored-heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,473 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,474 | INFO | HTTP Request: GET https://huggingface.co/api/models/tencent/Hy-MT2-1.8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,481 | INFO | HTTP Request: GET https://huggingface.co/api/models/jadeonrails/marlin-2b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,486 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-4-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,497 | INFO | HTTP Request: GET https://huggingface.co/api/models/ProCreations/grug-27b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,498 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,501 | INFO | HTTP Request: GET https://huggingface.co/api/models/nomic-ai/nomic-embed-text-v1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,502 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,506 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/MiniMax-H3-Pruned-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,515 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Ornith-1.5-35B-A3B-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,521 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,530 | INFO | HTTP Request: GET https://huggingface.co/api/models/janhq/Jan-v3.5-4B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,531 | INFO | HTTP Request: GET https://huggingface.co/api/models/openbmb/MiniCPM5-2B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,542 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-31B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,618 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Qwen3-4B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,631 | INFO | HTTP Request: GET https://huggingface.co/api/models/superwhisper/s1-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,641 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-8b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,644 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/canary-180m-flash-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-3b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,651 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-31B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,658 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Sharp-Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,660 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Kwaipilot_KAT-Coder-V2.5-Dev-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,665 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-30b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,669 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,676 | INFO | HTTP Request: GET https://huggingface.co/api/models/agentionai/Qwen3.8-27B-AP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,684 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-27B-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,685 | INFO | HTTP Request: GET https://huggingface.co/api/models/KyleHessling1/Qwopus3.6-27B-Fusion-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,701 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Bonsai-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,716 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/kai-os_Grug-12B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,762 | INFO | HTTP Request: GET https://huggingface.co/api/models/philbert440/Qwen3.8-27B-Uncensored-Cyber-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,793 | INFO | HTTP Request: GET https://huggingface.co/api/models/FINAL-Bench/POCKET-26B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,797 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,807 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-40B-Claude-4.6-Opus-Deckard-Heretic-Uncensored-Thinking-NEO-CODE-Di-IMatrix-MAX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,808 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/Qwen3-TTS-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,810 | INFO | HTTP Request: GET https://huggingface.co/api/models/AtomicChat/Ling-3.0-flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,821 | INFO | HTTP Request: GET https://huggingface.co/api/models/city96/umt5-xxl-encoder-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,835 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,838 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/North-Mini-Code-1.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,845 | INFO | HTTP Request: GET https://huggingface.co/api/models/AngelSlim/Hy3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,846 | INFO | HTTP Request: GET https://huggingface.co/api/models/HuggingFaceBio/Carbon-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,847 | INFO | HTTP Request: GET https://huggingface.co/api/models/GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-Thinking-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,849 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,875 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-12B-it-QAT-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,890 | INFO | HTTP Request: GET https://huggingface.co/api/models/AngelSlim/Hy4-preview-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,931 | INFO | HTTP Request: GET https://huggingface.co/api/models/GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,954 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/diffusiongemma-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,968 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Wan2.2-TI2V-5B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,969 | INFO | HTTP Request: GET https://huggingface.co/api/models/HuggingFaceBio/Carbon-3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,970 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Melody1437-26B-A4B-v2.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,977 | INFO | HTTP Request: GET https://huggingface.co/api/models/bloomer010/Ling-3.0-tiny-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:35,979 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,006 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-4B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,006 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Muse-Glimmer-30B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,011 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-1.7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,012 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Serenity-26B-A4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,013 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Dark-Scarlett-v0.3-26B-A4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,014 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,033 | INFO | HTTP Request: GET https://huggingface.co/api/models/ChristianAzinn/mxbai-embed-large-v1-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,035 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,069 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-0.5B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,094 | INFO | HTTP Request: GET https://huggingface.co/api/models/InternScience/Agents-A1-4B-Q8_0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,113 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-L-Uncensored-NM-DAU-NEO-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,127 | INFO | HTTP Request: GET https://huggingface.co/api/models/XHToken/Spark-X2.5-1.7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,139 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,140 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Granite-4.1-3B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,141 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-30B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,166 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-32B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,169 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-TI2V-5B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,169 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,172 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Granite-4.1-8B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,173 | INFO | HTTP Request: GET https://huggingface.co/api/models/Hcompany/Holo-3.1-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,176 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-T2V-A14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,189 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/bge-small-en-v1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,192 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,198 | INFO | HTTP Request: GET https://huggingface.co/api/models/pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,234 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-qat-mobile-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,261 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-0.8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,281 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,287 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,299 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-3-1b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,299 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Cyber-Ornith-1.5-9B-OBLITERATED-i1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,304 | INFO | HTTP Request: GET https://huggingface.co/api/models/bytkim/Qwen3.6-27B-MTP-pi-tune-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,330 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Qwen3-ASR-1.7B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,336 | INFO | HTTP Request: GET https://huggingface.co/api/models/poolside/Laguna-XS-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,336 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,339 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,356 | INFO | HTTP Request: GET https://huggingface.co/api/models/city96/FLUX.1-dev-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,356 | INFO | HTTP Request: GET https://huggingface.co/api/models/cyjin-yl/Qwen3.8-27B-Uncensored-Cyber-agentic-imatrix-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,362 | INFO | HTTP Request: GET https://huggingface.co/api/models/realrebelai/MiniMax-H3_GGUFs/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,368 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/gemma-4-31B-it-scotoma-2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,374 | INFO | HTTP Request: GET https://huggingface.co/api/models/LocalAI-io/privacy-filter-multilingual-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,394 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen2.5-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,424 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/qwen3.8-flash-next-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,452 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen2.5-VL-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,457 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,464 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.6-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,470 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,489 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-4B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,496 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/Yue2-3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,497 | INFO | HTTP Request: GET https://huggingface.co/api/models/InternScience/Agents-A1-4B-Q4_K_M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,513 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-VL-4B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,520 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Step-3.7-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,521 | INFO | HTTP Request: GET https://huggingface.co/api/models/leejet/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,526 | INFO | HTTP Request: GET https://huggingface.co/api/models/Myric/Laguna-S-2.1-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,527 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.8-27B-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,542 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,556 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-abliterated-ds4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,588 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.5-9B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,614 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/Nemotron-3-Embed-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,616 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.5-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,633 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-v2-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,648 | INFO | HTTP Request: GET https://huggingface.co/api/models/JetBrains/Mellum2-12B-A2.5B-Instruct-GGUF-Q8_0/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-Animate-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,662 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/orcarouter_Qwen3.8-27B-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,665 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-4.7-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,675 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-27B-Heretic-Uncensored-FINETUNE-NEO-CODE-Di-IMatrix-MAX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,683 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,683 | INFO | HTTP Request: GET https://huggingface.co/api/models/batiai/Qwen3.6-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,684 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gpt-oss-20b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,693 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/gemma-2-27b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,712 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Meta-Llama-3-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,718 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Llama-3.2-3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,741 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,756 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-Small-Instruct-2409-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,774 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-Nemo-Instruct-2407-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,789 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-7B-v0.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,797 | INFO | HTTP Request: GET https://huggingface.co/api/models/scragnog/YuE2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,812 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Yi-Coder-1.5B-Chat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,813 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/ERNIE-Image-Turbo-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,839 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Qwen3-ASR-0.6B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,842 | INFO | HTTP Request: GET https://huggingface.co/api/models/OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,843 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-VL-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,844 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen2-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,850 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Phi-3.5-mini-instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,872 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-Coder-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,880 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,894 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/firefunction-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 17:38:36,913 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:59772 - "GET /panel/models/browse?kind=gguf HTTP/1.1" 200 OK
+2026-10-07 17:40:52,090 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-Flash-Next-GGUF?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:56146 - "GET /panel/models/repo-files?kind=gguf&repo=unsloth%2FQwen3.8-Flash-Next-GGUF HTTP/1.1" 200 OK
+2026-10-07 17:41:04,925 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-27B-GGUF?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:40902 - "GET /panel/models/repo-files?kind=gguf&repo=unsloth%2FQwen3.8-27B-GGUF HTTP/1.1" 200 OK
+2026-10-07 17:41:24,115 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-9B-GGUF?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:49912 - "GET /panel/models/repo-files?kind=gguf&repo=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+2026-10-07 17:41:31,100 | INFO | İndirme başladı: unsloth/Qwen3.5-9B-GGUF (tür: gguf)
+INFO:     100.84.204.3:37902 - "POST /panel/models/download HTTP/1.1" 200 OK
+2026-10-07 17:41:31,278 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-9B-GGUF?blobs=true "HTTP/1.1 200 OK"
+2026-10-07 17:41:31,465 | INFO | HTTP Request: GET https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf "HTTP/1.1 302 Found"
+2026-10-07 17:41:32,063 | INFO | HTTP Request: GET https://us.aws.cdn.hf.co/xet-bridge-us/69a2f5edef408247323ee7f4/a8adfeb2dd607e6cc691d367f2c42a54209705ff24bf18f4dd1d4fc98966dcca?X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27Qwen3.5-9B-Q4_K_M.gguf%3B+filename%3D%22Qwen3.5-9B-Q4_K_M.gguf%22%3B&user_id=public&xip=1fJkubcScy8&Expires=1791387691&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjlhMmY1ZWRlZjQwODI0NzMyM2VlN2Y0L2E4YWRmZWIyZGQ2MDdlNmNjNjkxZDM2N2YyYzQyYTU0MjA5NzA1ZmYyNGJmMThmNGRkMWQ0ZmM5ODk2NmRjY2FcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3UXdlbjMuNS05Qi1RNF9LX00uZ2d1ZiUzQitmaWxlbmFtZSUzRCUyMlF3ZW4zLjUtOUItUTRfS19NLmdndWYlMjIlM0ImdXNlcl9pZD1wdWJsaWMmeGlwPTFmSmt1YmNTY3k4IiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJFcG9jaFRpbWUiOjE3OTEzODc2OTF9fX1dfQ__&Signature=MEQCIDAwQx4M-fbSGFSQrMhQ3mknJekLECWV7qlsU8SDnGnhAiAi5hAIIwKTnBfgqZenCjztz9%7ESnNZ3loSixWLEQRjNtg__&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F&Hash-Algorithm=SHA256 "HTTP/1.1 206 Partial Content"
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+2026-10-07 17:41:41,388 | INFO | API anahtarı silindi (id=1)
+INFO:     100.84.204.3:37902 - "DELETE /panel/apis/1 HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:37902 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:39978 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39978 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39978 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:39980 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39980 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39982 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44238 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44238 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44252 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44268 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44274 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44288 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/download/status?repo_id=unsloth%2FQwen3.5-9B-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:44302 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33540 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:33556 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33556 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33572 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33556 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33572 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33556 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33556 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33588 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33588 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:33588 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:56730 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56746 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56762 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56768 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56784 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56794 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56804 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     100.84.204.3:56818 - "POST /panel/apis HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/protocols/http/httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1215, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/routing.py", line 676, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2786, in app
+    await route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1817, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 2869, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1843, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 1308, in handle
+    await effective_context.app(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 165, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 151, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 727, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/routing.py", line 362, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+        _run_sync_endpoint, function=dependant.call, arguments=values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+  File "/home/kazim/Project/Vprovider2.1/.venv/lib/python3.14/site-packages/fastapi/telemetry/_api.py", line 240, in _run_sync_endpoint
+    return function(**arguments)
+  File "/home/kazim/Project/Vprovider2.1/app/admin_api.py", line 996, in create_api_key
+    
+    
+    ...<9 lines>...
+        transcription = await stt_backend.get_stored_transcription(key)
+        ^
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 369, in create_api_key_with_options
+    row_id = self._run(
+        "INSERT INTO api_keys (name, key_hash, prefix, created_at, expires_at, "
+    ...<4 lines>...
+         float(balance_credits), allow),
+    )
+  File "/home/kazim/Project/Vprovider2.1/app/user_store.py", line 63, in _run
+    cur = conn.execute(sql, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: api_keys.key
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-10-07 17:57:22,774 | INFO | VProvider sunucusu kapatıldı
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42862]
+INFO:     Started server process [45820]
+INFO:     Waiting for application startup.
+2026-10-07 17:57:25,128 | INFO | VProvider sunucusu başlatıldı (bellek modu: dynamic)
+2026-10-07 17:57:25,149 | INFO | Donanım tespiti: nvidia (NVIDIA GeForce RTX 4060)
+2026-10-07 17:57:25,232 | INFO | Derlenmiş llama_cpp backend'leri: cuda
+2026-10-07 17:57:25,232 | INFO | GPU durumu: NVIDIA GPU algılandı (NVIDIA GeForce RTX 4060; boş VRAM 7644 MB) -> backend=cuda, gpu_layers=-1 | Donanım: NVIDIA GeForce RTX 4060 | Derlenmiş: cuda
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
+INFO:     127.0.0.1:42208 - "POST /panel/setup HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:55468 - "POST /panel/login HTTP/1.1" 401 Unauthorized
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-10-07 17:59:11,730 | INFO | VProvider sunucusu kapatıldı
+INFO:     Application shutdown complete.
+INFO:     Finished server process [45820]
+INFO:     Started server process [45892]
+INFO:     Waiting for application startup.
+2026-10-07 17:59:13,027 | INFO | VProvider sunucusu başlatıldı (bellek modu: dynamic)
+2026-10-07 17:59:13,048 | INFO | Donanım tespiti: nvidia (NVIDIA GeForce RTX 4060)
+2026-10-07 17:59:13,107 | INFO | Derlenmiş llama_cpp backend'leri: cuda
+2026-10-07 17:59:13,107 | INFO | GPU durumu: NVIDIA GPU algılandı (NVIDIA GeForce RTX 4060; boş VRAM 7644 MB) -> backend=cuda, gpu_layers=-1 | Donanım: NVIDIA GeForce RTX 4060 | Derlenmiş: cuda
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
+INFO:     100.84.204.3:53022 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53030 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53044 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53044 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53044 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53044 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53030 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53030 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53030 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:53022 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-10-07 18:02:38,223 | INFO | VProvider sunucusu kapatıldı
+INFO:     Application shutdown complete.
+INFO:     Finished server process [45892]
+INFO:     Started server process [47628]
+INFO:     Waiting for application startup.
+2026-10-07 18:02:39,524 | INFO | VProvider sunucusu başlatıldı (bellek modu: dynamic)
+2026-10-07 18:02:39,544 | INFO | Donanım tespiti: nvidia (NVIDIA GeForce RTX 4060)
+2026-10-07 18:02:39,603 | INFO | Derlenmiş llama_cpp backend'leri: cuda
+2026-10-07 18:02:39,603 | INFO | GPU durumu: NVIDIA GPU algılandı (NVIDIA GeForce RTX 4060; boş VRAM 7644 MB) -> backend=cuda, gpu_layers=-1 | Donanım: NVIDIA GeForce RTX 4060 | Derlenmiş: cuda
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
+2026-10-07 18:02:42,262 | INFO | API anahtarı oluşturuldu: OC
+INFO:     100.84.204.3:32816 - "POST /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:32816 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56764 - "GET /panel/status HTTP/1.1" 200 OK
