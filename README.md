@@ -51,6 +51,8 @@ de HuggingFace'ten tek tıkla model indirir, bellek kullanımını yönetirsiniz
   tek tıkla model yükleme
 - **Dinamik bellek yönetimi** — `keep` (her daim hazır) ve `dynamic` (boşta boşalt)
   modları; modeller boştayken **0 MB VRAM**
+- **Ses metne çevirme (STT)** — faster-whisper ile `/v1/audio/transcriptions`; API anahtar doğrulaması; panel "Ses Metne" sekmesi; `models/ct2/` klasöründe model; varsayılan model `base` (aşağıdaki gibi)
+- **Müzik üretimi (MusicGen)** — AI destekli `/v1/audio/music/generate`; panel "Müzik" sekmesi; varsayılan model `musicgen-small` (aşağıdaki gibi)
 - **Görsel üretim (in-process + ComfyUI)** — OpenAI uyumlu `/v1/images/generations`
   ve `/v1/images/edits`. `models/safetensors/` altındaki modeller **sunucu içinde**
   (diffusers, ComfyUI gerekmez) çalışır; istenen model registry'de yoksa ComfyUI

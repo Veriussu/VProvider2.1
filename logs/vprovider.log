@@ -2249,3 +2249,694 @@ INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
 INFO:     100.84.204.3:32816 - "POST /panel/apis HTTP/1.1" 200 OK
 INFO:     100.84.204.3:32816 - "GET /panel/apis HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56764 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET / HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /logo HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/status HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/me HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59670 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59676 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+2026-10-07 18:07:41,071 | INFO | HTTP Request: GET https://huggingface.co/api/models?search=gguf&sort=downloads&limit=300 "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,270 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/locate-anything.cpp-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,338 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,339 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,341 | INFO | HTTP Request: GET https://huggingface.co/api/models/cdiamond/Qwen3.8-27B-iMatrix-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,342 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,346 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,347 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-2-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,350 | INFO | HTTP Request: GET https://huggingface.co/api/models/HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,350 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,351 | INFO | HTTP Request: GET https://huggingface.co/api/models/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,352 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,353 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,356 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/nemotron-3.5-asr-streaming-0.6b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,357 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.0-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,359 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/audio.cpp-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,374 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,418 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Laguna-XS-2.1-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,487 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Qwen-Image-2.1-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,487 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/parakeet-unified-en-0.6b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,490 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF-MTP/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,490 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,492 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-12b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,500 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Dirk-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,500 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/YuE2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,500 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/deepseek-v4.1-flash-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,503 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,504 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.0-35B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,514 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.8-Flash-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,515 | INFO | HTTP Request: GET https://huggingface.co/api/models/0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,527 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,553 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Ornith-1.5-9B-uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,561 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,571 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,639 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,642 | INFO | HTTP Request: GET https://huggingface.co/api/models/rippertnt/HyperCLOVAX-SEED-Text-Instruct-1.5B-Q4_K_M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,643 | INFO | HTTP Request: GET https://huggingface.co/api/models/ornith-ai/Ornith-1.5-397B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,643 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,643 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/deepseek-v4-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,649 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.3-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-2.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/byteshape/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/cohere-transcribe-03-2026-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,650 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,664 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/KAT-Coder-V2.5-Dev-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,683 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,690 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Inkling-Small-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,708 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Z-Image-Turbo-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,708 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/endless-frontier_BigBang-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,720 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,787 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,789 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-E4B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,789 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-12B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,792 | INFO | HTTP Request: GET https://huggingface.co/api/models/esatapedico/Qwen3.8-27B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,796 | INFO | HTTP Request: GET https://huggingface.co/api/models/AtomicChat/Qwen3.8-Flash-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,798 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-27B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,798 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.6-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,799 | INFO | HTTP Request: GET https://huggingface.co/api/models/datalab-to/surya-ocr-2-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,810 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-35B-A3B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,819 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/ACE-Step-1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,833 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,842 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/MiniMax-Music3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,863 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-9B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,864 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-models/Muse-Glimmer-30B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,864 | INFO | HTTP Request: GET https://huggingface.co/api/models/yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,868 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,934 | INFO | HTTP Request: GET https://huggingface.co/api/models/dealignai/Ornith-1.5-9B-UNCENSORED-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,936 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,936 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/parakeet-tdt-0.6b-v3-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,939 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-4B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,943 | INFO | HTTP Request: GET https://huggingface.co/api/models/FINAL-Bench/POCKET-35B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,948 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/MiniMax-Music3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,950 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-medium-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,953 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen2.5-32B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,966 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,967 | INFO | HTTP Request: GET https://huggingface.co/api/models/LuffyTheFox/Qwen3.6-35B-A3B-Uncensored-Genesis-Hermes-Final-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,984 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:41,996 | INFO | HTTP Request: GET https://huggingface.co/api/models/poolside/Laguna-S-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,004 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,006 | INFO | HTTP Request: GET https://huggingface.co/api/models/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,015 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,017 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-2B-Distill-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,085 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Apodex-1.1-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,086 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-27B-Fable-Fusion-711-Uncensored-Heretic-NM-DAU-NEO-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,092 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-230M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,095 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-12B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,100 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,101 | INFO | HTTP Request: GET https://huggingface.co/api/models/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,108 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,111 | INFO | HTTP Request: GET https://huggingface.co/api/models/XHToken/Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,123 | INFO | HTTP Request: GET https://huggingface.co/api/models/LocalAI-io/privacy-filter-nemotron-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,131 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gpt-oss-20b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,133 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,147 | INFO | HTTP Request: GET https://huggingface.co/api/models/BoldingBuilds/orcarouter_GLM-5.3-Flash-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,156 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,165 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-26B-A4B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,167 | INFO | HTTP Request: GET https://huggingface.co/api/models/tencent/Hy-MT2-7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,176 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-Edit-2511-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,237 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,237 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,246 | INFO | HTTP Request: GET https://huggingface.co/api/models/z-lab/Qwen3.8-27B-DFlash2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,257 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-E4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,263 | INFO | HTTP Request: GET https://huggingface.co/api/models/orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,264 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/inkling-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,273 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Ornith-1.5-35B-A3B-APEX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,274 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-I2V-A14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,282 | INFO | HTTP Request: GET https://huggingface.co/api/models/migtissera/Tess-4-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,289 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,295 | INFO | HTTP Request: GET https://huggingface.co/api/models/scragnog/MOSS-Music-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,295 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Qwen3.5-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,305 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-9B-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,316 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Voxtral-Mini-4B-Realtime-2602-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,325 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,348 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Bonsai-27B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,392 | INFO | HTTP Request: GET https://huggingface.co/api/models/Accio-Lab/occamy-1.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,392 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-8B-A1B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,396 | INFO | HTTP Request: GET https://huggingface.co/api/models/Mia-AiLab/Gemmable-4-12B-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,415 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,420 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-Cold-Fusion-GAIN-V1.1-NM-DAU-NEO-MAX-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,425 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,435 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Ornith-1.0-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,436 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-VL-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,445 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/LTX-2.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,448 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-8B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,450 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-E2B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,453 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/thomsonreuters_Thomson-1.0-Small-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,454 | INFO | HTTP Request: GET https://huggingface.co/api/models/leliuga/all-MiniLM-L6-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,469 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-large-v3-turbo-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,472 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-35B-A3B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,495 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,539 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-0731-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,542 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwen3.8-27B-Ridge-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,555 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Qwen3-8B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,561 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-26B-A4B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,568 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/google_gemma-4-E2B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,580 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwen3.6-35B-A3B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,592 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/FLUX.2-klein-9B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,594 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwopus3.6-27B-v2-MTP-NVFP4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,595 | INFO | HTTP Request: GET https://huggingface.co/api/models/tvall43/Qwen3.6-14B-A3B-FableVibes-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,596 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,601 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwopus3.6-27B-Coder-MTP-NVFP4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,601 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.8-27B-Flash-V2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,605 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-Coder-Compat-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,617 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,617 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/XYZAILab_XYZ-Aquila-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,641 | INFO | HTTP Request: GET https://huggingface.co/api/models/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,688 | INFO | HTTP Request: GET https://huggingface.co/api/models/michaelw9999/Qwen3.6-27B-NVFP4-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,699 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,702 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Kimi-K3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,709 | INFO | HTTP Request: GET https://huggingface.co/api/models/yuxinlu1/gemma-4-12B-coder-fable5-composer2.5-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,718 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/FLUX.2-klein-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,726 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/whisper-large-v3-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,738 | INFO | HTTP Request: GET https://huggingface.co/api/models/bottlecapai/ThinkingCap-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,741 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-2B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,744 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,745 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/embeddinggemma-300M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,751 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-31B-it-qat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,756 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-VL-4B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,765 | INFO | HTTP Request: GET https://huggingface.co/api/models/llm-jp/llm-jp-4-33b-thinking-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,768 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-Image-2512-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,775 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen-AgentWorld-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,797 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Kimi-K2.7-Code-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,835 | INFO | HTTP Request: GET https://huggingface.co/api/models/llmfan46/gemma-4-Ortenzya-The-Creative-Wordsmith-31B-it-uncensored-heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,852 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,867 | INFO | HTTP Request: GET https://huggingface.co/api/models/jadeonrails/marlin-2b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,870 | INFO | HTTP Request: GET https://huggingface.co/api/models/tencent/Hy-MT2-1.8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,881 | INFO | HTTP Request: GET https://huggingface.co/api/models/ProCreations/grug-27b-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,887 | INFO | HTTP Request: GET https://huggingface.co/api/models/abenzerps/Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,892 | INFO | HTTP Request: GET https://huggingface.co/api/models/nomic-ai/nomic-embed-text-v1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,894 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-4-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,899 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-5.2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,900 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/MiniMax-H3-Pruned-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,904 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-1.5B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,909 | INFO | HTTP Request: GET https://huggingface.co/api/models/mudler/Ornith-1.5-35B-A3B-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,913 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-31B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,916 | INFO | HTTP Request: GET https://huggingface.co/api/models/janhq/Jan-v3.5-4B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,925 | INFO | HTTP Request: GET https://huggingface.co/api/models/openbmb/MiniCPM5-2B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,959 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Qwen3-4B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:42,985 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-8b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,000 | INFO | HTTP Request: GET https://huggingface.co/api/models/google/gemma-4-31B-it-qat-q4_0-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,024 | INFO | HTTP Request: GET https://huggingface.co/api/models/superwhisper/s1-mini-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,025 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-3b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,027 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/canary-180m-flash-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,035 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,036 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Kwaipilot_KAT-Coder-V2.5-Dev-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,038 | INFO | HTTP Request: GET https://huggingface.co/api/models/peculiar-ragdoll/Sharp-Spark-X2.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,049 | INFO | HTTP Request: GET https://huggingface.co/api/models/ibm-granite/granite-4.2-30b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,057 | INFO | HTTP Request: GET https://huggingface.co/api/models/empero-ai/Qwythos-27B-v1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,058 | INFO | HTTP Request: GET https://huggingface.co/api/models/philbert440/Qwen3.8-27B-Uncensored-Cyber-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,063 | INFO | HTTP Request: GET https://huggingface.co/api/models/KyleHessling1/Qwopus3.6-27B-Fusion-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,066 | INFO | HTTP Request: GET https://huggingface.co/api/models/agentionai/Qwen3.8-27B-AP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,071 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/Bonsai-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,091 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/kai-os_Grug-12B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,151 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,151 | INFO | HTTP Request: GET https://huggingface.co/api/models/Serveurperso/Qwen3-TTS-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,155 | INFO | HTTP Request: GET https://huggingface.co/api/models/FINAL-Bench/POCKET-26B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,169 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-40B-Claude-4.6-Opus-Deckard-Heretic-Uncensored-Thinking-NEO-CODE-Di-IMatrix-MAX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,175 | INFO | HTTP Request: GET https://huggingface.co/api/models/AtomicChat/Ling-3.0-flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,177 | INFO | HTTP Request: GET https://huggingface.co/api/models/city96/umt5-xxl-encoder-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,182 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/North-Mini-Code-1.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,195 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,195 | INFO | HTTP Request: GET https://huggingface.co/api/models/HuggingFaceBio/Carbon-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,198 | INFO | HTTP Request: GET https://huggingface.co/api/models/GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-Thinking-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,205 | INFO | HTTP Request: GET https://huggingface.co/api/models/GnLOLot/MiniCPM5-1B-Claude-Opus-Fable5-V2-Thinking-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,205 | INFO | HTTP Request: GET https://huggingface.co/api/models/AngelSlim/Hy3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,210 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,213 | INFO | HTTP Request: GET https://huggingface.co/api/models/AngelSlim/Hy4-preview-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,217 | INFO | HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-12B-it-QAT-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,249 | INFO | HTTP Request: GET https://huggingface.co/api/models/bloomer010/Ling-3.0-tiny-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,295 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/diffusiongemma-26B-A4B-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,304 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Melody1437-26B-A4B-v2.0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,315 | INFO | HTTP Request: GET https://huggingface.co/api/models/HuggingFaceBio/Carbon-3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,329 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,329 | INFO | HTTP Request: GET https://huggingface.co/api/models/ChristianAzinn/mxbai-embed-large-v1-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,330 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Dark-Scarlett-v0.3-26B-A4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,331 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Wan2.2-TI2V-5B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,345 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-4B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,348 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,351 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-1.7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,352 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Muse-Glimmer-30B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,358 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,360 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-0.5B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,370 | INFO | HTTP Request: GET https://huggingface.co/api/models/InternScience/Agents-A1-4B-Q8_0-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,370 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/Serenity-26B-A4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,417 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.8-27B-TWIN-TURBO-Fable-Cold-Fusion-709-L-Uncensored-NM-DAU-NEO-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,441 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-30B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,452 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-32B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,466 | INFO | HTTP Request: GET https://huggingface.co/api/models/XHToken/Spark-X2.5-1.7B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,474 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,478 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Granite-4.1-3B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,479 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-TI2V-5B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,484 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,493 | INFO | HTTP Request: GET https://huggingface.co/api/models/AnkitAI/Parable-Granite-4.1-8B-Claude-Fable-5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,498 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-T2V-A14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,500 | INFO | HTTP Request: GET https://huggingface.co/api/models/pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,508 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,513 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/bge-small-en-v1.5-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,520 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E2B-it-qat-mobile-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,520 | INFO | HTTP Request: GET https://huggingface.co/api/models/Hcompany/Holo-3.1-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,527 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-0.8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,586 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,600 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gemma-3-1b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,612 | INFO | HTTP Request: GET https://huggingface.co/api/models/bytkim/Qwen3.6-27B-MTP-pi-tune-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,619 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,626 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,627 | INFO | HTTP Request: GET https://huggingface.co/api/models/mradermacher/Cyber-Ornith-1.5-9B-OBLITERATED-i1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,630 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Qwen3-ASR-1.7B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,640 | INFO | HTTP Request: GET https://huggingface.co/api/models/poolside/Laguna-XS-2.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,640 | INFO | HTTP Request: GET https://huggingface.co/api/models/ReadyArt/gemma-4-31B-it-scotoma-2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,657 | INFO | HTTP Request: GET https://huggingface.co/api/models/city96/FLUX.1-dev-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,662 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-Vision-Exp-abliterated-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,667 | INFO | HTTP Request: GET https://huggingface.co/api/models/LocalAI-io/privacy-filter-multilingual-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,668 | INFO | HTTP Request: GET https://huggingface.co/api/models/realrebelai/MiniMax-H3_GGUFs/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,668 | INFO | HTTP Request: GET https://huggingface.co/api/models/cyjin-yl/Qwen3.8-27B-Uncensored-Cyber-agentic-imatrix-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,669 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen2.5-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,719 | INFO | HTTP Request: GET https://huggingface.co/api/models/antirez/qwen3.8-flash-next-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,733 | INFO | HTTP Request: GET https://huggingface.co/api/models/Myric/Laguna-S-2.1-APEX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,747 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen2.5-VL-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,763 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.6-35B-A3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,770 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,773 | INFO | HTTP Request: GET https://huggingface.co/api/models/ukisai/Swift-1.5-Qwen3.8-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,777 | INFO | HTTP Request: GET https://huggingface.co/api/models/InternScience/Agents-A1-4B-Q4_K_M-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,780 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen3-4B-Instruct-2507-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,782 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/Yue2-3B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,800 | INFO | HTTP Request: GET https://huggingface.co/api/models/JetBrains/Mellum2-12B-A2.5B-Instruct-GGUF-Q8_0/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,807 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-VL-4B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,811 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Step-3.7-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,816 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.8-27B-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,817 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.5-4B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,819 | INFO | HTTP Request: GET https://huggingface.co/api/models/huihui-ai/Huihui-DeepSeek-V4-Flash-abliterated-ds4-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,819 | INFO | HTTP Request: GET https://huggingface.co/api/models/leejet/MiniMax-H3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,865 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.5-9B-Coder-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,884 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Qwen_Qwen3.5-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,899 | INFO | HTTP Request: GET https://huggingface.co/api/models/Abiray/Nemotron-3-Embed-8B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,907 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/GLM-4.7-Flash-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,922 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/orcarouter_Qwen3.8-27B-Uncensored-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,923 | INFO | HTTP Request: GET https://huggingface.co/api/models/QuantStack/Wan2.2-Animate-14B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,923 | INFO | HTTP Request: GET https://huggingface.co/api/models/Jackrong/Qwopus3.6-27B-v2-MTP-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,930 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Meta-Llama-3-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,940 | INFO | HTTP Request: GET https://huggingface.co/api/models/batiai/Qwen3.6-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,952 | INFO | HTTP Request: GET https://huggingface.co/api/models/DavidAU/Qwen3.6-27B-Heretic-Uncensored-FINETUNE-NEO-CODE-Di-IMatrix-MAX-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,960 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/gemma-2-27b-it-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,962 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3-Embedding-0.6B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,967 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-Small-Instruct-2409-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,967 | INFO | HTTP Request: GET https://huggingface.co/api/models/ggml-org/gpt-oss-20b-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,968 | INFO | HTTP Request: GET https://huggingface.co/api/models/bartowski/Llama-3.2-3B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:43,973 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3.5-27B-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,012 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-Nemo-Instruct-2407-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,035 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-7B-v0.1-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,044 | INFO | HTTP Request: GET https://huggingface.co/api/models/scragnog/YuE2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,055 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/ERNIE-Image-Turbo-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,072 | INFO | HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen2.5-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,082 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Yi-Coder-1.5B-Chat-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,083 | INFO | HTTP Request: GET https://huggingface.co/api/models/handy-computer/Qwen3-ASR-0.6B-gguf/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,087 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-VL-8B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,093 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/firefunction-v2-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,107 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Phi-3.5-mini-instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,110 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Qwen2-7B-Instruct-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,116 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Qwen3-Coder-Next-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,122 | INFO | HTTP Request: GET https://huggingface.co/api/models/MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-10-07 18:07:44,140 | INFO | HTTP Request: GET https://huggingface.co/api/models/OS-Software/Ternary-Bonsai-2-27B-Uncensored-Heretic-GGUF/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:48392 - "GET /panel/models/browse?kind=gguf HTTP/1.1" 200 OK
+2026-10-07 18:07:44,608 | INFO | HTTP Request: GET https://huggingface.co/api/models/audio-cpp/audio.cpp-gguf?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:48392 - "GET /panel/models/repo-files?kind=gguf&repo=audio-cpp%2Faudio.cpp-gguf HTTP/1.1" 200 OK
+2026-10-07 18:07:51,715 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/Kimi-K3-GGUF?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:34904 - "GET /panel/models/repo-files?kind=gguf&repo=unsloth%2FKimi-K3-GGUF HTTP/1.1" 200 OK
+2026-10-07 18:08:27,212 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-2-27B-gguf?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:52170 - "GET /panel/models/repo-files?kind=gguf&repo=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:08:35,542 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-27B-gguf?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:52180 - "GET /panel/models/repo-files?kind=gguf&repo=prism-ml%2FTernary-Bonsai-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:09:06,015 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-2-27B-gguf?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:40434 - "GET /panel/models/repo-files?kind=gguf&repo=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:09:10,430 | INFO | İndirme başladı: prism-ml/Ternary-Bonsai-2-27B-gguf (tür: gguf)
+INFO:     100.84.204.3:40434 - "POST /panel/models/download HTTP/1.1" 200 OK
+2026-10-07 18:09:10,598 | INFO | HTTP Request: GET https://huggingface.co/api/models/prism-ml/Ternary-Bonsai-2-27B-gguf?blobs=true "HTTP/1.1 200 OK"
+2026-10-07 18:09:10,777 | INFO | HTTP Request: GET https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf/resolve/main/Ternary-Bonsai-2-27B-PQ2_0.gguf "HTTP/1.1 302 Found"
+2026-10-07 18:09:11,313 | INFO | HTTP Request: GET https://us.aws.cdn.hf.co/xet-bridge-us/6aab2908d3d583554438fce8/432efa3ff2ce28e4ee6532fe39d70036a7ff8213aef8c002ab762fcf16d1e19e?X-Xet-Cas-Uid=public&xip=1fJkubcScy8&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27Ternary-Bonsai-2-27B-PQ2_0.gguf%3B+filename%3D%22Ternary-Bonsai-2-27B-PQ2_0.gguf%22%3B&user_id=public&Expires=1791389350&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNmFhYjI5MDhkM2Q1ODM1NTQ0MzhmY2U4LzQzMmVmYTNmZjJjZTI4ZTRlZTY1MzJmZTM5ZDcwMDM2YTdmZjgyMTNhZWY4YzAwMmFiNzYyZmNmMTZkMWUxOWVcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZ4aXA9MWZKa3ViY1NjeTgmcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj1pbmxpbmUlM0IrZmlsZW5hbWUlMkElM0RVVEYtOCUyNyUyN1Rlcm5hcnktQm9uc2FpLTItMjdCLVBRMl8wLmdndWYlM0IrZmlsZW5hbWUlM0QlMjJUZXJuYXJ5LUJvbnNhaS0yLTI3Qi1QUTJfMC5nZ3VmJTIyJTNCJnVzZXJfaWQ9cHVibGljIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJFcG9jaFRpbWUiOjE3OTEzODkzNTB9fX1dfQ__&Signature=MEUCIQDzsnT8c6cfep0YeS54rU5f3SQTDv7tAb2d4ilTfkPNLAIgFRA-PG5ZDjshKZcxnJcRKQHoXCX4UI1HMN1OHwSkCUI_&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F&Hash-Algorithm=SHA256 "HTTP/1.1 206 Partial Content"
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:09:42,727 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-GGUF?blobs=true "HTTP/1.1 200 OK"
+INFO:     100.84.204.3:40434 - "GET /panel/models/repo-files?kind=gguf&repo=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:09:53,777 | INFO | İndirme başladı: unsloth/gemma-4-E4B-it-GGUF (tür: gguf)
+INFO:     100.84.204.3:40434 - "POST /panel/models/download HTTP/1.1" 200 OK
+2026-10-07 18:09:53,981 | INFO | HTTP Request: GET https://huggingface.co/api/models/unsloth/gemma-4-E4B-it-GGUF?blobs=true "HTTP/1.1 200 OK"
+2026-10-07 18:09:54,187 | INFO | HTTP Request: GET https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q8_0.gguf "HTTP/1.1 302 Found"
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+2026-10-07 18:09:54,763 | INFO | HTTP Request: GET https://us.aws.cdn.hf.co/xet-bridge-us/69cd2ebc3dc1641e52e18d1d/184a4c3ad1ed6b47ded9686a48831cbc10335f118753dda4eb1631f81f14d6be?X-Xet-Cas-Uid=public&response-content-disposition=inline%3B+filename*%3DUTF-8%27%27gemma-4-E4B-it-Q8_0.gguf%3B+filename%3D%22gemma-4-E4B-it-Q8_0.gguf%22%3B&user_id=public&xip=1fJkubcScy8&Expires=1791389394&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjljZDJlYmMzZGMxNjQxZTUyZTE4ZDFkLzE4NGE0YzNhZDFlZDZiNDdkZWQ5Njg2YTQ4ODMxY2JjMTAzMzVmMTE4NzUzZGRhNGViMTYzMWY4MWYxNGQ2YmVcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWlubGluZSUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3Z2VtbWEtNC1FNEItaXQtUThfMC5nZ3VmJTNCK2ZpbGVuYW1lJTNEJTIyZ2VtbWEtNC1FNEItaXQtUThfMC5nZ3VmJTIyJTNCJnVzZXJfaWQ9cHVibGljJnhpcD0xZkprdWJjU2N5OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiRXBvY2hUaW1lIjoxNzkxMzg5Mzk0fX19XX0_&Signature=MEQCICz4d0%7EysQ2Bi5Kfa2QkVKBwTw7ohLgPCxtBfyNCvBvZAiB5G4Cys3OtJcam1eV7Rm5w0Yr3DZJlqqWArcpCYCzxnQ__&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F&Hash-Algorithm=SHA256 "HTTP/1.1 206 Partial Content"
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39288 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:40434 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39288 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/apis/2/usage?days=30 HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39282 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39300 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58158 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:39300 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60568 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60562 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:58144 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60568 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60562 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60562 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60562 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43778 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43786 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43778 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60550 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59216 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59228 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:59216 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:48386 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:48390 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:48386 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:48390 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:48404 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=prism-ml%2FTernary-Bonsai-2-27B-gguf HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/download/status?repo_id=unsloth%2Fgemma-4-E4B-it-GGUF HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models HTTP/1.1" 200 OK
+INFO:     100.84.204.3:43800 - "GET /panel/models/downloads HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60566 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60566 - "GET /panel/apis/2/usage?days=30 HTTP/1.1" 200 OK
+2026-10-07 18:16:19,051 | INFO | API anahtarı iptal edildi (id=2)
+INFO:     100.84.204.3:52356 - "POST /panel/apis/2/revoke HTTP/1.1" 200 OK
+INFO:     100.84.204.3:52356 - "GET /panel/apis HTTP/1.1" 200 OK
+2026-10-07 18:16:21,685 | INFO | API anahtarı silindi (id=2)
+INFO:     100.84.204.3:52356 - "DELETE /panel/apis/2 HTTP/1.1" 200 OK
+INFO:     100.84.204.3:52356 - "GET /panel/apis HTTP/1.1" 200 OK
+2026-10-07 18:16:28,097 | INFO | API anahtarı oluşturuldu: OC
+INFO:     100.84.204.3:60028 - "POST /panel/apis HTTP/1.1" 200 OK
+INFO:     100.84.204.3:60028 - "GET /panel/apis HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-10-07 18:19:45,525 | INFO | VProvider sunucusu kapatıldı
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47628]
+INFO:     Started server process [47845]
+INFO:     Waiting for application startup.
+2026-10-07 18:19:46,810 | INFO | VProvider sunucusu başlatıldı (bellek modu: dynamic)
+2026-10-07 18:19:46,830 | INFO | Donanım tespiti: nvidia (NVIDIA GeForce RTX 4060)
+2026-10-07 18:19:46,974 | INFO | Derlenmiş llama_cpp backend'leri: cuda
+2026-10-07 18:19:46,974 | INFO | GPU durumu: NVIDIA GPU algılandı (NVIDIA GeForce RTX 4060; boş VRAM 7644 MB) -> backend=cuda, gpu_layers=-1 | Donanım: NVIDIA GeForce RTX 4060 | Derlenmiş: cuda
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:10951 (Press CTRL+C to quit)
+INFO:     127.0.0.1:44694 - "GET / HTTP/1.1" 200 OK

@@ -340,10 +340,6 @@
       </div>
     </div>
     <nav class="nav-tabs" id="main-tabs">
-      <div class="tab" id="tab-models" onclick="switchTab('models')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        Modeller
-      </div>
       <div class="tab" id="tab-chat" onclick="switchTab('chat')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Sohbet
@@ -352,10 +348,106 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
         API
       </div>
+      <div class="tab" id="tab-tts" onclick="switchTab('tts')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a8 8 0 1 0 8 8l4-4-4-4zM8 10l4 4 4-4M8 14l8-4M8 18l8 4"/></svg>
+        Ses Metne Çevirme (STT)
+      </div>
+      <div class="tab" id="tab-music" onclick="switchTab('music')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l12-6L6 3zM6 21l12-6L6 3v18z"/></svg>
+        Müzik
+      </div>
     </nav>
     <div class="nav-right">
       <span class="muted" id="user-label"></span>
       <button class="btn" onclick="logout()">Çıkış</button>
+    </div>
+  </div>
+  
+  <div id="modal-panel">
+    <div id="modal-panel-content"></div>
+  </div>
+  
+  <div id="tabpanel-tts" class="hidden">
+    <div class="card">
+      <h2>Konuşma Metne Çevirme
+        <span id="stt-badge" class="badge off">Durum sorgulanıyor...</span>
+      </h2>
+      <p class="muted" style="margin-bottom:10px;">
+        MP3/WAV/FLAC başlıncalı dosyayı metne çevirir (faster-whisper).
+        Şu anlık varsayılan model: <strong>base</strong> (sahte sürüm).
+      </p>
+      <div class="grid3">
+        <div class="field"><label>Model</label>
+          <select id="stt-model">
+            <option value="base">base</option>
+            <option value="small">small</option>
+            <option value="medium">medium</option>
+            <option value="large-v2">large-v2</option>
+          </select>
+        </div>
+        <div class="field"><label>Dil</label>
+          <select id="stt-language">
+            <option value="">otomatik</option>
+            <option value="tr">Türkçe</option>
+            <option value="en">İngilizce</option>
+            <option value="fr">Fransızca</option>
+            <option value="de">Almanca</option>
+          </select>
+        </div>
+        <div class="field"><label>İpucu</label>
+          <input type="text" id="stt-prompt" placeholder="İpucu metni (opsiyonel)...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Ses Dosyası (mp3/wav/flac)</label>
+        <input type="file" id="stt-file-input" accept=".mp3,.wav,.flac,.m4a,.ogg">
+      </div>
+      <div class="field">
+        <label>Yanıt Formatı</label>
+        <select id="stt-response-format">
+          <option value="json">JSON</option>
+          <option value="text">Metin</option>
+          <option value="srt">SRT</option>
+          <option value="vtt">VTT</option>
+          <option value="tsv">TSV</option>
+        </select>
+      </div>
+      <button class="btn primary" id="btn-stt-transcribe" onclick="transcribeAudio()">Metne Çevir</button>
+      <div id="stt-result" style="margin-top:14px;"></div>
+    </div>
+  </div>
+  
+  <div id="tabpanel-music" class="hidden">
+    <div class="card">
+      <h2>Müzik Üretimi (Riffusion / MusicGen)
+        <span id="music-badge" class="badge off">Durum sorgulanıyor...</span>
+      </h2>
+      <p class="muted" style="margin-bottom:10px;">
+        Prompt'tan bir parça üretir (AI destekleniyorsa; şimdilik basit sinüs dalgası).
+        Sürüm modu: <strong>placeholder</strong> (basit bir ses).
+      </p>
+      <div class="grid3">
+        <div class="field"><label>Model</label>
+          <select id="music-model">
+            <option value="musicgen-small">musicgen-small</option>
+            <option value="musicgen-medium">musicgen-medium</option>
+            <option value="musicgen-large">musicgen-large</option>
+            <option value="meta-musicgen-3.5s">meta-musicgen-3.5s</option>
+          </select>
+        </div>
+        <div class="field"><label>Süre (sn)</label>
+          <input type="number" id="music-duration" value="10" min="1" max="30">
+        </div>
+        <div class="field"><label>Temperature</label>
+          <input type="number" id="music-temp" value="0.8" step="0.1" min="0.1" max="2.0">
+        </div>
+      </div>
+      <div class="field">
+        <label>Prompt (müzik tarifi, örn: " upbeat electronic loop "</label>
+        <textarea id="music-prompt" rows="3" placeholder="Modülü örnekleme: upbeat electronic loop"></textarea>
+      </div>
+      <button class="btn primary" id="btn-music-generate" onclick="generateMusic()">Çıkıştır</button>
+      <div id="music-result" style="margin-top:14px;"></div>
     </div>
   </div>
 </header>
@@ -775,15 +867,21 @@ function show(view) {
   $("header").classList.toggle("hidden", view !== "view-app");
 }
 function switchTab(name) {
-  if (!["models", "chat", "apis"].includes(name)) return;
+  if (!["models", "chat", "apis", "tts", "music"].includes(name)) return;
   $("tab-models").classList.toggle("active", name === "models");
   $("tab-chat").classList.toggle("active", name === "chat");
   $("tab-apis").classList.toggle("active", name === "apis");
+  $("tab-tts").classList.toggle("active", name === "tts");
+  $("tab-music").classList.toggle("active", name === "music");
   $("tabpanel-models").classList.toggle("hidden", name !== "models");
   $("tabpanel-chat").classList.toggle("hidden", name !== "chat");
   $("tabpanel-apis").classList.toggle("hidden", name !== "apis");
+  $("tabpanel-tts").classList.toggle("hidden", name !== "tts");
+  $("tabpanel-music").classList.toggle("hidden", name !== "music");
   if (name === "chat") { loadChatModels(); loadWebTools(); }
   if (name === "apis") loadApis();
+  if (name === "tts") loadTtsInfo();
+  if (name === "music") loadMusicInfo();
 }
 
 // ---------- ComfyUI görsel üretim ----------
@@ -1051,6 +1149,147 @@ async function generateSpeech() {
     audio.src = body.url;
     result.appendChild(audio);
     toast("Ses üretildi");
+  } catch (err) {
+    result.innerHTML = "";
+    toast(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ---------- Ses Metne Çevirme (STT) ----------
+async function loadSttInfo() {
+  const badge = $("stt-badge");
+  const btn = $("btn-stt-transcribe");
+  if (!btn) return;
+  try {
+    const st = await api("/panel/stt/status");
+    if (!st.enabled) {
+      badge.textContent = "Modül kapalı";
+      badge.className = "badge off";
+      btn.disabled = true;
+      return;
+    }
+    if (!st.faster_whisper_installed) {
+      badge.textContent = "faster-whisper yok";
+      badge.className = "badge off";
+      btn.disabled = true;
+      return;
+    }
+    badge.textContent = "faster-whisper · " + (st.default_model || "base");
+    badge.className = "badge on";
+    btn.disabled = false;
+  } catch (err) {
+    badge.textContent = "Durum alınamadı";
+    badge.className = "badge off";
+    btn.disabled = true;
+  }
+}
+
+async function transcribeAudio() {
+  const btn = $("btn-stt-transcribe");
+  const result = $("stt-result");
+  const fileInput = $("stt-file-input");
+  if (!fileInput.files || !fileInput.files.length) { toast("Lütfen bir ses dosyası seçin.", false); return; }
+  btn.disabled = true;
+  result.innerHTML = '<p class="muted">Transkripsiyon sürüyor...</p>';
+  try {
+    const form = new FormData();
+    form.append("file", fileInput.files[0]);
+    form.append("model", $("stt-model").value);
+    form.append("language", $("stt-language").value);
+    form.append("prompt", $("stt-prompt").value.trim());
+    form.append("response_format", $("stt-response-format").value);
+    const body = await api("/v1/audio/transcriptions", { method: "POST", body });
+    result.innerHTML = "";
+    if (typeof body === "string") {
+      result.innerHTML = "<pre style='white-space:pre-wrap;font-size:13px;'>" + escapeHtml(body) + "</pre>";
+    } else {
+      const textEl = document.createElement("pre");
+      textEl.style.cssText = "white-space:pre-wrap;font-size:13px;";
+      textEl.textContent = body.text || "";
+      result.appendChild(textEl);
+      if (body.segments) {
+        const seg = document.createElement("div");
+        seg.style.cssText = "margin-top:10px;font-size:12px;color:var(--muted);";
+        seg.textContent = body.segments.length + " segment, dil: " + (body.language || "unknown") + ", süre: " + (body.duration || "?") + "s";
+        result.appendChild(seg);
+      }
+    }
+    toast("Transkripsiyon tamamlandı");
+  } catch (err) {
+    result.innerHTML = "";
+    toast(err.message, false);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function escapeHtml(s) {
+  const d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// ---------- Müzik Üretimi ----------
+async function loadMusicInfo() {
+  const badge = $("music-badge");
+  const btn = $("btn-music-generate");
+  if (!btn) return;
+  try {
+    const st = await api("/panel/music/status");
+    if (!st.enabled) {
+      badge.textContent = "Modül kapalı";
+      badge.className = "badge off";
+      btn.disabled = true;
+      return;
+    }
+    if (!st.transformers_installed) {
+      badge.textContent = "transformers yok";
+      badge.className = "badge off";
+      btn.disabled = true;
+      return;
+    }
+    badge.textContent = st.default_model || "musicgen-small";
+    badge.className = "badge on";
+    btn.disabled = false;
+  } catch (err) {
+    badge.textContent = "Durum alınamadı";
+    badge.className = "badge off";
+    btn.disabled = true;
+  }
+}
+
+async function generateMusic() {
+  const btn = $("btn-music-generate");
+  const result = $("music-result");
+  const prompt = $("music-prompt").value.trim();
+  if (!prompt) { toast("Lütfen bir prompt girin.", false); return; }
+  btn.disabled = true;
+  result.innerHTML = '<p class="muted">Müzik üretiliyor...</p>';
+  try {
+    const body = await api("/v1/audio/music/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: $("music-model").value,
+        prompt: prompt,
+        duration: parseFloat($("music-duration").value),
+        temperature: parseFloat($("music-temp").value),
+      }),
+    });
+    result.innerHTML = "";
+    if (body.url) {
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.src = body.url;
+      result.appendChild(audio);
+    } else if (typeof body === "string") {
+      result.innerHTML = "<pre style='white-space:pre-wrap;font-size:12px;'>" + escapeHtml(body.slice(0, 500)) + "</pre>";
+    } else {
+      result.innerHTML = "<p class='muted'>Üretim tamamlandı (dosya URL alınamadı).</p>";
+    }
+    toast("Müzik üretildi");
   } catch (err) {
     result.innerHTML = "";
     toast(err.message, false);
